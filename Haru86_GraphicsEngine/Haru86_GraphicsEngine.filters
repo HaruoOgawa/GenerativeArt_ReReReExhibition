@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{d0b0a0de-601b-4780-a18f-f848981f241e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Shader">
+      <UniqueIdentifier>{6c3af43a-bd1e-4791-b060-41867b2a29fd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GraphicsEngine\App\BaseApp\Main.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Game\Game.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Graphics\GameRenderer.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Object\GameObject.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Component\Component.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Graphics\Material.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Component\MeshRendererComponent.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Component\TransformComponent.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Graphics\Mesh.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Object\Object.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Graphics\Primitive.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\App\DemoApp\DemoApp.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\App\BaseApp\BaseApp.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Object\AudioObject.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Component\AudioSourceComponent.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Object\TimelineObject.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Component\TimelineComponent.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Component\UIComponent.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Component\RectTransformComponent.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Game\Time.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Graphics\Texture.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Graphics\Font.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\App\KuraArtApp\KuraArtApp.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\App\Kura02\Kura02.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Graphics\Graphics.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\App\KuraArtApp\Script\KuraGPGPU.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Graphics\ComputeShader.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Graphics\ComputeBuffer.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Graphics\glTFLoader.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Library\tinygltf\json.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Library\tinygltf\stb_image.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Library\tinygltf\stb_image_write.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Library\tinygltf\tiny_gltf.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Graphics\glTFBinaryReader.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Object\CameraObject.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Component\CameraComponent.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\App\KuraArtApp\Script\KuraTrail.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GraphicsEngine\App\BaseApp\Main.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Game\Game.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Graphics\GameRenderer.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Object\GameObject.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Component\Component.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Graphics\Material.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Component\MeshRendererComponent.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Component\TransformComponent.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Graphics\Mesh.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Object\Object.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Graphics\Primitive.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Assets\App\DemoApp\DemoApp.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Object\AudioObject.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Component\AudioSourceComponent.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Object\TimelineObject.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Component\TimelineComponent.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Component\UIComponent.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Component\RectTransformComponent.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Game\Time.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Graphics\Texture.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Graphics\Font.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Assets\App\KuraArtApp\KuraArtApp.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Assets\App\Kura02\Kura02.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Graphics\Graphics.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Assets\App\KuraArtApp\Script\KuraGPGPU.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Graphics\ComputeShader.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Graphics\ComputeBuffer.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Graphics\glTFLoader.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Graphics\glTFBinaryReader.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Object\CameraObject.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Component\CameraComponent.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Assets\App\KuraArtApp\Script\KuraTrail.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\App\BaseApp\BaseApp.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Assets\Shader\demo.vert">
+      <Filter>ソース ファイル</Filter>
+    </None>
+    <None Include="Assets\Shader\UIStandard.vert">
+      <Filter>ソース ファイル</Filter>
+    </None>
+    <None Include="Assets\Shader\UIStandard.frag">
+      <Filter>ソース ファイル</Filter>
+    </None>
+    <None Include="Assets\Shader\Standard.vert">
+      <Filter>ソース ファイル</Filter>
+    </None>
+    <None Include="Assets\Shader\Standard.frag">
+      <Filter>ソース ファイル</Filter>
+    </None>
+    <None Include="Assets\Shader\VedaStructuredShader\BoardRender.vert" />
+    <None Include="Assets\Shader\VedaStructuredShader\BoardRender.frag" />
+    <None Include="Assets\Shader\FontText.vert" />
+    <None Include="Assets\Shader\FontText.frag" />
+    <None Include="Assets\Shader\VedaStructuredShader\PostProcess.frag" />
+    <None Include="Assets\Shader\VedaStructuredShader\scene2.frag" />
+    <None Include="Assets\Shader\VedaStructuredShader\scene1.frag" />
+    <None Include="Assets\Shader\VedaStructuredShader\save.frag" />
+    <None Include="Assets\Shader\VedaStructuredShader\Scene3.frag" />
+    <None Include="Assets\Shader\VedaStructuredShader\Scene4.frag" />
+    <None Include="Assets\Shader\VedaStructuredShader\Scene5.frag" />
+    <None Include="bin\libfreetype-6.dll" />
+    <None Include="bin\SDL2_ttf.dll" />
+    <None Include="bin\zlib1.dll" />
+    <None Include="Assets\Shader\KuraShader\BoidsResult.vert" />
+    <None Include="Assets\Shader\KuraShader\BoidsResult.frag" />
+    <None Include="Assets\Shader\KuraShader\BoidsData.comp" />
+    <None Include="Assets\Shader\KuraShader\BoidsResult.geom" />
+    <None Include="Assets\Shader\KuraShader\BoidsForce.comp" />
+    <None Include="Assets\Shader\KuraShader\GPUTrail_NextInputPos.comp" />
+    <None Include="Assets\Shader\KuraShader\GPUTrail_NodeInfo.comp" />
+    <None Include="Assets\Shader\KuraShader\GPUTrail_Render.vert" />
+    <None Include="Assets\Shader\KuraShader\GPUTrail_Render.geom" />
+    <None Include="Assets\Shader\KuraShader\GPUTrail_Render.frag" />
+    <None Include="Assets\Shader\KuraShader\Background.vert" />
+    <None Include="Assets\Shader\KuraShader\Background.frag" />
+    <None Include="Assets\Shader\KuraShader\KuraPostProcess.frag" />
+    <None Include="Assets\Shader\KuraShader\KuraTerrain.vert" />
+    <None Include="Assets\Shader\KuraShader\KuraTerrain.frag" />
+    <None Include="Assets\Shader\KuraShader\KuraTerrain.geom" />
+    <None Include="Assets\Shader\KuraShader\KuraTerrain.tesc" />
+    <None Include="Assets\Shader\KuraShader\KuraTerrain.tese" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Assets\Resources\FontData\FRSCRIPT.TTF" />
+  </ItemGroup>
+</Project>

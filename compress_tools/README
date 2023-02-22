@@ -1,0 +1,95 @@
+squishy 0.2.0 - 64k intro packer
+Copyright (C) 2016-2021 Jake "ferris" Taylor / logicoma
+
+
+TL;DR
+=====
+
+squishy is a modern pc 64k intro packer that provides better compression than
+all alternatives (that I've tried at least). It does so with a healthy mix of
+fresh and existing ideas, along with a hefty dose of CPU cycles and memory.
+
+squishy has been used in several intros by top pc 64k intro groups including
+logicoma, monad, macau exports, polarity, quadtrip, ivory labs, and more.
+
+
+FEATURES/USAGE
+==============
+
+Currently, squishy is a barebones, command-line PE packer. There are no fancy
+reporting/debugging features or parameterization. Some of this stuff is
+planned, some of it isn't.
+
+Example usage:
+
+squishy -i uncompressed.exe -o compo-winner.exe
+
+Pass -h or --help for more options/usage info.
+
+
+LICENSE
+=======
+
+See the LICENSE file for licensing terms and conditions.
+
+
+ATTRIBUTION
+===========
+
+While squishy was primarily developed and tested by ferris / logicoma, several
+folks (and their respective works) have been instrumental in its design
+development. Specifically, I'd like to thank:
+
+ - ryg / farbrausch, charles bloom, matt mahoney (and other PAQ authors), LZMA
+   authors for providing open-source compression utilities, blog posts, and
+   other literature
+ - blueberry / loonies for initial help bootstrapping a crinkler-like model
+   and context tips
+ - mentor / tbc for tips/guidance for model improvements/testing
+ - all intro authors who provided (and continue to provide) uncompressed
+   executables which was instrumental in building an extensive/universal PE
+   corpus
+ - gargaj / conspiracy for usability feedback/testing
+
+
+CHANGELOG
+=========
+
+version 0.2.0 (23.03.2021)
+ - Migrated to x86-64. All further squishy releases as of 0.2.0 will only
+   target x86-64, and no longer support x86. Previous versions are still
+   available if x86 is desired, but won't be updated or maintained moving
+   forward.
+
+version 0.1.3 (07.02.2021)
+ - Fixed a possible code section unfilter regression introduced in 0.1.2,
+   which affected a handful of intros.
+ - Fixed an issue where certain large resources could get corrupted during
+   packing.
+ - Added additional 32-bit executable sanity checks which should catch most
+   invalid/malformed input files.
+
+version 0.1.2 (22.04.2020)
+ - Reworked jmp/call transform to be driven by the model's state-based
+   disassembler, which allows the transform to more accurately identify these
+   instructions. This provides better compression while also fixing
+   compatibility issues when the previous inverse transform would produce
+   invalid code after decompression.
+ - Adjusted indirect models slightly for better compression.
+
+version 0.1.1 (05.04.2020)
+ - Added several command line options; see usage for info.
+ - Added warnings for resources, as they can be somewhat large.
+
+version 0.1.0 (29.03.2020)
+ - Initial release version. A near-identical build was used to produce the
+   first released 64k intros using squishy. If you received a version of
+   squishy before the official public release, it should be nearly identical to
+   this build and produce identical executables.
+
+
+ETC
+===
+
+Copyright (C) 2016-2021 Jake "ferris" Taylor / logicoma
+http://logicoma.io/squishy/

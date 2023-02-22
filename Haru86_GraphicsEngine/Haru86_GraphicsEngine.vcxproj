@@ -1,0 +1,652 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DemoRelease|Win32">
+      <Configuration>DemoRelease</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DemoRelease|x64">
+      <Configuration>DemoRelease</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinimumRelease|Win32">
+      <Configuration>MinimumRelease</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinimumRelease|x64">
+      <Configuration>MinimumRelease</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{50dfea6a-e7c1-453b-9ace-5f391c56ea9b}</ProjectGuid>
+    <RootNamespace>Haru86_GraphicsEngine</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DemoRelease|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinimumRelease|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DemoRelease|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinimumRelease|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DemoRelease|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='MinimumRelease|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DemoRelease|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='MinimumRelease|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IncludePath>$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DemoRelease|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinimumRelease|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <ExecutablePath>$(SolutionDir);$(VC_ExecutablePath_x86);$(CommonExecutablePath)</ExecutablePath>
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <LibraryPath>C:\SDL2-2.0.16\lib\x86;C:\SDL2_image-2.0.5\lib\x86;C:\SDL2_ttf-2.0.15\lib\x86;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studio\lib;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib;%(AdditionalLibraryDirectories);$(LibraryPath)</LibraryPath>
+    <ReferencePath>C:\SDL2-2.0.16\lib\x86;C:\SDL2_image-2.0.5\lib\x86;C:\SDL2_ttf-2.0.15\lib\x86;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studio\lib;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib;%(AdditionalLibraryDirectories);$(ReferencePath)</ReferencePath>
+    <LibraryWPath>C:\SDL2-2.0.16\lib\x86;C:\SDL2_image-2.0.5\lib\x86;C:\SDL2_ttf-2.0.15\lib\x86;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studio\lib;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib;%(AdditionalLibraryDirectories)</LibraryWPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <LibraryPath>C:\SDL2-2.0.16\lib\x86;C:\SDL2_image-2.0.5\lib\x86;C:\SDL2_ttf-2.0.15\lib\x86;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studio\lib;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib;%(AdditionalLibraryDirectories);$(LibraryPath)</LibraryPath>
+    <ReferencePath>C:\SDL2-2.0.16\lib\x86;C:\SDL2_image-2.0.5\lib\x86;C:\SDL2_ttf-2.0.15\lib\x86;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studio\lib;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib;%(AdditionalLibraryDirectories);$(ReferencePath)</ReferencePath>
+    <LibraryWPath>C:\SDL2-2.0.16\lib\x86;C:\SDL2_image-2.0.5\lib\x86;C:\SDL2_ttf-2.0.15\lib\x86;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studio\lib;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib;%(AdditionalLibraryDirectories)</LibraryWPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DemoRelease|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <LibraryPath>C:\SDL2-2.0.16\lib\x86;C:\SDL2_image-2.0.5\lib\x86;C:\SDL2_ttf-2.0.15\lib\x86;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studio\lib;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib;%(AdditionalLibraryDirectories);$(LibraryPath)</LibraryPath>
+    <ReferencePath>C:\SDL2-2.0.16\lib\x86;C:\SDL2_image-2.0.5\lib\x86;C:\SDL2_ttf-2.0.15\lib\x86;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studio\lib;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib;%(AdditionalLibraryDirectories);$(ReferencePath)</ReferencePath>
+    <LibraryWPath>C:\SDL2-2.0.16\lib\x86;C:\SDL2_image-2.0.5\lib\x86;C:\SDL2_ttf-2.0.15\lib\x86;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studio\lib;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib;%(AdditionalLibraryDirectories)</LibraryWPath>
+    <ExecutablePath>$(SolutionDir)compress_tools;$(VC_ExecutablePath_x64);$(CommonExecutablePath)</ExecutablePath>
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinimumRelease|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <LibraryPath>C:\SDL2-2.0.16\lib\x86;C:\SDL2_image-2.0.5\lib\x86;C:\SDL2_ttf-2.0.15\lib\x86;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studio\lib;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib;%(AdditionalLibraryDirectories);$(LibraryPath)</LibraryPath>
+    <ReferencePath>C:\SDL2-2.0.16\lib\x86;C:\SDL2_image-2.0.5\lib\x86;C:\SDL2_ttf-2.0.15\lib\x86;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studio\lib;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib;%(AdditionalLibraryDirectories);$(ReferencePath)</ReferencePath>
+    <LibraryWPath>C:\SDL2-2.0.16\lib\x86;C:\SDL2_image-2.0.5\lib\x86;C:\SDL2_ttf-2.0.15\lib\x86;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studio\lib;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib;%(AdditionalLibraryDirectories)</LibraryWPath>
+    <ExecutablePath>$(SolutionDir);$(VC_ExecutablePath_x64);$(CommonExecutablePath)</ExecutablePath>
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)GraphicsEngine\Library\GLFW\x86\include\GLFW;$(ProjectDir)GraphicsEngine\Library\GLEW\x86\include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>opengl32.lib;glfw3dll.lib;glew32.lib;WinMM.Lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)GraphicsEngine\Library\GLFW\x86\lib;$(ProjectDir)GraphicsEngine\Library\GLEW\x86\lib\Release\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)GraphicsEngine\Library\GLEW\x86\bin\Release\Win32\glew32.dll" "$(OutDir)" /i /s /y
+xcopy "$(ProjectDir)GraphicsEngine\Library\GLFW\x86\lib\glfw3.dll" "$(OutDir)" /i /s /y
+
+xcopy "$(ProjectDir)Assets\Shader" "$(OutDir)Assets\Shader" /i /s /y
+</Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>call $(SolutionDir)comp.bat</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions);</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)GraphicsEngine\Library\GLFW\x86\include\GLFW;$(ProjectDir)GraphicsEngine\Library\GLEW\x86\include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)GraphicsEngine\Library\GLFW\x86\lib;$(ProjectDir)GraphicsEngine\Library\GLEW\x86\lib\Release\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3dll.lib;glew32.lib;WinMM.Lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>Winmm.lib;$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)GraphicsEngine\Library\GLEW\x86\bin\Release\Win32\glew32.dll" "$(OutDir)" /i /s /y
+xcopy "$(ProjectDir)GraphicsEngine\Library\GLFW\x86\lib\glfw3.dll" "$(OutDir)" /i /s /y
+
+xcopy "$(ProjectDir)Assets\Shader" "$(OutDir)Assets\Shader" /i /s /y
+</Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>call $(SolutionDir)comp.bat</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DemoRelease|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>false</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions);</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)GraphicsEngine\Library\GLFW\x86\include\GLFW;$(ProjectDir)GraphicsEngine\Library\GLEW\x86\include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)GraphicsEngine\Library\GLFW\x86\lib;$(ProjectDir)GraphicsEngine\Library\GLEW\x86\lib\Release\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3dll.lib;glew32.lib;WinMM.Lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
+      <OutputFile>Winmm.lib;$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)GraphicsEngine\Library\GLEW\x86\bin\Release\Win32\glew32.dll" "$(OutDir)" /i /s /y
+xcopy "$(ProjectDir)GraphicsEngine\Library\GLFW\x86\lib\glfw3.dll" "$(OutDir)" /i /s /y
+
+xcopy "$(ProjectDir)Assets\Shader" "$(OutDir)Assets\Shader" /i /s /y
+</Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>call $(SolutionDir)comp.bat</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinimumRelease|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>false</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions);</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)GraphicsEngine\Library\GLFW\x86\include\GLFW;$(ProjectDir)GraphicsEngine\Library\GLEW\x86\include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)GraphicsEngine\Library\GLFW\x86\lib;$(ProjectDir)GraphicsEngine\Library\GLEW\x86\lib\Release\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3dll.lib;glew32.lib;WinMM.Lib;comsupp.lib;delayimp.lib;oldnames.lib;libcmt.lib;libcpmt.lib;libcpmt1.lib;msvcmrt.lib;msvcprt.lib;msvcrt.lib;msvcurt.lib;vcomp.lib;ptrustu.lib;pgort.lib;pgobootrun.lib;ucrt.lib;ucrtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+      <AdditionalOptions>/CRINKLER %(AdditionalOptions)</AdditionalOptions>
+      <EntryPointSymbol>WinMain</EntryPointSymbol>
+      <NoEntryPoint>false</NoEntryPoint>
+      <OutputFile>Winmm.lib;$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)GraphicsEngine\Library\GLEW\x86\bin\Release\Win32\glew32.dll" "$(OutDir)" /i /s /y
+xcopy "$(ProjectDir)GraphicsEngine\Library\GLFW\x86\lib\glfw3.dll" "$(OutDir)" /i /s /y
+
+xcopy "$(ProjectDir)Assets\Shader" "$(OutDir)Assets\Shader" /i /s /y
+</Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>call $(SolutionDir)comp.bat</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)GraphicsEngine\Library\GLFW\x64\include\GLFW;$(ProjectDir)GraphicsEngine\Library\GLEW\x64\include\GL;$(ProjectDir)GraphicsEngine\Library\FreeType\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)GraphicsEngine\Library\GLFW\x64\lib;$(ProjectDir)GraphicsEngine\Library\GLEW\x64\lib;$(ProjectDir)GraphicsEngine\Library\FreeType\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3dll.lib;glew32d.lib;WinMM.Lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+    </Link>
+    <PostBuildEvent>
+      <Command>mkdir $(OutDir)bin
+attrib +s +h $(OutDir)bin
+xcopy "$(ProjectDir)GraphicsEngine\Library\GLEW\x64\bin\glew32d.dll" "$(OutDir)bin" /i /s /y
+xcopy "$(ProjectDir)GraphicsEngine\Library\GLFW\x64\lib\glfw3.dll" "$(OutDir)bin" /i /s /y
+xcopy "$(ProjectDir)GraphicsEngine\Library\FreeType\lib\freetype.dll" "$(OutDir)bin" /i /s /y 
+xcopy "$(ProjectDir)Assets\Sound\edm_electronic_electronica_.mp3" "$(OutDir)bin" /i /s /y
+xcopy "$(ProjectDir)Assets\Font\georgiai.ttf" "$(OutDir)bin" /i /s /y
+del /Q $(OutDir)Haru86_GraphicsEngine.pdb</Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>call $(SolutionDir)comp.bat</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)GraphicsEngine\Library\GLFW\x64\include\GLFW;$(ProjectDir)GraphicsEngine\Library\GLEW\x64\include\GL;$(ProjectDir)GraphicsEngine\Library\FreeType\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)GraphicsEngine\Library\GLFW\x64\lib;$(ProjectDir)GraphicsEngine\Library\GLEW\x64\lib;$(ProjectDir)GraphicsEngine\Library\FreeType\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3dll.lib;glew32d.lib;WinMM.Lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+    </Link>
+    <PostBuildEvent>
+      <Command>mkdir $(OutDir)bin
+attrib +s +h $(OutDir)bin
+xcopy "$(ProjectDir)GraphicsEngine\Library\GLEW\x64\bin\glew32d.dll" "$(OutDir)bin" /i /s /y
+xcopy "$(ProjectDir)GraphicsEngine\Library\GLFW\x64\lib\glfw3.dll" "$(OutDir)bin" /i /s /y
+xcopy "$(ProjectDir)GraphicsEngine\Library\FreeType\lib\freetype.dll" "$(OutDir)bin" /i /s /y 
+xcopy "$(ProjectDir)Assets\Sound\edm_electronic_electronica_.mp3" "$(OutDir)bin" /i /s /y
+xcopy "$(ProjectDir)Assets\Font\georgiai.ttf" "$(OutDir)bin" /i /s /y
+del /Q $(OutDir)Haru86_GraphicsEngine.pdb
+</Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>call $(SolutionDir)comp.bat</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DemoRelease|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)GraphicsEngine\Library\GLFW\x64\include\GLFW;$(ProjectDir)GraphicsEngine\Library\GLEW\x64\include\GL;$(ProjectDir)GraphicsEngine\Library\FreeType\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)GraphicsEngine\Library\GLFW\x64\lib;$(ProjectDir)GraphicsEngine\Library\GLEW\x64\lib;$(ProjectDir)GraphicsEngine\Library\FreeType\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3dll.lib;glew32d.lib;WinMM.Lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+    </Link>
+    <PostBuildEvent>
+      <Command>mkdir $(OutDir)bin
+attrib +s +h $(OutDir)bin
+xcopy "$(ProjectDir)GraphicsEngine\Library\GLEW\x64\bin\glew32d.dll" "$(OutDir)bin" /i /s /y
+xcopy "$(ProjectDir)GraphicsEngine\Library\GLFW\x64\lib\glfw3.dll" "$(OutDir)bin" /i /s /y
+xcopy "$(ProjectDir)GraphicsEngine\Library\FreeType\lib\freetype.dll" "$(OutDir)bin" /i /s /y 
+xcopy "$(ProjectDir)Assets\Sound\edm_electronic_electronica_.mp3" "$(OutDir)bin" /i /s /y
+xcopy "$(ProjectDir)Assets\Font\georgiai.ttf" "$(OutDir)bin" /i /s /y
+call squishy-x64 -i "$(OutDir)Haru86_GraphicsEngine.exe" -o "$(OutDir)Haru86_GraphicsEngine.exe"
+del /Q $(OutDir)Haru86_GraphicsEngine.pdb
+</Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>call $(SolutionDir)comp.bat</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinimumRelease|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)GraphicsEngine\Library\GLFW\x64\include\GLFW;$(ProjectDir)GraphicsEngine\Library\GLEW\x64\include\GL;$(ProjectDir)GraphicsEngine\Library\FreeType\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)GraphicsEngine\Library\GLFW\x64\lib;$(ProjectDir)GraphicsEngine\Library\GLEW\x64\lib;$(ProjectDir)GraphicsEngine\Library\FreeType\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3dll.lib;glew32d.lib;WinMM.Lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+      <AdditionalOptions>/CRINKLER %(AdditionalOptions)</AdditionalOptions>
+      <OutputFile>Winmm.lib;$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)GraphicsEngine\Library\GLEW\x64\bin\glew32d.dll" "$(OutDir)" /i /s /y
+xcopy "$(ProjectDir)GraphicsEngine\Library\GLFW\x64\lib\glfw3.dll" "$(OutDir)" /i /s /y
+
+xcopy "$(ProjectDir)Assets\Shader" "$(OutDir)Assets\Shader" /i /s /y
+xcopy "$(ProjectDir)GraphicsEngine\Assets\Sound\stroke.wav" "$(OutDir)" /i /s /y</Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>call $(SolutionDir)comp.bat</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Assets\App\GradDemo\GradDemo.h" />
+    <ClInclude Include="Assets\App\GradDemo\2_EarthAndMoon\Script\EarthAndMoon.h" />
+    <ClInclude Include="Assets\App\GradDemo\5_ChangeOfMind\Script\ChangeOfMind.h" />
+    <ClInclude Include="Assets\App\GradDemo\8_FindKaguya\Script\FindKaguya.h" />
+    <ClInclude Include="Assets\App\GradDemo\7_FeatherRobe\Script\FeatherRobe.h" />
+    <ClInclude Include="Assets\App\GradDemo\6_RoughMikado\Script\EnergyField.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\dlg\dlg.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\dlg\output.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\config\ftconfig.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\config\ftheader.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\config\ftmodule.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\config\ftoption.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\config\ftstdlib.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\config\integer-types.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\config\mac-support.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\config\public-macros.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\freetype.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftadvanc.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftbbox.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftbdf.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftbitmap.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftbzip2.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftcache.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftchapters.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftcid.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftcolor.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftdriver.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\fterrdef.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\fterrors.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftfntfmt.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftgasp.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftglyph.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftgxval.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftgzip.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftimage.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftincrem.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftlcdfil.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftlist.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftlogging.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftlzw.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftmac.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftmm.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftmodapi.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftmoderr.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftotval.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftoutln.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftparams.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftpfr.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftrender.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftsizes.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftsnames.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftstroke.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftsynth.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftsystem.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\fttrigon.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\fttypes.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftwinfnt.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\autohint.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\cffotypes.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\cfftypes.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\compiler-macros.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\ftcalc.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\ftdebug.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\ftdrv.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\ftgloadr.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\fthash.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\ftmemory.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\ftobjs.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\ftpsprop.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\ftrfork.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\ftserv.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\ftstream.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\fttrace.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\ftvalid.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\psaux.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\pshints.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svbdf.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svcfftl.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svcid.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svfntfmt.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svgldict.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svgxval.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svkern.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svmetric.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svmm.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svotval.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svpfr.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svpostnm.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svprop.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svpscmap.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svpsinfo.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svsfnt.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svttcmap.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svtteng.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svttglyf.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svwinfnt.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\sfnt.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\svginterface.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\t1types.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\tttypes.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\wofftypes.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\otsvg.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\t1tables.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ttnameid.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\tttables.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\tttags.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\ft2build.h" />
+    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\ftoption.h" />
+    <ClInclude Include="GraphicsEngine\Library\GLEW\x64\include\GL\glew.h" />
+    <ClInclude Include="GraphicsEngine\Library\GLEW\x64\include\GL\glxew.h" />
+    <ClInclude Include="GraphicsEngine\Library\GLEW\x64\include\GL\wglew.h" />
+    <ClInclude Include="GraphicsEngine\Library\GLEW\x86\include\GL\eglew.h" />
+    <ClInclude Include="GraphicsEngine\Library\GLEW\x86\include\GL\glew.h" />
+    <ClInclude Include="GraphicsEngine\Library\GLEW\x86\include\GL\glxew.h" />
+    <ClInclude Include="GraphicsEngine\Library\GLEW\x86\include\GL\wglew.h" />
+    <ClInclude Include="GraphicsEngine\Library\GLFW\x64\include\GLFW\glfw3.h" />
+    <ClInclude Include="GraphicsEngine\Library\GLFW\x64\include\GLFW\glfw3native.h" />
+    <ClInclude Include="GraphicsEngine\Library\GLFW\x86\include\GLFW\glfw3.h" />
+    <ClInclude Include="GraphicsEngine\Library\GLFW\x86\include\GLFW\glfw3native.h" />
+    <ClInclude Include="GraphicsEngine\ShaderEditor\CShaderCode.h" />
+    <ClInclude Include="GraphicsEngine\ShaderEditor\CShaderEditor.h" />
+    <ClInclude Include="GraphicsEngine\Graphics\EGraphicsParam.h" />
+    <ClInclude Include="GraphicsEngine\Graphics\ShaderLib.h" />
+    <ClInclude Include="GraphicsEngine\Message\Console.h" />
+    <ClInclude Include="GraphicsEngine\Library\tinygltf\json.hpp" />
+    <ClInclude Include="GraphicsEngine\Library\tinygltf\stb_image.h" />
+    <ClInclude Include="GraphicsEngine\Library\tinygltf\stb_image_write.h" />
+    <ClInclude Include="GraphicsEngine\Library\tinygltf\tiny_gltf.h" />
+    <ClInclude Include="GraphicsEngine\GraphicsMain\GraphicsMain.h" />
+    <ClInclude Include="GraphicsEngine\Graphics\GraphicsRenderer.h" />
+    <ClInclude Include="GraphicsEngine\Graphics\Material.h" />
+    <ClInclude Include="GraphicsEngine\Component\MeshRendererComponent.h" />
+    <ClInclude Include="GraphicsEngine\Graphics\Primitive.h" />
+    <ClInclude Include="GraphicsEngine\Graphics\PolygonRaymarchingMixer.h" />
+    <ClInclude Include="GraphicsEngine\Graphics\PostProcess.h" />
+    <ClInclude Include="GraphicsEngine\Graphics\Texture.h" />
+    <ClInclude Include="GraphicsEngine\Component\TransformComponent.h" />
+    <ClInclude Include="GraphicsEngine\Graphics\Mesh.h" />
+    <ClInclude Include="GraphicsEngine\Sound\SoundPlayer.h" />
+    <ClInclude Include="GraphicsEngine\Text\TextRenderer.h" />
+    <ClInclude Include="GraphicsEngine\Text\TextObject.h" />
+    <ClInclude Include="GraphicsEngine\Text\TTFFactory.h" />
+    <ClInclude Include="Assets\App\GradDemo\0_MoonSea\Script\MoonSea.h" />
+    <ClInclude Include="Assets\App\GradDemo\3_MoonTravel\Script\MoonTravel.h" />
+    <ClInclude Include="Assets\App\GradDemo\9_MountFuji\Script\MountFuji.h" />
+    <ClInclude Include="Assets\App\GradDemo\6_RoughMikado\Script\RoughMikado.h" />
+    <ClInclude Include="GraphicsEngine\Graphics\RenderBuffer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Assets\App\GradDemo\GradDemo.cpp" />
+    <ClCompile Include="Assets\App\GradDemo\2_EarthAndMoon\Script\EarthAndMoon.cpp" />
+    <ClCompile Include="Assets\App\GradDemo\5_ChangeOfMind\Script\ChangeOfMind.cpp" />
+    <ClCompile Include="Assets\App\GradDemo\8_FindKaguya\Script\FindKaguya.cpp" />
+    <ClCompile Include="Assets\App\GradDemo\7_FeatherRobe\Script\FeatherRobe.cpp" />
+    <ClCompile Include="Assets\App\GradDemo\6_RoughMikado\Script\EnergyField.cpp" />
+    <ClCompile Include="GraphicsEngine\ShaderEditor\CShaderCode.cpp" />
+    <ClCompile Include="GraphicsEngine\ShaderEditor\CShaderEditor.cpp" />
+    <ClCompile Include="GraphicsEngine\GraphicsMain\GraphicsMain.cpp" />
+    <ClCompile Include="GraphicsEngine\Graphics\GraphicsRenderer.cpp" />
+    <ClCompile Include="GraphicsEngine\GraphicsMain\Main.cpp" />
+    <ClCompile Include="GraphicsEngine\Graphics\Material.cpp" />
+    <ClCompile Include="GraphicsEngine\Component\MeshRendererComponent.cpp" />
+    <ClCompile Include="GraphicsEngine\Graphics\Primitive.cpp" />
+    <ClCompile Include="GraphicsEngine\Graphics\Texture.cpp" />
+    <ClCompile Include="GraphicsEngine\Component\TransformComponent.cpp" />
+    <ClCompile Include="GraphicsEngine\Graphics\Mesh.cpp" />
+    <ClCompile Include="GraphicsEngine\Graphics\PolygonRaymarchingMixer.cpp" />
+    <ClCompile Include="GraphicsEngine\Graphics\PostProcess.cpp" />
+    <ClCompile Include="GraphicsEngine\Sound\SoundPlayer.cpp" />
+    <ClCompile Include="GraphicsEngine\Text\TextRenderer.cpp" />
+    <ClCompile Include="GraphicsEngine\Text\TextObject.cpp" />
+    <ClCompile Include="GraphicsEngine\Text\TTFFactory.cpp" />
+    <ClCompile Include="Assets\App\GradDemo\0_MoonSea\Script\MoonSea.cpp" />
+    <ClCompile Include="Assets\App\GradDemo\3_MoonTravel\Script\MoonTravel.cpp" />
+    <ClCompile Include="Assets\App\GradDemo\9_MountFuji\Script\MountFuji.cpp" />
+    <ClCompile Include="Assets\App\GradDemo\6_RoughMikado\Script\RoughMikado.cpp" />
+    <ClCompile Include="GraphicsEngine\Graphics\RenderBuffer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\App\GradDemo\0_MoonSea\Shader\RaySpaceShip.frag" />
+    <None Include="Assets\App\GradDemo\0_MoonSea\Shader\ShipParticle.frag" />
+    <None Include="Assets\App\GradDemo\2_EarthAndMoon\Shader\EarthAndMoon.frag" />
+    <None Include="Assets\App\GradDemo\0_MoonSea\Shader\MoonSea.frag" />
+    <None Include="Assets\App\GradDemo\3_MoonTravel\Shader\MoonTravel.frag" />
+    <None Include="Assets\App\GradDemo\3_MoonTravel\Shader\CyberpunkSpaceRay.frag" />
+    <None Include="Assets\App\GradDemo\5_ChangeOfMind\Shader\NegativeSphere.frag" />
+    <None Include="Assets\App\GradDemo\5_ChangeOfMind\Shader\NegativeSphere.geom" />
+    <None Include="Assets\App\GradDemo\5_ChangeOfMind\Shader\NegativeSphereCore.vert" />
+    <None Include="Assets\App\GradDemo\5_ChangeOfMind\Shader\Triangle.frag" />
+    <None Include="Assets\App\GradDemo\6_RoughMikado\Shader\EnergyField.frag" />
+    <None Include="Assets\App\GradDemo\6_RoughMikado\Shader\EnergyTrail.frag" />
+    <None Include="Assets\App\GradDemo\7_FeatherRobe\Shader\FeatherRobe.frag" />
+    <None Include="Assets\App\GradDemo\7_FeatherRobe\Shader\FeatherRobeTrail.frag" />
+    <None Include="Assets\App\GradDemo\9_MountFuji\Shader\MountFuji.frag" />
+    <None Include="Assets\App\GradDemo\8_FindKaguya\Shader\Voxel.frag" />
+    <None Include="bin\libfreetype-6.dll" />
+    <None Include="bin\SDL2_ttf.dll" />
+    <None Include="bin\zlib1.dll" />
+    <None Include="GraphicsEngine\Library\GLEW\x86\doc\advanced.html" />
+    <None Include="GraphicsEngine\Library\GLEW\x86\doc\basic.html" />
+    <None Include="GraphicsEngine\Library\GLEW\x86\doc\build.html" />
+    <None Include="GraphicsEngine\Library\GLEW\x86\doc\credits.html" />
+    <None Include="GraphicsEngine\Library\GLEW\x86\doc\glew.html" />
+    <None Include="GraphicsEngine\Library\GLEW\x86\doc\glxew.html" />
+    <None Include="GraphicsEngine\Library\GLEW\x86\doc\index.html" />
+    <None Include="GraphicsEngine\Library\GLEW\x86\doc\install.html" />
+    <None Include="GraphicsEngine\Library\GLEW\x86\doc\log.html" />
+    <None Include="GraphicsEngine\Library\GLEW\x86\doc\wglew.html" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\glm.0.9.9.800\build\native\glm.targets" Condition="Exists('..\packages\glm.0.9.9.800\build\native\glm.targets')" />
+  </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>このプロジェクトは、このコンピューター上にない NuGet パッケージを参照しています。それらのパッケージをダウンロードするには、[NuGet パッケージの復元] を使用します。詳細については、http://go.microsoft.com/fwlink/?LinkID=322105 を参照してください。見つからないファイルは {0} です。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\glm.0.9.9.800\build\native\glm.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\glm.0.9.9.800\build\native\glm.targets'))" />
+  </Target>
+</Project>
