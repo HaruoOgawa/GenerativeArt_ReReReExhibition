@@ -429,12 +429,7 @@ xcopy "$(ProjectDir)GraphicsEngine\Assets\Sound\stroke.wav" "$(OutDir)" /i /s /y
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Assets\App\GradDemo\GradDemo.h" />
-    <ClInclude Include="Assets\App\GradDemo\2_EarthAndMoon\Script\EarthAndMoon.h" />
-    <ClInclude Include="Assets\App\GradDemo\5_ChangeOfMind\Script\ChangeOfMind.h" />
-    <ClInclude Include="Assets\App\GradDemo\8_FindKaguya\Script\FindKaguya.h" />
-    <ClInclude Include="Assets\App\GradDemo\7_FeatherRobe\Script\FeatherRobe.h" />
-    <ClInclude Include="Assets\App\GradDemo\6_RoughMikado\Script\EnergyField.h" />
+    <ClInclude Include="Assets\App\ArtReReRe\ArtReReRe.h" />
     <ClInclude Include="GraphicsEngine\Library\FreeType\lib\dlg\dlg.h" />
     <ClInclude Include="GraphicsEngine\Library\FreeType\lib\dlg\output.h" />
     <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\config\ftconfig.h" />
@@ -571,19 +566,10 @@ xcopy "$(ProjectDir)GraphicsEngine\Assets\Sound\stroke.wav" "$(OutDir)" /i /s /y
     <ClInclude Include="GraphicsEngine\Text\TextRenderer.h" />
     <ClInclude Include="GraphicsEngine\Text\TextObject.h" />
     <ClInclude Include="GraphicsEngine\Text\TTFFactory.h" />
-    <ClInclude Include="Assets\App\GradDemo\0_MoonSea\Script\MoonSea.h" />
-    <ClInclude Include="Assets\App\GradDemo\3_MoonTravel\Script\MoonTravel.h" />
-    <ClInclude Include="Assets\App\GradDemo\9_MountFuji\Script\MountFuji.h" />
-    <ClInclude Include="Assets\App\GradDemo\6_RoughMikado\Script\RoughMikado.h" />
     <ClInclude Include="GraphicsEngine\Graphics\RenderBuffer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Assets\App\GradDemo\GradDemo.cpp" />
-    <ClCompile Include="Assets\App\GradDemo\2_EarthAndMoon\Script\EarthAndMoon.cpp" />
-    <ClCompile Include="Assets\App\GradDemo\5_ChangeOfMind\Script\ChangeOfMind.cpp" />
-    <ClCompile Include="Assets\App\GradDemo\8_FindKaguya\Script\FindKaguya.cpp" />
-    <ClCompile Include="Assets\App\GradDemo\7_FeatherRobe\Script\FeatherRobe.cpp" />
-    <ClCompile Include="Assets\App\GradDemo\6_RoughMikado\Script\EnergyField.cpp" />
+    <ClCompile Include="Assets\App\ArtReReRe\ArtReReRe.cpp" />
     <ClCompile Include="GraphicsEngine\ShaderEditor\CShaderCode.cpp" />
     <ClCompile Include="GraphicsEngine\ShaderEditor\CShaderEditor.cpp" />
     <ClCompile Include="GraphicsEngine\GraphicsMain\GraphicsMain.cpp" />
@@ -601,29 +587,9 @@ xcopy "$(ProjectDir)GraphicsEngine\Assets\Sound\stroke.wav" "$(OutDir)" /i /s /y
     <ClCompile Include="GraphicsEngine\Text\TextRenderer.cpp" />
     <ClCompile Include="GraphicsEngine\Text\TextObject.cpp" />
     <ClCompile Include="GraphicsEngine\Text\TTFFactory.cpp" />
-    <ClCompile Include="Assets\App\GradDemo\0_MoonSea\Script\MoonSea.cpp" />
-    <ClCompile Include="Assets\App\GradDemo\3_MoonTravel\Script\MoonTravel.cpp" />
-    <ClCompile Include="Assets\App\GradDemo\9_MountFuji\Script\MountFuji.cpp" />
-    <ClCompile Include="Assets\App\GradDemo\6_RoughMikado\Script\RoughMikado.cpp" />
     <ClCompile Include="GraphicsEngine\Graphics\RenderBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\App\GradDemo\0_MoonSea\Shader\RaySpaceShip.frag" />
-    <None Include="Assets\App\GradDemo\0_MoonSea\Shader\ShipParticle.frag" />
-    <None Include="Assets\App\GradDemo\2_EarthAndMoon\Shader\EarthAndMoon.frag" />
-    <None Include="Assets\App\GradDemo\0_MoonSea\Shader\MoonSea.frag" />
-    <None Include="Assets\App\GradDemo\3_MoonTravel\Shader\MoonTravel.frag" />
-    <None Include="Assets\App\GradDemo\3_MoonTravel\Shader\CyberpunkSpaceRay.frag" />
-    <None Include="Assets\App\GradDemo\5_ChangeOfMind\Shader\NegativeSphere.frag" />
-    <None Include="Assets\App\GradDemo\5_ChangeOfMind\Shader\NegativeSphere.geom" />
-    <None Include="Assets\App\GradDemo\5_ChangeOfMind\Shader\NegativeSphereCore.vert" />
-    <None Include="Assets\App\GradDemo\5_ChangeOfMind\Shader\Triangle.frag" />
-    <None Include="Assets\App\GradDemo\6_RoughMikado\Shader\EnergyField.frag" />
-    <None Include="Assets\App\GradDemo\6_RoughMikado\Shader\EnergyTrail.frag" />
-    <None Include="Assets\App\GradDemo\7_FeatherRobe\Shader\FeatherRobe.frag" />
-    <None Include="Assets\App\GradDemo\7_FeatherRobe\Shader\FeatherRobeTrail.frag" />
-    <None Include="Assets\App\GradDemo\9_MountFuji\Shader\MountFuji.frag" />
-    <None Include="Assets\App\GradDemo\8_FindKaguya\Shader\Voxel.frag" />
     <None Include="bin\libfreetype-6.dll" />
     <None Include="bin\SDL2_ttf.dll" />
     <None Include="bin\zlib1.dll" />

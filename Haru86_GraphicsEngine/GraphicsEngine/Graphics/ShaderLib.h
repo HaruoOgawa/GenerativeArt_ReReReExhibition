@@ -17,8 +17,4 @@ namespace shaderlib {
 	const std::string LatePostProcess_frag = std::string({
 		#include "GraphicsEngine/Graphics/Shader/LatePostProcess_FragComp.h"
 	});
-
-	const std::string Voxel_frag = std::string({
-		#include "Assets/App/GradDemo/8_FindKaguya/Shader/Voxel_FragComp.h"
-	});
 }

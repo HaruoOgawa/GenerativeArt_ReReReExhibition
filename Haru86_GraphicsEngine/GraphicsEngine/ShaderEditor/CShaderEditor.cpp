@@ -116,6 +116,9 @@ namespace editor
 	void CShaderEditor::Update()
 	{
 		//
+		if (m_ShaderCodeList.empty()) return;
+
+		//
 		int PrevShaderIndex = m_CurerentShaderIndex;
 		m_CurerentShaderIndex = GraphicsMain::GetInstance()->GetAppSceneIndex();
 		m_IsDraw = true;
@@ -159,6 +162,9 @@ namespace editor
 
 	void CShaderEditor::Draw()
 	{
+		//
+		if (m_ShaderCodeList.empty()) return;
+
 		if (m_EditorRenderer && m_IsDraw)
 		{
 			m_EditorRenderer->Draw([&]() {
