@@ -3,7 +3,7 @@
 #include "../Graphics/Mesh.h"
 #include <vector>
 #include <algorithm>
-#include "Assets/App/GradDemo/GradDemo.h"
+#include "Assets/App/ArtReReRe/ArtReReRe.h"
 #include "GraphicsEngine/Component/TransformComponent.h"
 #include "GraphicsEngine/Sound/SoundPlayer.h"
 #include "GraphicsEngine/Component/MeshRendererComponent.h"
@@ -68,7 +68,7 @@ bool GraphicsMain::CreateApp() {
 
 bool GraphicsMain::Initialize() {
 	// ÉÅÉÇÉäämï€
-	m_App = new app::GradDemo();
+	m_App = new app::ArtReReRe();
 	LoadData();
 	
 	return true;

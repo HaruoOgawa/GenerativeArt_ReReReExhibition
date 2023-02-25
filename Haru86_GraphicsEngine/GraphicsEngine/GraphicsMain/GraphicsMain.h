@@ -18,7 +18,7 @@ enum class ERerderingTarget
 };
 
 namespace sound { class SoundPlayer;}
-namespace app { class GradDemo; }
+namespace app { class ArtReReRe; }
 namespace text { class TTFFactory; }
 class TransformComponent;
 class MeshRendererComponent;
@@ -54,7 +54,7 @@ public:
 	std::shared_ptr<class CameraObject> game_camera_instance;
 	
 	//
-	app::GradDemo* m_App;
+	app::ArtReReRe* m_App;
 	ERerderingTarget renderingTarget;
 	unsigned int m_TargetFrameIndex;
 	bool isRunning;
