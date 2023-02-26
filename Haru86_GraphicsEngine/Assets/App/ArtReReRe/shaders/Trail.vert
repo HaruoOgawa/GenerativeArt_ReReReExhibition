@@ -19,6 +19,7 @@ struct STrailData
 	vec4 Rotate;
 	vec4 Scale;
 	vec4 Color;
+	vec4 Velocity;
 };
 
 layout(std430, binding = 0) buffer TrailDataBuffer
@@ -34,6 +35,7 @@ layout(location=0) out vec2 out_uv;
 layout(location=1) out vec4 out_WorldVertexPos;
 layout(location=2) out vec4 out_WorldNormal;
 layout(location=3) flat out int out_gl_InstanceID;
+layout(location=4) out vec4 out_Color;
 
 #define rot(a) mat2(cos(a),-sin(a),sin(a),cos(a))
 
@@ -41,6 +43,7 @@ void main(){
 	vec4 pos = vec4(vertex, 1.0);
 	int id = gl_InstanceID;
 
+	pos.xyz *= rw_TrailDataBuffer.trailData[id].Scale.xyz;
 	pos.xyz += rw_TrailDataBuffer.trailData[id].Pos.xyz;
 	
 	gl_Position = PMatrix * VMatrix * pos;
@@ -48,6 +51,7 @@ void main(){
 	out_WorldVertexPos = pos;
 	out_WorldNormal=vec4(normalize(normal), 0.0);
 	out_gl_InstanceID = id;
+	out_Color = rw_TrailDataBuffer.trailData[id].Color;
 }
 
 )"

@@ -6,6 +6,8 @@ layout(local_size_x = 256, local_size_y = 1, local_size_z = 1) in;
 
 // Uniform 
 uniform float _time;
+uniform float _deltaTime;
+uniform vec4 _WallHalfSize;
 
 //
 struct STrailData
@@ -14,6 +16,7 @@ struct STrailData
 	vec4 Rotate;
 	vec4 Scale;
 	vec4 Color;
+	vec4 Velocity;
 };
 
 layout(std430, binding = 0) buffer TrailDataBuffer
@@ -46,6 +49,20 @@ float PerlinNoise(vec2 st)
 		(d - b) * u.x * u.y;
 }
 
+vec4 RefWall(vec4 v, vec4 p)
+{
+	if(abs(p.x) > _WallHalfSize.x){ v.x = abs(v.x) * (-1.0) * sign(p.x); }
+	if(abs(p.y) > _WallHalfSize.y){ v.y = abs(v.y) * (-1.0) * sign(p.y); }
+	if(abs(p.z) > _WallHalfSize.z){ v.z = abs(v.z) * (-1.0) * sign(p.z); }
+
+	return v;
+}
+
+vec3 hsv2rgb2(vec3 c, float k) {
+    return smoothstep(0. + k, 1. - k,
+        .5 + .5 * cos((vec3(c.x, c.x, c.x) + vec3(3., 2., 1.) / 3.) * radians(360.)));
+}
+
 void main()
 {
 	uint DID = gl_GlobalInvocationID.x;
@@ -53,12 +70,33 @@ void main()
 	//
 	float t = _time, r = 25.0, s = Noise(vec2(float(DID) + 1.1111)) * 2.0;
 	
-	float p0 = PerlinNoise(vec2(t * s, 0.957841 + float(DID))) * 2.0 - 1.0;
-	float p1 = PerlinNoise(vec2(t * s + float(DID), 129.3 + float(DID))) * 2.0 - 1.0;
-	float p2 = PerlinNoise(vec2(t * s + 941.0,0.11 + float(DID))) * 2.0 - 1.0;
+	vec4 addv = vec4(
+		PerlinNoise(vec2(t * s, 0.957841 + float(DID))) * 2.0 - 1.0,
+		PerlinNoise(vec2(t * s + float(DID), 129.3 + float(DID))) * 2.0 - 1.0,
+		PerlinNoise(vec2(t * s + 941.0,0.11 + float(DID))) * 2.0 - 1.0,
+		1.0
+	);
 
 	//
-	rw_TrailDataBuffer.trailData[DID].Pos =  vec4(p0 * r, p1 * r, p2 * r, 1.0);
+	vec4 v = rw_TrailDataBuffer.trailData[DID].Velocity;
+	vec4 pos = rw_TrailDataBuffer.trailData[DID].Pos;
+
+	// 速度ベクトルを更新
+	v.xyz += addv.xyz;
+
+	// 壁に当たっているのなら跳ね返す
+	v = RefWall(v, pos);
+
+	// 位置を更新
+	pos.xyz += v.xyz * _deltaTime;
+
+	//
+	vec4 col = vec4(hsv2rgb2(normalize(v.xyz) * 0.5 +0.5, 2.2), 1.0);
+
+	//
+	rw_TrailDataBuffer.trailData[DID].Pos =  pos;
+	rw_TrailDataBuffer.trailData[DID].Velocity = v;
+	rw_TrailDataBuffer.trailData[DID].Color = col;
 }
 
 )"

@@ -15,6 +15,7 @@ namespace app
 		float m_Rotate[4];
 		float m_Scale[4];
 		float m_Color[4];
+		float m_Velocity[4];
 	};
 
 	class CTrailObject
@@ -23,6 +24,7 @@ namespace app
 		std::shared_ptr<ComputeBuffer> m_TrailBuffer;
 		std::shared_ptr<Material> m_TrailGPGPU;
 
+		glm::vec4 m_WallHalfSize;
 		unsigned int m_DomainCount;
 		unsigned int m_InstanceNumPerDomain;
 	private:
