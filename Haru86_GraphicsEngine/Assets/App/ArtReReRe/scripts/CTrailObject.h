@@ -25,6 +25,7 @@ namespace app
 		std::shared_ptr<Material> m_TrailGPGPU;
 
 		glm::vec4 m_WallHalfSize;
+		glm::ivec3 m_ThreadNum;
 		unsigned int m_DomainCount;
 		unsigned int m_InstanceNumPerDomain;
 	private:

@@ -10,7 +10,8 @@ namespace app
 		m_TrailGPGPU(nullptr),
 		m_DomainCount(8),
 		m_InstanceNumPerDomain(1024),
-		m_WallHalfSize(glm::vec4(25.0f, 25.0f, 25.0f,1.0f))
+		m_WallHalfSize(glm::vec4(25.0f, 25.0f, 25.0f,1.0f)),
+		m_ThreadNum(1024, 1, 1)
 	{
 	}
 
