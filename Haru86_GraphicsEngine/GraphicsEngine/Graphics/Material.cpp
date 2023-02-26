@@ -1,4 +1,5 @@
 #include "Material.h"
+#include "GraphicsEngine/Graphics/ComputeBuffer.h"
 #include "GraphicsEngine/Graphics/Texture.h"
 #include "GraphicsEngine/GraphicsMain/GraphicsMain.h"
 #include "GraphicsEngine/Graphics/ShaderLib.h"
@@ -194,6 +195,14 @@ void Material::SetFloatVectorUniform(std::string uniformName, std::vector<float>
 	glUniform1fv(location, val.size(), reinterpret_cast<GLfloat*>(&val[0]));
 }
 
+// 普通のShaderにバッファーをアタッチ
+void Material::SetBufferToMat(std::shared_ptr<ComputeBuffer> buffer, int bufferIndex) {
+	SetActive();
+	buffer->SetActive();
+	glBindBufferBase(GL_SHADER_STORAGE_BUFFER, bufferIndex, buffer->ssbo);
+	buffer->SetEactive();
+}
+
 GLuint Material::GetCurrentShaderPrg() {
 	if (computeShaderData == -1) 
 	{
@@ -238,4 +247,44 @@ void Material::UnLoadData() {
 		glDeleteShader(depthGeometryShaderData);
 	}
 	glDeleteShader(depthFragShaderData);
+}
+
+// Compute Shader Func
+void Material::Dispatch(int xGroupNum, int yGroupNum, int zGroupNum) {
+	glDispatchCompute(xGroupNum, yGroupNum, zGroupNum);
+}
+
+void Material::BindComputeBuffer(CorrectionType correctionType) {
+	if (correctionType == CorrectionType::COMPUTEBUFFER) {
+		for (int i = 0; i < m_buffers.size(); i++) {
+			glBindBufferBase(GL_SHADER_STORAGE_BUFFER, i, m_buffers[i]->ssbo);
+		}
+	}
+	else if (correctionType == CorrectionType::ARRAY) {
+		for (int i = 0; i < m_buffers.size(); i++) {
+			glBindBuffer(GL_ARRAY_BUFFER, m_buffers[i]->ssbo);
+		}
+	}
+}
+
+void Material::DisBindComputeBuffer(CorrectionType correctionType) {
+	if (correctionType == CorrectionType::COMPUTEBUFFER) {
+		for (int i = 0; i < m_buffers.size(); i++) {
+			glBindBufferBase(GL_SHADER_STORAGE_BUFFER, i, 0);
+		}
+	}
+	else if (correctionType == CorrectionType::ARRAY) {
+		for (int i = 0; i < m_buffers.size(); i++) {
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
+		}
+	}
+}
+
+// ComputeShaderにバッファをアタッチ
+void Material::SetBufferToCS(std::shared_ptr<ComputeBuffer> buffer, int bufferindex) {
+	m_buffers.push_back(buffer);
+	SetActive();
+	buffer->SetActive();
+	glBindBufferBase(GL_SHADER_STORAGE_BUFFER, bufferindex, buffer->ssbo);
+	buffer->SetEactive();
 }

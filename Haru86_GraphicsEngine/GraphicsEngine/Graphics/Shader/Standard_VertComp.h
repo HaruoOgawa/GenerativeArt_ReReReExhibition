@@ -2,7 +2,7 @@
  * http://www.ctrl-alt-test.fr
  */
 
-// E:\CppDev\GradDemo\Haru86_GraphicsEngine\GraphicsEngine\Graphics\Shader\Standard_Vert.h
+// E:\CppDev\Art_ReReRe\Haru86_GraphicsEngine\GraphicsEngine\Graphics\Shader\Standard_Vert.h
 "#version 330\n"
  "#extension GL_ARB_separate_shader_objects:enable\n"
  "uniform mat4 MVPMatrix,MMatrix,VMatrix,PMatrix;"

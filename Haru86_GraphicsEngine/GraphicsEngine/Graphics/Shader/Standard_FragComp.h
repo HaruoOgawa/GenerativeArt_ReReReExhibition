@@ -2,7 +2,7 @@
  * http://www.ctrl-alt-test.fr
  */
 
-// E:\CppDev\GradDemo\Haru86_GraphicsEngine\GraphicsEngine\Graphics\Shader\Standard_Frag.h
+// E:\CppDev\Art_ReReRe\Haru86_GraphicsEngine\GraphicsEngine\Graphics\Shader\Standard_Frag.h
 "#version 430\n"
  "#extension GL_ARB_separate_shader_objects:enable\n"
  "layout(location=0) in vec2 in_uv;"
@@ -60,12 +60,12 @@
      "v=_EnvColor;"
    "if(_UseLighting==1)"
      "{"
-       "vec3 r=normalize(_LightPos-in_WorldVertexPos.xyz);"
+       "vec3 r=_LightDir;"
        "float n=max(0.,dot(in_WorldNormal.xyz,r));"
        "i.xyz*=n;"
        "i.xyz+=v.xyz;"
        "vec3 l=-1.*normalize(in_WorldVertexPos.xyz-_WorldCameraPos),t=normalize(l+r);"
-       "float u=pow(max(0.,dot(in_WorldNormal.xyz,t)),60.);"
+       "float u=pow(max(0.,dot(in_WorldNormal.xyz,t)),30.);"
        "u=min(1.,u);"
        "i.xyz+=vec3(1.)*u;"
      "}"

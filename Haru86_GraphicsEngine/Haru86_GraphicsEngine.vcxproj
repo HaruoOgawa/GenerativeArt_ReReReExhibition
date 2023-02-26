@@ -430,6 +430,9 @@ xcopy "$(ProjectDir)GraphicsEngine\Assets\Sound\stroke.wav" "$(OutDir)" /i /s /y
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Assets\App\ArtReReRe\ArtReReRe.h" />
+    <ClInclude Include="Assets\App\ArtReReRe\scripts\CWhiteWall.h" />
+    <ClInclude Include="Assets\App\ArtReReRe\scripts\CTrailObject.h" />
+    <ClInclude Include="GraphicsEngine\Graphics\ComputeBuffer.h" />
     <ClInclude Include="GraphicsEngine\Library\FreeType\lib\dlg\dlg.h" />
     <ClInclude Include="GraphicsEngine\Library\FreeType\lib\dlg\output.h" />
     <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\config\ftconfig.h" />
@@ -570,6 +573,9 @@ xcopy "$(ProjectDir)GraphicsEngine\Assets\Sound\stroke.wav" "$(OutDir)" /i /s /y
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Assets\App\ArtReReRe\ArtReReRe.cpp" />
+    <ClCompile Include="Assets\App\ArtReReRe\scripts\CWhiteWall.cpp" />
+    <ClCompile Include="Assets\App\ArtReReRe\scripts\CTrailObject.cpp" />
+    <ClCompile Include="GraphicsEngine\Graphics\ComputeBuffer.cpp" />
     <ClCompile Include="GraphicsEngine\ShaderEditor\CShaderCode.cpp" />
     <ClCompile Include="GraphicsEngine\ShaderEditor\CShaderEditor.cpp" />
     <ClCompile Include="GraphicsEngine\GraphicsMain\GraphicsMain.cpp" />
@@ -590,6 +596,9 @@ xcopy "$(ProjectDir)GraphicsEngine\Assets\Sound\stroke.wav" "$(OutDir)" /i /s /y
     <ClCompile Include="GraphicsEngine\Graphics\RenderBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\App\ArtReReRe\shaders\Trail.comp" />
+    <None Include="Assets\App\ArtReReRe\shaders\Trail.frag" />
+    <None Include="Assets\App\ArtReReRe\shaders\Trail.vert" />
     <None Include="bin\libfreetype-6.dll" />
     <None Include="bin\SDL2_ttf.dll" />
     <None Include="bin\zlib1.dll" />

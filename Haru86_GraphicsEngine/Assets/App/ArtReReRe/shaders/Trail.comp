@@ -1,0 +1,64 @@
+R"(
+#version 430
+
+// thread
+layout(local_size_x = 256, local_size_y = 1, local_size_z = 1) in;
+
+// Uniform 
+uniform float _time;
+
+//
+struct STrailData
+{
+	vec4 Pos;
+	vec4 Rotate;
+	vec4 Scale;
+	vec4 Color;
+};
+
+layout(std430, binding = 0) buffer TrailDataBuffer
+{
+	STrailData trailData[];
+} rw_TrailDataBuffer;
+
+//
+float Noise(vec2 st)
+{
+	return fract(sin(dot(st, vec2(12.9898, 78.233))) * 43758.5453123);
+}
+
+float PerlinNoise(vec2 st)
+{
+	vec2 i = floor(st);
+	vec2 f = fract(st);
+
+	// Four corners in 2D of a tile
+	float a = Noise(i);
+	float b = Noise(i + vec2(1.0, 0.0));
+	float c = Noise(i + vec2(0.0, 1.0));
+	float d = Noise(i + vec2(1.0, 1.0));
+
+	vec2 u = f * f * (3.0 - 2.0 * f);
+
+	// Mix 4 coorners percentages
+	return mix(a, b, u.x) +
+		(c - a) * u.y * (1.0 - u.x) +
+		(d - b) * u.x * u.y;
+}
+
+void main()
+{
+	uint DID = gl_GlobalInvocationID.x;
+
+	//
+	float t = _time, r = 25.0, s = Noise(vec2(float(DID) + 1.1111)) * 2.0;
+	
+	float p0 = PerlinNoise(vec2(t * s, 0.957841 + float(DID))) * 2.0 - 1.0;
+	float p1 = PerlinNoise(vec2(t * s + float(DID), 129.3 + float(DID))) * 2.0 - 1.0;
+	float p2 = PerlinNoise(vec2(t * s + 941.0,0.11 + float(DID))) * 2.0 - 1.0;
+
+	//
+	rw_TrailDataBuffer.trailData[DID].Pos =  vec4(p0 * r, p1 * r, p2 * r, 1.0);
+}
+
+)"

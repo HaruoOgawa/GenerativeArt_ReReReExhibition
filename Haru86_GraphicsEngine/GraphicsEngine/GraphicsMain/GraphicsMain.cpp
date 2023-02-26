@@ -50,7 +50,8 @@ GraphicsMain::GraphicsMain()
 	m_TTFFactory(nullptr),
 	m_ShaderEditor(nullptr),
 	m_LoadingWaitTime(0.0f),
-	m_GroabalLightPosition(nullptr)
+	m_GroabalLightPosition(nullptr),
+	m_DirectionalLightDir(glm::vec3(-1.0f, -1.0f, -1.0f))
 {
 }
 
