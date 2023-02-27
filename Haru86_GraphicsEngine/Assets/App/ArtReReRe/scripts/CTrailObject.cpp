@@ -12,11 +12,11 @@ namespace app
 		m_SegmentBuffer(nullptr),
 		m_SegmentGPGPU(nullptr),
 		m_DomainCount(1),
-		m_TrailNumPerDomain(4096),
-		m_TrailSegmentNum(64),
-		m_WallHalfSize(glm::vec4(100.0f, 50.0f, 50.0f,1.0f)),
+		m_TrailNumPerDomain(1024),
+		m_TrailSegmentNum(256),
+		m_WallHalfSize(glm::vec4(100.0f, 50.0f, 25.0f,1.0f)),
 		m_ThreadNum(1024, 1, 1),
-		m_Radius(0.25f)
+		m_Radius(0.1f)
 	{
 	}
 
@@ -65,7 +65,7 @@ namespace app
 			shaderlib::Standard_frag
 		);
 
-		m_TrailMesh->useAlphaTest = true;
+		m_TrailMesh->useAlphaTest = false;
 
 		m_TrailGPGPU = std::make_shared<Material>(
 			RenderingSurfaceType::RASTERIZER,
@@ -89,7 +89,7 @@ namespace app
 			})
 		);
 
-		m_SegmentMesh->useAlphaTest = true;
+		m_SegmentMesh->useAlphaTest = false;
 
 		m_SegmentGPGPU = std::make_shared<Material>(
 			RenderingSurfaceType::RASTERIZER,

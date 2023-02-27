@@ -39,6 +39,13 @@ uniform float _wCharH;
 void main(){
 	vec4 col=vec4(vec3(0.0),1.0);
 
+	// 環境光
+	vec4 envColor = vec4(0.0, 0.0, 0.0, 1.0);
+	if (_UseEnvColor == 1)
+	{
+		envColor = _EnvColor;
+	}
+
 	// ベースカラー
 	if(_UseColor == 1)
 	{
@@ -47,6 +54,7 @@ void main(){
 	else if (_Use2FColor == 1)
 	{
 		col = in_Color;
+		envColor = in_Color;
 	}
 	else if(_UseMainTex == 1) // テクスチャサンプリング
 	{
@@ -79,13 +87,6 @@ void main(){
 	{
 		col=vec4(1.0);
 		//col=vec4(in_uv.x,in_uv.y,0.0,1.0);
-	}
-
-	// 環境光
-	vec4 envColor = vec4(0.0,0.0,0.0,1.0);
-	if(_UseEnvColor == 1)
-	{
-		envColor = _EnvColor;
 	}
 
 	// ライティング

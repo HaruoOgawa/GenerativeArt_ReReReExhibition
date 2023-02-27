@@ -244,7 +244,11 @@ void main()
 	rot.x = acos(dot(nv.yz, zdir.yz));
 
 	//
-	vec4 col = vec4(hsv2rgb2(normalize(v.xyz) * 0.5 +0.5, 2.2), 1.0);
+	vec3 vc = normalize(v.xyz) * 0.5 + 0.5;
+	vc.x *= 0.5;
+	//vc.x = clamp(vc.x, 0.0, 0.45);
+
+	vec4 col = vec4(hsv2rgb2(vc, 2.2), 1.0);
 
 	//
 	rw_TrailDataBuffer.trailData[DID].Pos =  pos;
