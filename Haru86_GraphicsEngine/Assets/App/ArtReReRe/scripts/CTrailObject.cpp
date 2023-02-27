@@ -12,10 +12,11 @@ namespace app
 		m_SegmentBuffer(nullptr),
 		m_SegmentGPGPU(nullptr),
 		m_DomainCount(1),
-		m_TrailNumPerDomain(1024),
+		m_TrailNumPerDomain(4096),
 		m_TrailSegmentNum(64),
-		m_WallHalfSize(glm::vec4(50.0f, 25.0f, 25.0f,1.0f)),
-		m_ThreadNum(1024, 1, 1)
+		m_WallHalfSize(glm::vec4(100.0f, 50.0f, 50.0f,1.0f)),
+		m_ThreadNum(1024, 1, 1),
+		m_Radius(0.25f)
 	{
 	}
 
@@ -64,6 +65,8 @@ namespace app
 			shaderlib::Standard_frag
 		);
 
+		m_TrailMesh->useAlphaTest = true;
+
 		m_TrailGPGPU = std::make_shared<Material>(
 			RenderingSurfaceType::RASTERIZER,
 			"", "", "", "", "",
@@ -85,6 +88,8 @@ namespace app
 				#include "../shaders/Segment.geom"	
 			})
 		);
+
+		m_SegmentMesh->useAlphaTest = true;
 
 		m_SegmentGPGPU = std::make_shared<Material>(
 			RenderingSurfaceType::RASTERIZER,
@@ -119,7 +124,7 @@ namespace app
 					1.0f
 				);
 				glm::vec4 scl = glm::vec4(0.25f);
-				glm::vec4 col = glm::vec4(Noise(glm::vec2(id, id + 11.1f)), Noise(glm::vec2(id + 95.0f, id)), Noise(glm::vec2(id, 66.6)), 1.0f);
+				glm::vec4 col = glm::vec4(Noise(glm::vec2(id, id + 11.1f)), Noise(glm::vec2(id + 95.0f, id)), Noise(glm::vec2(id, 66.6)), 0.5f);
 				glm::vec4 vel = glm::vec4(Noise(glm::vec2(id + 2.622f)) * 2.0f - 1.0f, Noise(glm::vec2(id + 55.12f, id  + id)) * 2.0f - 1.0f, Noise(glm::vec2(id + 66.6)) * 2.0f - 1.0f, 1.0f);
 
 				STrailData data = {
@@ -205,6 +210,8 @@ namespace app
 		// Segment
 		m_SegmentMesh->Draw([&]() {
 			m_SegmentMesh->m_material->SetIntUniform("_SegmentNum", m_TrailSegmentNum);
+			m_SegmentMesh->m_material->SetFloatUniform("_Radius", m_Radius);
+			m_SegmentMesh->m_material->SetIntUniform("_Use2FColor", 1);
 		}, GL_POINTS, true, m_DomainCount * m_TrailNumPerDomain * m_TrailSegmentNum);
 	}
 }

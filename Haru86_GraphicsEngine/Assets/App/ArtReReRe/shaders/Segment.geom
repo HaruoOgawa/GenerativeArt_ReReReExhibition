@@ -4,7 +4,7 @@ R"(
 #extension GL_ARB_separate_shader_objects : enable
 
 layout(points) in;
-layout(line_strip, max_vertices = 6) out;
+layout(triangle_strip, max_vertices = 6) out;
 
 // Uniform 
 uniform float _time;
@@ -12,6 +12,8 @@ uniform float _deltaTime;
 uniform int _SegmentNum;
 uniform mat4 VMatrix;
 uniform mat4 PMatrix;
+uniform float _Radius;
+
 // 
 struct SSegmentData 
 {
@@ -50,19 +52,65 @@ void main()
 	int id1 = (data0.SegmentIndex == _SegmentNum - 1)? id0 : id0 + 1;
 	SSegmentData data1 = rw_SegmentDataBuffer.segmentData[id1];
 
+	// 
+	vec3 dir = normalize(data1.Pos.xyz - data0.Pos.xyz);
+	vec4 n = vec4(normalize(cross(dir, vec3(0.0,1.0, 0.0))), 0.0);
+	vec3 mDir = normalize(cross(n.xyz, dir));
+
 	//
-	gl_Position = PMatrix * VMatrix * data0.Pos;
+	vec4 pos0 = data1.Pos + vec4(mDir * _Radius, 0.0);
+	vec4 pos1 = data1.Pos - vec4(mDir * _Radius, 0.0);
+	vec4 pos2 = data0.Pos + vec4(mDir * _Radius, 0.0);
+	vec4 pos3 = data0.Pos - vec4(mDir * _Radius, 0.0);
+
+	//
+	gl_Position = PMatrix * VMatrix * pos2;
 	out_uv = in_uv[0];
-	out_WorldVertexPos = data0.Pos;
-	out_WorldNormal = in_WorldNormal[0];
+	out_WorldVertexPos = pos2;
+	out_WorldNormal = n;
+	out_gl_InstanceID = in_gl_InstanceID[0];
+	out_Color = in_Color[0];
+	EmitVertex();
+
+	gl_Position = PMatrix * VMatrix * pos1;
+	out_uv = in_uv[0];
+	out_WorldVertexPos = pos1;
+	out_WorldNormal = n;
+	out_gl_InstanceID = in_gl_InstanceID[0];
+	out_Color = in_Color[0];
+	EmitVertex();
+
+	gl_Position = PMatrix * VMatrix * pos3;
+	out_uv = in_uv[0];
+	out_WorldVertexPos = pos3;
+	out_WorldNormal = n;
+	out_gl_InstanceID = in_gl_InstanceID[0];
+	out_Color = in_Color[0];
+	EmitVertex();
+
+	EndPrimitive();
+
+	//
+	gl_Position = PMatrix * VMatrix * pos0;
+	out_uv = in_uv[0];
+	out_WorldVertexPos = pos0;
+	out_WorldNormal = n;
 	out_gl_InstanceID = in_gl_InstanceID[0];
 	out_Color = in_Color[0];
 	EmitVertex();
 	
-	gl_Position = PMatrix * VMatrix * data1.Pos;
+	gl_Position = PMatrix * VMatrix * pos1;
 	out_uv = in_uv[0];
-	out_WorldVertexPos = data1.Pos;
-	out_WorldNormal = in_WorldNormal[0];
+	out_WorldVertexPos = pos1;
+	out_WorldNormal = n;
+	out_gl_InstanceID = in_gl_InstanceID[0];
+	out_Color = in_Color[0];
+	EmitVertex();
+
+	gl_Position = PMatrix * VMatrix * pos2;
+	out_uv = in_uv[0];
+	out_WorldVertexPos = pos2;
+	out_WorldNormal = n;
 	out_gl_InstanceID = in_gl_InstanceID[0];
 	out_Color = in_Color[0];
 	EmitVertex();

@@ -27,6 +27,23 @@ layout(std430, binding = 0) buffer TrailDataBuffer
 	STrailData trailData[];
 } rw_TrailDataBuffer;
 
+// 
+struct SSegmentData 
+{
+	vec4 Pos;
+	vec4 Rotate;
+	vec4 Scale;
+	int  TrailIndex;
+	int  SegmentIndex;
+	int  Padding0;
+	int  Padding1;
+};
+
+layout(std430, binding = 1) buffer SegmentDataBuffer
+{
+	SSegmentData segmentData[];
+} rw_SegmentDataBuffer;
+
 layout(location=0)in vec3 vertex;
 layout(location=1)in vec3 normal;
 layout(location=2)in vec2 texcoord;
@@ -42,13 +59,14 @@ layout(location=4) out vec4 out_Color;
 void main(){
 	vec4 pos = vec4(vertex, 1.0);
 	int id = gl_InstanceID;
-	
+	int TrailID = rw_SegmentDataBuffer.segmentData[id].TrailIndex;
+
 	gl_Position = pos;
 	out_uv = texcoord;
 	out_WorldVertexPos = pos;
 	out_WorldNormal=vec4(normalize(normal), 0.0);
 	out_gl_InstanceID = id;
-	out_Color = rw_TrailDataBuffer.trailData[id].Color;
+	out_Color = rw_TrailDataBuffer.trailData[TrailID].Color;
 }
 
 )"

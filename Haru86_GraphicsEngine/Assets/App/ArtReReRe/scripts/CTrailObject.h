@@ -50,6 +50,8 @@ namespace app
 		unsigned int m_DomainCount; // これをドローコール数としてもいいのかも？
 		unsigned int m_TrailNumPerDomain;
 		unsigned int m_TrailSegmentNum;
+
+		float m_Radius;
 	private:
 		static float Noise(glm::vec2 st);
 
