@@ -28,6 +28,8 @@ namespace app
 		float m_Scale[4];
 		int   m_TrailIndex;
 		int   m_SegmentIndex;
+		int   m_Padding0;
+		int   m_Padding1;
 	};
 
 	class CTrailObject

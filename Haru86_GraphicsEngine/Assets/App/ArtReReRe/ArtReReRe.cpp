@@ -40,7 +40,7 @@ namespace app
         }
         else
         {
-            m_WhiteWall->Draw();
+            //m_WhiteWall->Draw();
             m_TrailObject->Draw();
         }
     }

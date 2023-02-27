@@ -14,7 +14,7 @@ namespace app
 		m_DomainCount(1),
 		m_TrailNumPerDomain(1024),
 		m_TrailSegmentNum(64),
-		m_WallHalfSize(glm::vec4(25.0f, 25.0f, 25.0f,1.0f)),
+		m_WallHalfSize(glm::vec4(50.0f, 25.0f, 25.0f,1.0f)),
 		m_ThreadNum(1024, 1, 1)
 	{
 	}
@@ -80,10 +80,10 @@ namespace app
 			std::string({
 				#include "../shaders/Segment.vert"	
 			}),
-			shaderlib::Standard_frag/*,
+			shaderlib::Standard_frag,
 			std::string({
 				#include "../shaders/Segment.geom"	
-			})*/
+			})
 		);
 
 		m_SegmentGPGPU = std::make_shared<Material>(
@@ -109,9 +109,9 @@ namespace app
 
 		for (int d = 0; d < m_DomainCount; d++)
 		{
-			for (int s = 0; s < m_TrailNumPerDomain; s++)
+			for (int t = 0; t < m_TrailNumPerDomain; t++)
 			{
-				float id = static_cast<float>(m_TrailNumPerDomain * d + s);
+				float id = static_cast<float>(m_TrailNumPerDomain * d + t);
 				glm::vec4 pos = glm::vec4(
 					m_WallHalfSize.x * (Noise(glm::vec2(id, 0.741f)) * 2.0f - 1.0f),
 					m_WallHalfSize.y * (Noise(glm::vec2(id, 942.0f)) * 2.0f - 1.0f),
@@ -145,7 +145,7 @@ namespace app
 			{
 				for (int s = 0; s < m_TrailSegmentNum; s++)
 				{
-					int TrailIndex = m_TrailNumPerDomain * d + s;
+					int TrailIndex = m_TrailNumPerDomain * d + t;
 					int SegmentIndex = s;
 					const auto& Trail = InitTrailDataList[TrailIndex];
 
@@ -154,7 +154,9 @@ namespace app
 						{Trail.m_Rotate[0], Trail.m_Rotate[1], Trail.m_Rotate[2], Trail.m_Rotate[3]},
 						{Trail.m_Scale[0], Trail.m_Scale[1], Trail.m_Scale[2], Trail.m_Scale[3]},
 						TrailIndex,
-						SegmentIndex
+						SegmentIndex,
+						0,
+						0
 					};
 
 					InitSegmentData.push_back(data);
@@ -191,12 +193,18 @@ namespace app
 		m_SegmentGPGPU->SetFloatUniform("_time", GraphicsMain::GetInstance()->m_SecondsTime);
 		m_SegmentGPGPU->SetFloatUniform("_deltaTime", GraphicsMain::GetInstance()->m_DeltaTime);
 		m_SegmentGPGPU->SetIntUniform("_SegmentNum", m_TrailSegmentNum);
-		m_SegmentGPGPU->Dispatch(m_DomainCount * m_TrailNumPerDomain / m_ThreadNum.x, 1, 1);
+		m_SegmentGPGPU->Dispatch(m_DomainCount * m_TrailNumPerDomain * m_TrailSegmentNum / m_ThreadNum.x, 1, 1);
 	}
 	void CTrailObject::Draw()
 	{
+		// Trail
 		m_TrailMesh->Draw([&]() {
 			m_TrailMesh->m_material->SetIntUniform("_Use2FColor", 1);
 		}, GL_TRIANGLES, true, m_DomainCount * m_TrailNumPerDomain);
+
+		// Segment
+		m_SegmentMesh->Draw([&]() {
+			m_SegmentMesh->m_material->SetIntUniform("_SegmentNum", m_TrailSegmentNum);
+		}, GL_POINTS, true, m_DomainCount * m_TrailNumPerDomain * m_TrailSegmentNum);
 	}
 }

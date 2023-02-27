@@ -33,6 +33,8 @@ struct SSegmentData
 	vec4 Scale;
 	int  TrailIndex;
 	int  SegmentIndex;
+	int  Padding0;
+	int  Padding1;
 };
 
 layout(std430, binding = 1) buffer SegmentDataBuffer
