@@ -12,6 +12,7 @@ enum class PrimitiveType {
 	CUBE,
 	Icosahedron,
 	CUSTOM,
+	CIRCLE,
 };
 
 enum class GLDrawType {

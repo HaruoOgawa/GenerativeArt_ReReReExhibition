@@ -41,19 +41,15 @@ layout(location=4) out vec4 out_Color;
 
 void main(){
 	vec4 pos = vec4(vertex, 1.0);
-	vec4 wn = vec4(normal, 0.0);
 	int id = gl_InstanceID;
 
 	pos.xyz *= rw_TrailDataBuffer.trailData[id].Scale.xyz;
-	vec4 TR = rw_TrailDataBuffer.trailData[id].Rotate;
-	pos.xy *= rot(TR.z); pos.yz *= rot(TR.x); pos.xz *= rot(TR.y);
-	wn.xy *= rot(TR.z); wn.yz *= rot(TR.x); wn.xz *= rot(TR.y);
 	pos.xyz += rw_TrailDataBuffer.trailData[id].Pos.xyz;
 	
 	gl_Position = PMatrix * VMatrix * pos;
 	out_uv = texcoord;
 	out_WorldVertexPos = pos;
-	out_WorldNormal = wn;
+	out_WorldNormal=vec4(normalize(normal), 0.0);
 	out_gl_InstanceID = id;
 	out_Color = rw_TrailDataBuffer.trailData[id].Color;
 }

@@ -21,6 +21,7 @@ layout(location=0) out vec2 out_uv;
 layout(location=1) out vec4 out_WorldVertexPos;
 layout(location=2) out vec4 out_WorldNormal;
 layout(location=3) flat out int out_gl_InstanceID;
+layout(location = 4) out vec4 out_Color;
 
 #define rot(a) mat2(cos(a),-sin(a),sin(a),cos(a))
 
@@ -35,6 +36,7 @@ void main(){
 		out_WorldVertexPos=MMatrix * pos;
 		out_WorldNormal=MMatrix * vec4(normalize(normal), 0.0);
 		out_gl_InstanceID = id;
+		out_Color = vec4(1.0);
 	}
 	else if(_IsMOnly == 1)
 	{
@@ -43,6 +45,7 @@ void main(){
 		out_WorldVertexPos=MMatrix*pos;
 		out_WorldNormal=vec4(normalize(normal), 0.0);
 		out_gl_InstanceID = id;
+		out_Color = vec4(1.0);
 	}
 	else if(_IsMulMatOnVert == 0)
 	{
@@ -51,6 +54,7 @@ void main(){
 		out_WorldVertexPos=pos;
 		out_WorldNormal=vec4(normalize(normal), 0.0);
 		out_gl_InstanceID = id;
+		out_Color = vec4(1.0);
 	}
 }
 

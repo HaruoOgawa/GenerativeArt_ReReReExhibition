@@ -5,11 +5,13 @@ layout(location=0) in vec2 in_uv;
 layout(location=1) in vec4 in_WorldVertexPos;
 layout(location=2) in vec4 in_WorldNormal;
 layout(location=3) flat in int  in_gl_InstanceID;
+layout(location = 4) in vec4 in_Color;
 
 out vec4 out_Color;
 
 uniform int _UseColor;
 uniform vec4 _Color;
+uniform int _Use2FColor;
 uniform int _UseLighting;
 uniform vec3 _LightDir;
 uniform vec3 _LightPos;
@@ -41,6 +43,10 @@ void main(){
 	if(_UseColor == 1)
 	{
 		col=_Color;
+	}
+	else if (_Use2FColor == 1)
+	{
+		col = in_Color;
 	}
 	else if(_UseMainTex == 1) // テクスチャサンプリング
 	{

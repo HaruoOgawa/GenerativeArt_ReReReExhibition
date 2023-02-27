@@ -493,3 +493,58 @@ void Primitive::CreateIcosahedron(std::vector<std::vector<float>>* vertices, std
 		indices->emplace_back(data);
 	}
 }
+
+void Primitive::CreateCircle(std::vector<std::vector<float>>* vertices, std::vector<int>* dimention, std::vector<unsigned short>* indices, float row, float rad)
+{
+	float pi = 3.14159265f;
+
+	std::vector<float> vertex;
+	std::vector<float> normal;
+	std::vector<float> texcoord;
+
+	// íÜêS
+	vertex.push_back(0.0f);
+	vertex.push_back(0.0f);
+	vertex.push_back(0.0f);
+
+	normal.push_back(0.0f);
+	normal.push_back(0.0f);
+	normal.push_back(1.0f);
+
+	texcoord.push_back(0.0f);
+	texcoord.push_back(0.0f);
+
+	//
+	for (float i = 0.0f; i <= row; i++)
+	{
+		float a = 2.0f * pi / row * i;
+		glm::vec3 p = glm::vec3(rad * glm::cos(a), rad * glm::sin(a), 0.0f);
+		glm::vec3 n = glm::vec3(0.0f, 0.0f, 1.0f);
+		glm::vec2 st = glm::vec2(glm::cos(a), glm::sin(a)) * 0.5f + 0.5f;
+
+		vertex.push_back(p.x);
+		vertex.push_back(p.y);
+		vertex.push_back(p.z);
+
+		normal.push_back(n.x);
+		normal.push_back(n.y);
+		normal.push_back(n.z);
+
+		texcoord.push_back(st.x);
+		texcoord.push_back(st.y);
+	}
+
+	vertices->push_back(vertex);
+	vertices->push_back(normal);
+	vertices->push_back(texcoord);
+
+	dimention->push_back(3);
+	dimention->push_back(3);
+	dimention->push_back(2);
+
+	for (int i = 1; i < row + 1; i++) {
+		indices->push_back(0);
+		indices->push_back(i);
+		indices->push_back(i + 1);
+	}
+}

@@ -238,6 +238,11 @@ void main()
 	// 位置を更新
 	pos.xyz += v.xyz * _deltaTime;
 
+	// 速度ベクトルの向きから回転を取得
+	vec3 rot = vec3(0.0), nv = normalize(v.xyz), zdir = vec3(0.0, 0.0, 1.0);
+	rot.z = acos(dot(nv.xy, zdir.xy));
+	rot.x = acos(dot(nv.yz, zdir.yz));
+
 	//
 	vec4 col = vec4(hsv2rgb2(normalize(v.xyz) * 0.5 +0.5, 2.2), 1.0);
 
@@ -245,6 +250,7 @@ void main()
 	rw_TrailDataBuffer.trailData[DID].Pos =  pos;
 	rw_TrailDataBuffer.trailData[DID].Velocity = v;
 	rw_TrailDataBuffer.trailData[DID].Color = col;
+	rw_TrailDataBuffer.trailData[DID].Rotate = vec4(rot, 1.0);
 }
 
 )"

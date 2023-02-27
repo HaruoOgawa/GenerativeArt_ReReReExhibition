@@ -596,8 +596,10 @@ xcopy "$(ProjectDir)GraphicsEngine\Assets\Sound\stroke.wav" "$(OutDir)" /i /s /y
     <ClCompile Include="GraphicsEngine\Graphics\RenderBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\App\ArtReReRe\shaders\Segment.comp" />
+    <None Include="Assets\App\ArtReReRe\shaders\Segment.geom" />
+    <None Include="Assets\App\ArtReReRe\shaders\Segment.vert" />
     <None Include="Assets\App\ArtReReRe\shaders\Trail.comp" />
-    <None Include="Assets\App\ArtReReRe\shaders\Trail.frag" />
     <None Include="Assets\App\ArtReReRe\shaders\Trail.vert" />
     <None Include="bin\libfreetype-6.dll" />
     <None Include="bin\SDL2_ttf.dll" />
