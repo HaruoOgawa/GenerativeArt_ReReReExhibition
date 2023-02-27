@@ -3,12 +3,18 @@
 
 namespace app
 {
+    class CWhiteWall;
+    class CTrailObject;
+
     class ArtReReRe
     {
         unsigned int m_SceneIndex;
         float        m_SceneStartTime;
         float        m_SceneEndTime;
         float        m_LocalTime;
+
+        std::shared_ptr<CWhiteWall> m_WhiteWall;
+        std::shared_ptr<CTrailObject> m_TrailObject;
     public:
         ArtReReRe();
         ~ArtReReRe() = default;

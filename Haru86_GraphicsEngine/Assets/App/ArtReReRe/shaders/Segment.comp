@@ -1,0 +1,74 @@
+R"(
+
+#version 430
+
+// thread
+layout(local_size_x = 1024, local_size_y = 1, local_size_z = 1) in;
+
+// Uniform 
+uniform float _time;
+uniform float _deltaTime;
+uniform int _SegmentNum;
+
+//
+struct STrailData
+{
+	vec4 Pos;
+	vec4 Rotate;
+	vec4 Scale;
+	vec4 Color;
+	vec4 Velocity;
+};
+
+layout(std430, binding = 0) buffer TrailDataBuffer
+{
+	STrailData trailData[];
+} rw_TrailDataBuffer;
+
+// 
+struct SSegmentData 
+{
+	vec4 Pos;
+	vec4 Rotate;
+	vec4 Scale;
+	int  TrailIndex;
+	int  SegmentIndex;
+	int  Padding0;
+	int  Padding1;
+};
+
+layout(std430, binding = 1) buffer SegmentDataBuffer
+{
+	SSegmentData segmentData[];
+} rw_SegmentDataBuffer;
+
+void main()
+{
+	uint DID = gl_GlobalInvocationID.x;
+
+	SSegmentData Data = rw_SegmentDataBuffer.segmentData[DID];
+
+	if(Data.SegmentIndex == 0)
+	{
+		STrailData trailData = rw_TrailDataBuffer.trailData[Data.TrailIndex];
+
+		Data.Pos = trailData.Pos;
+		Data.Rotate = trailData.Rotate;
+		Data.Scale = trailData.Scale;
+
+		rw_SegmentDataBuffer.segmentData[DID] = Data;
+	}
+	else
+	{
+		uint PrevIndex = DID - 1;
+		SSegmentData PrevData = rw_SegmentDataBuffer.segmentData[PrevIndex];
+
+		Data.Pos = PrevData.Pos;
+		Data.Rotate = PrevData.Rotate;
+		Data.Scale = PrevData.Scale;
+
+		rw_SegmentDataBuffer.segmentData[DID] = Data;
+	}
+}
+
+)"

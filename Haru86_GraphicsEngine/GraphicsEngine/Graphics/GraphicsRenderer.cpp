@@ -205,7 +205,9 @@ bool GraphicsRenderer::Initialize(float width,float height) {
 	}
 
 	// マウスを描画しない
+#ifndef _DEBUG
 	glfwSetInputMode(sWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+#endif // !_DEBUG
 
 	// プログラム終了時の処理
 	atexit(glfwTerminate);

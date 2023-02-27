@@ -69,6 +69,7 @@ public:
 
 	// ƒ‰ƒCƒg
 	std::shared_ptr<TransformComponent> m_GroabalLightPosition;
+	glm::vec3 m_DirectionalLightDir;
 
 	// ƒJƒƒ‰
 	std::shared_ptr<TransformComponent> m_MainCamera;
