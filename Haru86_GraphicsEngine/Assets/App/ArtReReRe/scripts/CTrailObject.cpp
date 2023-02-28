@@ -181,8 +181,6 @@ namespace app
 					{col.x, col.y, col.z, col.w},
 					{vel.x, vel.y, vel.z, vel.w},
 					{pos.x, pos.y, pos.z, pos.w},
-					{0.0f, 0.0f, 0.0f, 0.0f},
-					{0.0f, 0.0f, 0.0f, 0.0f},
 					{0.0f, 0.0f, 0.0f, 0.0f}
 				};
 
@@ -258,7 +256,8 @@ namespace app
 		m_TrailGPGPU->SetVec4Uniform("_WallHalfSize", m_WallHalfSize);
 		m_TrailGPGPU->SetFloatUniform("_FlowGridX", m_FlowGridX);
 		m_TrailGPGPU->SetFloatUniform("_FlowGridY", m_FlowGridY);
-		m_TrailGPGPU->SetFloatUniform("_StepLength", 1.0f);
+		m_TrailGPGPU->SetFloatUniform("_StepLength", m_StepLength);
+		m_TrailGPGPU->SetFloatUniform("_StepSpeed", m_StepSpeed);
 		m_TrailGPGPU->Dispatch(m_DomainCount * m_TrailNumPerDomain / m_ThreadNum.x, 1, 1);
 		
 		// Segment
@@ -288,6 +287,7 @@ namespace app
 			m_SegmentMesh->m_material->SetIntUniform("_SegmentNum", m_TrailSegmentNum);
 			m_SegmentMesh->m_material->SetFloatUniform("_Radius", m_Radius);
 			m_SegmentMesh->m_material->SetIntUniform("_Use2FColor", 1);
+			m_SegmentMesh->m_material->SetVec4Uniform("_WallHalfSize", m_WallHalfSize);
 		}, GL_POINTS, true, m_DomainCount * m_TrailNumPerDomain * m_TrailSegmentNum);
 	}
 }

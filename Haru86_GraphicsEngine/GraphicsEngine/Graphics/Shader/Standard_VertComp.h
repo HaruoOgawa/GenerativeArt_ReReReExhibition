@@ -23,7 +23,7 @@
    "vec4 v=vec4(vertex,1.);"
    "int n=gl_InstanceID;"
    "if(_IsMulMatOnVert==1)"
-     "gl_Position=MVPMatrix*v,out_uv=texcoord,out_WorldVertexPos=MMatrix*v,out_WorldNormal=MMatrix*vec4(normalize(normal),0.),out_gl_InstanceID=n,out_Color=vec4(1.);"
+     "gl_Position=MVPMatrix*v,out_uv=texcoord,out_WorldVertexPos=MMatrix*v,out_WorldNormal=normalize(MMatrix*vec4(normal,0.)),out_gl_InstanceID=n,out_Color=vec4(1.);"
    "else"
      " if(_IsMOnly==1)"
        "gl_Position=MMatrix*v,out_uv=texcoord,out_WorldVertexPos=MMatrix*v,out_WorldNormal=vec4(normalize(normal),0.),out_gl_InstanceID=n,out_Color=vec4(1.);"

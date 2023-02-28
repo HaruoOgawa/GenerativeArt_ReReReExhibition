@@ -21,9 +21,7 @@ struct STrailData
 	vec4 Color;
 	vec4 Velocity;
 	vec4 TargetPos;
-	vec4 DebugData;
-	vec4 DebugData2;
-	vec4 DebugData3;
+	vec4 Data;
 };
 
 layout(std430, binding = 0) buffer TrailDataBuffer
@@ -64,13 +62,14 @@ void main(){
 	vec4 pos = vec4(vertex, 1.0);
 	int id = gl_InstanceID;
 	int TrailID = rw_SegmentDataBuffer.segmentData[id].TrailIndex;
+	STrailData trailData = rw_TrailDataBuffer.trailData[TrailID];
 
 	gl_Position = pos;
 	out_uv = texcoord;
 	out_WorldVertexPos = pos;
 	out_WorldNormal=vec4(normalize(normal), 0.0);
 	out_gl_InstanceID = id;
-	out_Color = rw_TrailDataBuffer.trailData[TrailID].Color;
+	out_Color = trailData.Color;
 }
 
 )"

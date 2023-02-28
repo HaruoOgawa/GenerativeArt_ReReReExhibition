@@ -21,12 +21,38 @@ layout(std430, binding = 2) buffer FlowDataBuffer
 	SFlowData flowData[];
 } rw_FlowDataBuffer;
 
+//
+float Noise(vec2 st)
+{
+	return fract(sin(dot(st, vec2(12.9898, 78.233))) * 43758.5453123);
+}
+
+float PerlinNoise(vec2 st)
+{
+	vec2 i = floor(st);
+	vec2 f = fract(st);
+
+	// Four corners in 2D of a tile
+	float a = Noise(i);
+	float b = Noise(i + vec2(1.0, 0.0));
+	float c = Noise(i + vec2(0.0, 1.0));
+	float d = Noise(i + vec2(1.0, 1.0));
+
+	vec2 u = f * f * (3.0 - 2.0 * f);
+
+	// Mix 4 coorners percentages
+	return mix(a, b, u.x) +
+		(c - a) * u.y * (1.0 - u.x) +
+		(d - b) * u.x * u.y;
+}
+
 #define pi 3.1415
 
 void main()
 {
 	uvec2 DID = gl_GlobalInvocationID.xy;
 	float angle = pi * (float(DID.x) / float(_FlowGridX - 1));
+	//float angle = pi/4.0 * PerlinNoise(DID*0.1);
 	
 	uint ID = DID.y * _FlowGridX + DID.x;
 	rw_FlowDataBuffer.flowData[ID].Data.w = angle;

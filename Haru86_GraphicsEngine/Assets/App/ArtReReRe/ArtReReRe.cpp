@@ -18,13 +18,15 @@ namespace app
 
     void ArtReReRe::Start()
     {
+        m_WhiteWall->Init(m_TrailObject->GetWallHalfSize());
         m_TrailObject->Init();
     }
     void ArtReReRe::Update()
     {
         GraphicsMain::GetInstance()->m_GroabalLightPosition->m_position = glm::vec3(0.0f, 0.0f, 0.0f);
         GraphicsRenderer::GetInstance()->SetBackgroudColor(glm::vec4(glm::vec3(0.01f), 1.0f));
-        GraphicsMain::GetInstance()->m_MainCamera->m_position = glm::vec3(0.0f, 0.0f, -50.0f);
+        //GraphicsMain::GetInstance()->m_MainCamera->m_position = glm::vec3(0.0f, 0.0f, -50.0f);
+        GraphicsMain::GetInstance()->m_MainCamera->m_position = glm::vec3(0.0f, 0.0f, -65.0f);
         //GraphicsMain::GetInstance()->m_MainCamera->m_position = glm::vec3(0.0f, 0.0f, -10.0f);
 
         //
@@ -36,11 +38,10 @@ namespace app
     {
         if (IsRaymarching)
         {
-            //m_WhiteWall->Draw();
         }
         else
         {
-            //m_WhiteWall->Draw();
+            m_WhiteWall->Draw();
             m_TrailObject->Draw();
         }
     }

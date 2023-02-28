@@ -34,7 +34,7 @@ void main(){
 		gl_Position=MVPMatrix*pos;
 		out_uv=texcoord;
 		out_WorldVertexPos=MMatrix * pos;
-		out_WorldNormal=MMatrix * vec4(normalize(normal), 0.0);
+		out_WorldNormal = normalize(MMatrix * vec4(normal, 0.0));
 		out_gl_InstanceID = id;
 		out_Color = vec4(1.0);
 	}

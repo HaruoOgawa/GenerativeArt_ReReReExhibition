@@ -19,9 +19,7 @@ struct STrailData
 	vec4 Color;
 	vec4 Velocity;
 	vec4 TargetPos;
-	vec4 DebugData;
-	vec4 DebugData2;
-	vec4 DebugData3;
+	vec4 Data;
 };
 
 layout(std430, binding = 0) buffer TrailDataBuffer
@@ -52,7 +50,7 @@ void main()
 
 	SSegmentData Data = rw_SegmentDataBuffer.segmentData[DID];
 
-	if(Data.SegmentIndex == 0)
+	if(Data.SegmentIndex == 0 /*|| Data.Data.x == 1.0*/)
 	{
 		STrailData trailData = rw_TrailDataBuffer.trailData[Data.TrailIndex];
 

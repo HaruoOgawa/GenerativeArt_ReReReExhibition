@@ -22,9 +22,7 @@ namespace app
 		float m_Color[4];
 		float m_Velocity[4];
 		float m_TargetPos[4];
-		float m_DebugData[4];
-		float m_DebugData2[4];
-		float m_DebugData3[4];
+		float m_Data[4]; // IsRelocation, none, none, none
 	};
 
 	// 今回はセグメントの順番は固定で単純にひとつ前のセグメントの位置を参照する形にしてみる
@@ -53,6 +51,9 @@ namespace app
 		float		m_FlowCellSize;
 		const glm::ivec3	m_FlowThreads = glm::ivec3(32, 32, 1);
 
+		const float m_StepLength = 1.0f;
+		const float m_StepSpeed = 1.0f;
+
 		// Trail
 		std::shared_ptr<MeshRendererComponent> m_TrailMesh;
 		std::shared_ptr<ComputeBuffer> m_TrailBuffer;
@@ -62,8 +63,6 @@ namespace app
 		std::shared_ptr<MeshRendererComponent> m_SegmentMesh;
 		std::shared_ptr<ComputeBuffer> m_SegmentBuffer;
 		std::shared_ptr<Material> m_SegmentGPGPU;
-
-		//
 
 		//
 		glm::vec4 m_WallHalfSize;
@@ -87,5 +86,7 @@ namespace app
 		void Init();
 		void Update();
 		void Draw();
+
+		const glm::vec4& GetWallHalfSize() const { return m_WallHalfSize; }
 	};
 }
