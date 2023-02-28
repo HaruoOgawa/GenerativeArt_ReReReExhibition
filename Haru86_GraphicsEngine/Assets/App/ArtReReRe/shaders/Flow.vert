@@ -12,24 +12,17 @@ uniform float _deltaTime;
 uniform vec3 _CameraPos;
 uniform int _IsMulMatOnVert;
 uniform int _IsMOnly;
+uniform float _FlowCellSize;
 
-struct STrailData
+struct SFlowData
 {
-	vec4 Pos;
-	vec4 Rotate;
-	vec4 Scale;
-	vec4 Color;
-	vec4 Velocity;
-	vec4 TargetPos;
-	vec4 DebugData;
-	vec4 DebugData2;
-	vec4 DebugData3;
+	vec4 Data;
 };
 
-layout(std430, binding = 0) buffer TrailDataBuffer
+layout(std430, binding = 2) buffer FlowDataBuffer
 {
-	STrailData trailData[];
-} rw_TrailDataBuffer;
+	SFlowData flowData[];
+} rw_FlowDataBuffer;
 
 layout(location=0)in vec3 vertex;
 layout(location=1)in vec3 normal;
@@ -48,18 +41,18 @@ void main(){
 	vec4 wn = vec4(normal, 0.0);
 	int id = gl_InstanceID;
 
-	pos.xyz *= rw_TrailDataBuffer.trailData[id].Scale.xyz;
-	vec4 TR = rw_TrailDataBuffer.trailData[id].Rotate;
-	pos.xy *= rot(TR.z); pos.yz *= rot(TR.x); pos.xz *= rot(TR.y);
-	wn.xy *= rot(TR.z); wn.yz *= rot(TR.x); wn.xz *= rot(TR.y);
-	pos.xyz += rw_TrailDataBuffer.trailData[id].Pos.xyz;
+	SFlowData flowData = rw_FlowDataBuffer.flowData[id];
+
+	pos.xyz *= _FlowCellSize;
+	pos.xy *= rot(flowData.Data.w); wn.xy *= rot(flowData.Data.w);
+	pos.xyz += flowData.Data.xyz;
 	
 	gl_Position = PMatrix * VMatrix * pos;
 	out_uv = texcoord;
 	out_WorldVertexPos = pos;
 	out_WorldNormal = wn;
 	out_gl_InstanceID = id;
-	out_Color = rw_TrailDataBuffer.trailData[id].Color;
+	out_Color = vec4(1.0, 0.0, 0.0, 1.0);
 }
 
 )"

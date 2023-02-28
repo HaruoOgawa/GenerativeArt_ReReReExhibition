@@ -23,7 +23,7 @@ namespace app
     void ArtReReRe::Update()
     {
         GraphicsMain::GetInstance()->m_GroabalLightPosition->m_position = glm::vec3(0.0f, 0.0f, 0.0f);
-        GraphicsRenderer::GetInstance()->SetBackgroudColor(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+        GraphicsRenderer::GetInstance()->SetBackgroudColor(glm::vec4(glm::vec3(0.01f), 1.0f));
         GraphicsMain::GetInstance()->m_MainCamera->m_position = glm::vec3(0.0f, 0.0f, -50.0f);
         //GraphicsMain::GetInstance()->m_MainCamera->m_position = glm::vec3(0.0f, 0.0f, -10.0f);
 

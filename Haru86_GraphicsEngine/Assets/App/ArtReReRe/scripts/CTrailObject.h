@@ -9,6 +9,11 @@ class Material;
 
 namespace app
 {
+	struct SFlowData
+	{
+		float Data[4]; // pos.x, pos.y, pos.z, angle
+	};
+
 	struct STrailData
 	{
 		float m_Pos[4];
@@ -16,6 +21,10 @@ namespace app
 		float m_Scale[4];
 		float m_Color[4];
 		float m_Velocity[4];
+		float m_TargetPos[4];
+		float m_DebugData[4];
+		float m_DebugData2[4];
+		float m_DebugData3[4];
 	};
 
 	// 今回はセグメントの順番は固定で単純にひとつ前のセグメントの位置を参照する形にしてみる
@@ -34,6 +43,16 @@ namespace app
 
 	class CTrailObject
 	{
+		// FlowFields
+		std::shared_ptr<MeshRendererComponent> m_FlowFieldsMesh;
+		std::shared_ptr<ComputeBuffer> m_FlowFieldsBuffer;
+		std::shared_ptr<Material> m_FlowFieldsGPGPU;
+
+		const float m_FlowGridX = 64;
+		const float m_FlowGridY = 64;
+		float		m_FlowCellSize;
+		const glm::ivec3	m_FlowThreads = glm::ivec3(32, 32, 1);
+
 		// Trail
 		std::shared_ptr<MeshRendererComponent> m_TrailMesh;
 		std::shared_ptr<ComputeBuffer> m_TrailBuffer;
@@ -43,6 +62,8 @@ namespace app
 		std::shared_ptr<MeshRendererComponent> m_SegmentMesh;
 		std::shared_ptr<ComputeBuffer> m_SegmentBuffer;
 		std::shared_ptr<Material> m_SegmentGPGPU;
+
+		//
 
 		//
 		glm::vec4 m_WallHalfSize;

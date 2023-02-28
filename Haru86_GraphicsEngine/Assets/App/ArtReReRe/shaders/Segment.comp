@@ -18,6 +18,10 @@ struct STrailData
 	vec4 Scale;
 	vec4 Color;
 	vec4 Velocity;
+	vec4 TargetPos;
+	vec4 DebugData;
+	vec4 DebugData2;
+	vec4 DebugData3;
 };
 
 layout(std430, binding = 0) buffer TrailDataBuffer
