@@ -21,6 +21,10 @@ namespace app
 		float m_Scale[4];
 		float m_Color[4];
 		float m_Velocity[4];
+		float m_TargetPos[4];
+		float m_DebugData[4];
+		float m_DebugData2[4];
+		float m_DebugData3[4];
 	};
 
 	// 今回はセグメントの順番は固定で単純にひとつ前のセグメントの位置を参照する形にしてみる

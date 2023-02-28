@@ -8,8 +8,21 @@ layout(local_size_x = 1024, local_size_y = 1, local_size_z = 1) in;
 uniform float _time;
 uniform float _deltaTime;
 uniform vec4 _WallHalfSize;
+uniform float _FlowGridX;
+uniform float _FlowGridY;
+uniform float _StepLength;
 
 //
+struct SFlowData
+{
+	vec4 Data;
+};
+
+layout(std430, binding = 2) buffer FlowDataBuffer
+{
+	SFlowData flowData[];
+} rw_FlowDataBuffer;
+
 struct STrailData
 {
 	vec4 Pos;
@@ -17,6 +30,10 @@ struct STrailData
 	vec4 Scale;
 	vec4 Color;
 	vec4 Velocity;
+	vec4 TargetPos;
+	vec4 DebugData;
+	vec4 DebugData2;
+	vec4 DebugData3;
 };
 
 layout(std430, binding = 0) buffer TrailDataBuffer
@@ -49,11 +66,11 @@ float PerlinNoise(vec2 st)
 		(d - b) * u.x * u.y;
 }
 
-vec4 RefWall(vec4 v, vec4 p)
+vec4 RefWall(vec4 v, vec4 p, inout bool IsWall)
 {
-	if(abs(p.x) > _WallHalfSize.x){ v.x = abs(v.x) * (-1.0) * sign(p.x); }
-	if(abs(p.y) > _WallHalfSize.y){ v.y = abs(v.y) * (-1.0) * sign(p.y); }
-	if(abs(p.z) > _WallHalfSize.z){ v.z = abs(v.z) * (-1.0) * sign(p.z); }
+	if(abs(p.x) > _WallHalfSize.x){ v.x = abs(v.x) * (-1.0) * sign(p.x); IsWall = true; }
+	if(abs(p.y) > _WallHalfSize.y){ v.y = abs(v.y) * (-1.0) * sign(p.y); IsWall = true; }
+	if(abs(p.z) > _WallHalfSize.z){ v.z = abs(v.z) * (-1.0) * sign(p.z); IsWall = true; }
 
 	return v;
 }
@@ -208,17 +225,21 @@ vec3 curlNoise( vec3 p ){
   return normalize( vec3( x , y , z ) / e2 );
 }
 
+#define rot(a) mat2(cos(a),-sin(a),sin(a),cos(a))
+
 void main()
 {
 	uint DID = gl_GlobalInvocationID.x;
 
 	//
-	vec4 v = rw_TrailDataBuffer.trailData[DID].Velocity;
-	vec4 pos = rw_TrailDataBuffer.trailData[DID].Pos;
+	STrailData trailData = rw_TrailDataBuffer.trailData[DID];
+	vec4 v = trailData.Velocity;
+	vec4 pos = trailData.Pos;
 
 	//
 	float t = _time, r = 25.0, s = Noise(vec2(float(DID) + 1.1111)) * 2.0;
 	
+	///////////////////////////////////
 	/*vec4 addv = vec4(
 		PerlinNoise(vec2(t * s, 0.957841 + float(DID))) * 2.0 - 1.0,
 		PerlinNoise(vec2(t * s + float(DID), 129.3 + float(DID))) * 2.0 - 1.0,
@@ -226,17 +247,67 @@ void main()
 		1.0
 	);*/
 
-	vec3 n = curlNoise(pos.xyz);
-	vec4 addv = vec4(n, 1.0);
+	//vec3 n = curlNoise(pos.xyz);
+	//vec4 addv = vec4(n, 1.0);
+	///////////////////////////////////////////
+	
+	//
+	vec4 addv = vec4(0.0);
+
+	// 更新する
+	// (なんかあんまり早いとTargetPosを通過するバグが出そうな予感・・・)
+	vec4 DebugData = vec4(-8686, 0.0, 0.0, 1.0);
+	vec4 DebugData2 = vec4(-8686, 0.0, 0.0, 1.0);
+	vec4 DebugData3 = vec4(-8686, 0.0, 0.0, 1.0);
+	//if(length(trailData.TargetPos.xyz - pos.xyz) < 1e-3)
+	{
+		vec2 DebugPos = pos.xy;
+
+		vec2 GridPos = pos.xy / _WallHalfSize.xy;
+		GridPos = GridPos * 0.5 + 0.5;
+		//GridPos *= vec2(_FlowGridX, _FlowGridY);
+
+		int GridID = int(GridPos.x * _FlowGridY + GridPos.y);
+
+		SFlowData flowData = rw_FlowDataBuffer.flowData[GridID];
+
+		addv = vec4(0.0, 1.0, 0.0, 0.0);
+		addv.xy *= rot(flowData.Data.w);
+
+		trailData.TargetPos = pos + addv * _StepLength;
+		
+		v.xyz = addv.xyz * _StepLength;
+
+		//v.xyz = vec3(cos(flowData.Data.w - 3.1415) * _StepLength, sin(flowData.Data.w - 3.1415) * _StepLength, 0.0);
+
+		DebugData.xy = DebugPos;
+		DebugData.zw = GridPos;
+		
+		/*DebugData.x = _FlowGridX;
+		DebugData.y = _FlowGridY;
+		DebugData.zw = _WallHalfSize.xy;*/
+
+		DebugData2 = flowData.Data;
+
+		DebugData3.x = float(GridID);
+		DebugData3.yzw = addv.xyz;
+	}
 
 	// 速度ベクトルを更新
-	v.xyz += addv.xyz;
+	//v.xyz += addv.xyz;
+
+	//v.xyz = vec3(cos(_time), sin(_time), 0.0);
 
 	// 壁に当たっているのなら跳ね返す
-	v = RefWall(v, pos);
-
+	bool IsWall = false;
+	v = RefWall(v, pos, IsWall);
+	
 	// 位置を更新
 	pos.xyz += v.xyz * _deltaTime;
+	if(IsWall)
+	{
+		trailData.TargetPos = pos;
+	}
 
 	// 速度ベクトルの向きから回転を取得
 	vec3 rot = vec3(0.0), nv = normalize(v.xyz), zdir = vec3(0.0, 0.0, 1.0);
@@ -251,10 +322,15 @@ void main()
 	vec4 col = vec4(hsv2rgb2(vc, 2.2), 1.0);
 
 	//
-	rw_TrailDataBuffer.trailData[DID].Pos =  pos;
-	rw_TrailDataBuffer.trailData[DID].Velocity = v;
-	rw_TrailDataBuffer.trailData[DID].Color = col;
-	rw_TrailDataBuffer.trailData[DID].Rotate = vec4(rot, 1.0);
+	trailData.Pos =  pos;
+	trailData.Velocity = v;
+	trailData.Color = col;
+	trailData.Rotate = vec4(rot, 1.0);
+	trailData.DebugData = DebugData;
+	trailData.DebugData2 = DebugData2;
+	trailData.DebugData3 = DebugData3;
+
+	rw_TrailDataBuffer.trailData[DID] = trailData;
 }
 
 )"

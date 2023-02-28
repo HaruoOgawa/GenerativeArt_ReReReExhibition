@@ -145,7 +145,7 @@ namespace app
 				pos.y *= m_WallHalfSize.y;
 
 				SFlowData data = {
-					{pos.x, pos.y, pos.z, 3.1415f * 0.25f}
+					{pos.x, pos.y, pos.z, 0.0f/*3.1415f * 0.25f*/}
 				};
 
 				InitFlowData.push_back(data);
@@ -171,14 +171,19 @@ namespace app
 				);
 				glm::vec4 scl = glm::vec4(0.25f);
 				glm::vec4 col = glm::vec4(Noise(glm::vec2(id, id + 11.1f)), Noise(glm::vec2(id + 95.0f, id)), Noise(glm::vec2(id, 66.6)), 0.5f);
-				glm::vec4 vel = glm::vec4(Noise(glm::vec2(id + 2.622f)) * 2.0f - 1.0f, Noise(glm::vec2(id + 55.12f, id  + id)) * 2.0f - 1.0f, Noise(glm::vec2(id + 66.6)) * 2.0f - 1.0f, 1.0f);
+				//glm::vec4 vel = glm::vec4(Noise(glm::vec2(id + 2.622f)) * 2.0f - 1.0f, Noise(glm::vec2(id + 55.12f, id  + id)) * 2.0f - 1.0f, Noise(glm::vec2(id + 66.6)) * 2.0f - 1.0f, 1.0f);
+				glm::vec4 vel = glm::vec4(0.0f);
 
 				STrailData data = {
 					{pos.x, pos.y, pos.z, pos.w},
 					{0.0f, 0.0f, 0.0f, 0.0f},
 					{scl.x, scl.y, scl.z, scl.w},
 					{col.x, col.y, col.z, col.w},
-					{vel.x, vel.y, vel.z, vel.w}
+					{vel.x, vel.y, vel.z, vel.w},
+					{pos.x, pos.y, pos.z, pos.w},
+					{0.0f, 0.0f, 0.0f, 0.0f},
+					{0.0f, 0.0f, 0.0f, 0.0f},
+					{0.0f, 0.0f, 0.0f, 0.0f}
 				};
 
 				InitTrailDataList.push_back(data);
@@ -227,6 +232,7 @@ namespace app
 		// Trail
 		m_TrailMesh->m_material->SetBufferToMat(m_TrailBuffer, 0);
 		m_TrailGPGPU->SetBufferToCS(m_TrailBuffer, 0);
+		m_TrailGPGPU->SetBufferToCS(m_FlowFieldsBuffer, 2);
 
 		// Segment
 		m_SegmentMesh->m_material->SetBufferToMat(m_SegmentBuffer, 1);
@@ -250,6 +256,9 @@ namespace app
 		m_TrailGPGPU->SetFloatUniform("_time", GraphicsMain::GetInstance()->m_SecondsTime);
 		m_TrailGPGPU->SetFloatUniform("_deltaTime", GraphicsMain::GetInstance()->m_DeltaTime);
 		m_TrailGPGPU->SetVec4Uniform("_WallHalfSize", m_WallHalfSize);
+		m_TrailGPGPU->SetFloatUniform("_FlowGridX", m_FlowGridX);
+		m_TrailGPGPU->SetFloatUniform("_FlowGridY", m_FlowGridY);
+		m_TrailGPGPU->SetFloatUniform("_StepLength", 1.0f);
 		m_TrailGPGPU->Dispatch(m_DomainCount * m_TrailNumPerDomain / m_ThreadNum.x, 1, 1);
 		
 		// Segment
@@ -269,7 +278,7 @@ namespace app
 		}, GL_TRIANGLES, true, static_cast<int>(m_FlowGridX * m_FlowGridY));
 //#endif // _DEBUG
 
-		/*// Trail
+		// Trail
 		m_TrailMesh->Draw([&]() {
 			m_TrailMesh->m_material->SetIntUniform("_Use2FColor", 1);
 		}, GL_TRIANGLES, true, m_DomainCount * m_TrailNumPerDomain);
@@ -279,6 +288,6 @@ namespace app
 			m_SegmentMesh->m_material->SetIntUniform("_SegmentNum", m_TrailSegmentNum);
 			m_SegmentMesh->m_material->SetFloatUniform("_Radius", m_Radius);
 			m_SegmentMesh->m_material->SetIntUniform("_Use2FColor", 1);
-		}, GL_POINTS, true, m_DomainCount * m_TrailNumPerDomain * m_TrailSegmentNum);*/
+		}, GL_POINTS, true, m_DomainCount * m_TrailNumPerDomain * m_TrailSegmentNum);
 	}
 }
