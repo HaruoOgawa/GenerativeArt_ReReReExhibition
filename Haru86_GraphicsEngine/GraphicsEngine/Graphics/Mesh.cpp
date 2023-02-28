@@ -26,17 +26,14 @@ void Mesh::CreateMesh(PrimitiveType primType) {
 	case PrimitiveType::POINT:
 		Primitive::CreatePoint(&VertexData, &Dimention, &Indices);
 		break;
-	case PrimitiveType::SPHERE:
-		Primitive::CreateSphere(&VertexData, &Dimention, &Indices);
-		break;
 	case PrimitiveType::CUBE:
 		Primitive::CreateCube(&VertexData, &Dimention, &Indices);
 		break;
-	case PrimitiveType::Icosahedron:
-		Primitive::CreateIcosahedron(&VertexData, &Dimention, &Indices);
-		break;
 	case PrimitiveType::CIRCLE:
 		Primitive::CreateCircle(&VertexData, &Dimention, &Indices);
+		break;
+	case PrimitiveType::ARROW:
+		Primitive::CreateArrow(&VertexData, &Dimention, &Indices);
 		break;
 	default:
 		Primitive::CreateBoard(&VertexData, &Dimention, &Indices);

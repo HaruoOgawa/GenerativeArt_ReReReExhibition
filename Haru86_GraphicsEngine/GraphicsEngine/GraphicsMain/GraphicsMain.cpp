@@ -178,7 +178,7 @@ void GraphicsMain::Update() {
 #ifdef _DEBUG
 	// FPS‚ÌŒv‘ª‚Æ•\¦(60FPS‚ğŠî€‚Æ‚·‚é)
 	float FPS = 60.0f / (m_DeltaTime * 60.0f);
-	Console::Log("[FPS] %f fps / [CurrentTime] %f s\n", FPS, m_SecondsTime);
+	//Console::Log("[FPS] %f fps / [CurrentTime] %f s\n", FPS, m_SecondsTime);
 #endif // _DEBUG
 
 	previousTime = m_MilliSecondsTime;

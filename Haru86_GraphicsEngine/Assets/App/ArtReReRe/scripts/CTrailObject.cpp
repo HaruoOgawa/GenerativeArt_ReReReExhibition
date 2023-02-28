@@ -5,6 +5,10 @@
 namespace app
 {
 	CTrailObject::CTrailObject() :
+		m_FlowFieldsMesh(nullptr),
+		m_FlowFieldsBuffer(nullptr),
+		m_FlowFieldsGPGPU(nullptr),
+		m_FlowCellSize(1.0f),
 		m_TrailMesh(nullptr),
 		m_TrailBuffer(nullptr),
 		m_TrailGPGPU(nullptr),
@@ -54,6 +58,25 @@ namespace app
 
 	void CTrailObject::Init()
 	{
+		// FlowFields
+		m_FlowFieldsMesh = std::make_shared<MeshRendererComponent>(
+			std::make_shared<TransformComponent>(),
+			PrimitiveType::ARROW,
+			RenderingSurfaceType::RASTERIZER,
+			std::string({
+				#include "../shaders/Flow.vert"	
+			}),
+			shaderlib::Standard_frag
+		);
+
+		m_FlowFieldsGPGPU = std::make_shared<Material>(
+			RenderingSurfaceType::RASTERIZER,
+			"", "", "", "", "",
+			std::string({
+				#include "../shaders/Flow.comp"	
+			})
+		);
+
 		// Trail
 		m_TrailMesh = std::make_shared<MeshRendererComponent>(
 			std::make_shared<TransformComponent>(),
@@ -100,6 +123,7 @@ namespace app
 		);
 
 		// Buffer
+		m_FlowFieldsBuffer = std::make_shared<ComputeBuffer>(m_FlowGridX * m_FlowGridY * sizeof(SFlowData));
 		m_TrailBuffer = std::make_shared<ComputeBuffer>(m_DomainCount * m_TrailNumPerDomain * sizeof(STrailData));
 		m_SegmentBuffer = std::make_shared<ComputeBuffer>(m_DomainCount * m_TrailNumPerDomain * m_TrailSegmentNum * sizeof(SSegmentData));
 
@@ -109,6 +133,28 @@ namespace app
 
 	void CTrailObject::InitBuffer()
 	{
+		// Flow ///////////////////////////////////
+		std::vector<SFlowData> InitFlowData;
+		for (float y = 0.0f; y < m_FlowGridY; y++)
+		{
+			for (float x = 0.0f; x < m_FlowGridX; x++)
+			{
+				glm::vec3 pos = glm::vec3(x / (m_FlowGridX - 1.0f), y / (m_FlowGridY - 1.0f), 0.0f);
+				pos = pos * 2.0f - 1.0f;
+				pos.x *= m_WallHalfSize.x;
+				pos.y *= m_WallHalfSize.y;
+
+				SFlowData data = {
+					{pos.x, pos.y, pos.z, 3.1415f * 0.25f}
+				};
+
+				InitFlowData.push_back(data);
+			}
+		}
+
+		m_FlowCellSize = m_WallHalfSize.x / m_FlowGridX;
+		m_FlowFieldsBuffer->SetData<std::vector<SFlowData>>(InitFlowData);
+
 		// Trail ///////////////////////////////////
 		std::vector<STrailData> InitTrailDataList;
 
@@ -174,6 +220,10 @@ namespace app
 	
 	void CTrailObject::LinkBuffer()
 	{
+		// FlowFields
+		m_FlowFieldsMesh->m_material->SetBufferToMat(m_FlowFieldsBuffer, 2);
+		m_FlowFieldsGPGPU->SetBufferToCS(m_FlowFieldsBuffer, 2);
+
 		// Trail
 		m_TrailMesh->m_material->SetBufferToMat(m_TrailBuffer, 0);
 		m_TrailGPGPU->SetBufferToCS(m_TrailBuffer, 0);
@@ -186,6 +236,15 @@ namespace app
 
 	void CTrailObject::Update()
 	{
+		// FlowFields
+		m_FlowFieldsGPGPU->SetActive();
+		m_FlowFieldsGPGPU->SetFloatUniform("_time", GraphicsMain::GetInstance()->m_SecondsTime);
+		m_FlowFieldsGPGPU->SetFloatUniform("_deltaTime", GraphicsMain::GetInstance()->m_DeltaTime);
+		m_FlowFieldsGPGPU->SetVec4Uniform("_WallHalfSize", m_WallHalfSize);
+		m_FlowFieldsGPGPU->SetIntUniform("_FlowGridX", static_cast<int>(m_FlowGridX));
+		m_FlowFieldsGPGPU->SetIntUniform("_FlowGridY", static_cast<int>(m_FlowGridY));
+		m_FlowFieldsGPGPU->Dispatch(m_FlowGridX / m_FlowThreads.x, m_FlowGridY / m_FlowThreads.y, 1);
+
 		// Trail
 		m_TrailGPGPU->SetActive();
 		m_TrailGPGPU->SetFloatUniform("_time", GraphicsMain::GetInstance()->m_SecondsTime);
@@ -202,7 +261,15 @@ namespace app
 	}
 	void CTrailObject::Draw()
 	{
-		// Trail
+		// Debug FlowFields
+//#ifdef _DEBUG
+		m_FlowFieldsMesh->Draw([&]() {
+			m_FlowFieldsMesh->m_material->SetIntUniform("_Use2FColor", 1);
+			m_FlowFieldsMesh->m_material->SetFloatUniform("_FlowCellSize", m_FlowCellSize);
+		}, GL_TRIANGLES, true, static_cast<int>(m_FlowGridX * m_FlowGridY));
+//#endif // _DEBUG
+
+		/*// Trail
 		m_TrailMesh->Draw([&]() {
 			m_TrailMesh->m_material->SetIntUniform("_Use2FColor", 1);
 		}, GL_TRIANGLES, true, m_DomainCount * m_TrailNumPerDomain);
@@ -212,6 +279,6 @@ namespace app
 			m_SegmentMesh->m_material->SetIntUniform("_SegmentNum", m_TrailSegmentNum);
 			m_SegmentMesh->m_material->SetFloatUniform("_Radius", m_Radius);
 			m_SegmentMesh->m_material->SetIntUniform("_Use2FColor", 1);
-		}, GL_POINTS, true, m_DomainCount * m_TrailNumPerDomain * m_TrailSegmentNum);
+		}, GL_POINTS, true, m_DomainCount * m_TrailNumPerDomain * m_TrailSegmentNum);*/
 	}
 }
