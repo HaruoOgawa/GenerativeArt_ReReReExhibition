@@ -11,6 +11,12 @@ uniform vec4 _WallHalfSize;
 uniform int _FlowGridX;
 uniform int _FlowGridY;
 
+uniform float _NoiseScale;
+uniform float _NoiseOctaves;
+uniform float _NoiseOffset;
+uniform float _AngleScale;
+uniform vec2 _Seed;
+
 struct SFlowData
 {
 	vec4 Data;
@@ -22,6 +28,8 @@ layout(std430, binding = 2) buffer FlowDataBuffer
 } rw_FlowDataBuffer;
 
 //
+#define pi 3.1415
+
 float Noise(vec2 st)
 {
 	return fract(sin(dot(st, vec2(12.9898, 78.233))) * 43758.5453123);
@@ -32,7 +40,6 @@ float PerlinNoise(vec2 st)
 	vec2 i = floor(st);
 	vec2 f = fract(st);
 
-	// Four corners in 2D of a tile
 	float a = Noise(i);
 	float b = Noise(i + vec2(1.0, 0.0));
 	float c = Noise(i + vec2(0.0, 1.0));
@@ -40,19 +47,36 @@ float PerlinNoise(vec2 st)
 
 	vec2 u = f * f * (3.0 - 2.0 * f);
 
-	// Mix 4 coorners percentages
 	return mix(a, b, u.x) +
 		(c - a) * u.y * (1.0 - u.x) +
 		(d - b) * u.x * u.y;
 }
 
-#define pi 3.1415
+float FBM(vec2 st)
+{
+	float total = 0.0, freq = 1.0, amp = 1.0, val = 0.0;
+
+	for(float i = 0.0; i < _NoiseOctaves; i++)
+	{
+		val += PerlinNoise(st * freq) * amp;
+		total += amp;
+		amp *= 0.5;
+		freq *= 2.0;
+	}
+
+	float result = val / total;
+	//result = result * 2.0 - 1.0;
+
+	return result;
+}
 
 void main()
 {
 	uvec2 DID = gl_GlobalInvocationID.xy;
-	float angle = pi * (float(DID.x) / float(_FlowGridX - 1));
-	//float angle = pi/4.0 * PerlinNoise(DID*0.1);
+	//float angle = pi * (float(DID.x) / float(_FlowGridX - 1));
+	float angle = pi * 0.7 * _AngleScale * (
+		FBM(_Seed + vec2(float(DID.x), float(DID.y)) / vec2(float(_FlowGridX), float(_FlowGridY)) * _NoiseScale) + _NoiseOffset
+	);
 	
 	uint ID = DID.y * _FlowGridX + DID.x;
 	rw_FlowDataBuffer.flowData[ID].Data.w = angle;

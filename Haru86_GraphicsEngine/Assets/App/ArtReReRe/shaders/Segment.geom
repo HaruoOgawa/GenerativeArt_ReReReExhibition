@@ -12,7 +12,7 @@ uniform float _deltaTime;
 uniform int _SegmentNum;
 uniform mat4 VMatrix;
 uniform mat4 PMatrix;
-uniform float _Radius;
+uniform float _Tickness;
 
 uniform vec4 _WallHalfSize;
 
@@ -71,10 +71,10 @@ void main()
 	vec3 mDir = normalize(cross(n.xyz, dir));
 
 	//
-	vec4 pos0 = data1.Pos + vec4(mDir * _Radius, 0.0);
-	vec4 pos1 = data1.Pos - vec4(mDir * _Radius, 0.0);
-	vec4 pos2 = data0.Pos + vec4(mDir * _Radius, 0.0);
-	vec4 pos3 = data0.Pos - vec4(mDir * _Radius, 0.0);
+	vec4 pos0 = data1.Pos + vec4(mDir * _Tickness, 0.0);
+	vec4 pos1 = data1.Pos - vec4(mDir * _Tickness, 0.0);
+	vec4 pos2 = data0.Pos + vec4(mDir * _Tickness, 0.0);
+	vec4 pos3 = data0.Pos - vec4(mDir * _Tickness, 0.0);
 
 	//
 	float Alpha = (IsOutterWall(data1.Pos))? 0.0 : 1.0;

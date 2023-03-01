@@ -41,37 +41,39 @@ namespace app
 
 	class CTrailObject
 	{
-		// FlowFields
+		// GPGPU Param
+		glm::ivec3 m_ThreadNum;
+		glm::ivec3	m_FlowThreads;
+		glm::vec4 m_WallHalfSize;
+
+		// FlowFields Param
 		std::shared_ptr<MeshRendererComponent> m_FlowFieldsMesh;
 		std::shared_ptr<ComputeBuffer> m_FlowFieldsBuffer;
 		std::shared_ptr<Material> m_FlowFieldsGPGPU;
 
-		const float m_FlowGridX = 64;
-		const float m_FlowGridY = 64;
-		float		m_FlowCellSize;
-		const glm::ivec3	m_FlowThreads = glm::ivec3(32, 32, 1);
+		float m_FlowGridX;
+		float m_FlowGridY;
+		float m_FlowCellSize;
 
-		const float m_StepLength = 1.0f;
-		const float m_StepSpeed = 1.0f;
-
-		// Trail
+		// Trail Param
 		std::shared_ptr<MeshRendererComponent> m_TrailMesh;
 		std::shared_ptr<ComputeBuffer> m_TrailBuffer;
 		std::shared_ptr<Material> m_TrailGPGPU;
 
-		// Segment
+		// Segment Param
 		std::shared_ptr<MeshRendererComponent> m_SegmentMesh;
 		std::shared_ptr<ComputeBuffer> m_SegmentBuffer;
 		std::shared_ptr<Material> m_SegmentGPGPU;
 
-		//
-		glm::vec4 m_WallHalfSize;
-		glm::ivec3 m_ThreadNum;
-		unsigned int m_DomainCount; // これをドローコール数としてもいいのかも？
-		unsigned int m_TrailNumPerDomain;
+		// Art Param
+		unsigned int m_DomainCount;
+		unsigned int m_TrailNumPerDomain; // Curve Count
 		unsigned int m_TrailSegmentNum;
 
-		float m_Radius;
+		float m_StepLength; // Curve Length
+		float m_StepSpeed;
+		float m_CurveAlpha; // Curve Alpha
+		float m_CurveTickness; // Curve Tickness
 	private:
 		static float Noise(glm::vec2 st);
 

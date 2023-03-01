@@ -5,22 +5,32 @@
 namespace app
 {
 	CTrailObject::CTrailObject() :
+		m_ThreadNum(1024, 1, 1),
+		m_FlowThreads(32, 32, 1),
+		m_WallHalfSize(glm::vec4(100.0f, 50.0f, 25.0f, 1.0f)),
+
 		m_FlowFieldsMesh(nullptr),
 		m_FlowFieldsBuffer(nullptr),
 		m_FlowFieldsGPGPU(nullptr),
+		m_FlowGridX(64.0f),
+		m_FlowGridY(64.0f),
 		m_FlowCellSize(1.0f),
+
 		m_TrailMesh(nullptr),
 		m_TrailBuffer(nullptr),
 		m_TrailGPGPU(nullptr),
+		
 		m_SegmentMesh(nullptr),
 		m_SegmentBuffer(nullptr),
 		m_SegmentGPGPU(nullptr),
+		
 		m_DomainCount(1),
 		m_TrailNumPerDomain(1024),
 		m_TrailSegmentNum(256),
-		m_WallHalfSize(glm::vec4(100.0f, 50.0f, 25.0f,1.0f)),
-		m_ThreadNum(1024, 1, 1),
-		m_Radius(0.1f)
+		m_StepLength(1.0f),
+		m_StepSpeed(1.0f),
+		m_CurveAlpha(1.0f),
+		m_CurveTickness(0.1f)
 	{
 	}
 
@@ -247,6 +257,12 @@ namespace app
 		m_FlowFieldsGPGPU->SetVec4Uniform("_WallHalfSize", m_WallHalfSize);
 		m_FlowFieldsGPGPU->SetIntUniform("_FlowGridX", static_cast<int>(m_FlowGridX));
 		m_FlowFieldsGPGPU->SetIntUniform("_FlowGridY", static_cast<int>(m_FlowGridY));
+
+		m_FlowFieldsGPGPU->SetFloatUniform("_NoiseScale", 1.0f);
+		m_FlowFieldsGPGPU->SetFloatUniform("_NoiseOctaves", 2.0f);
+		m_FlowFieldsGPGPU->SetFloatUniform("_NoiseOffset", 0.0f);
+		m_FlowFieldsGPGPU->SetFloatUniform("_AngleScale", 4.0f);
+		m_FlowFieldsGPGPU->SetVec2Uniform("_Seed", glm::vec2(0.0f, 0.0f));
 		m_FlowFieldsGPGPU->Dispatch(m_FlowGridX / m_FlowThreads.x, m_FlowGridY / m_FlowThreads.y, 1);
 
 		// Trail
@@ -285,7 +301,7 @@ namespace app
 		// Segment
 		m_SegmentMesh->Draw([&]() {
 			m_SegmentMesh->m_material->SetIntUniform("_SegmentNum", m_TrailSegmentNum);
-			m_SegmentMesh->m_material->SetFloatUniform("_Radius", m_Radius);
+			m_SegmentMesh->m_material->SetFloatUniform("_Tickness", m_CurveTickness);
 			m_SegmentMesh->m_material->SetIntUniform("_Use2FColor", 1);
 			m_SegmentMesh->m_material->SetVec4Uniform("_WallHalfSize", m_WallHalfSize);
 		}, GL_POINTS, true, m_DomainCount * m_TrailNumPerDomain * m_TrailSegmentNum);
