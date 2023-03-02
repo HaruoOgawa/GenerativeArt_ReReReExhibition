@@ -35,6 +35,7 @@ struct SSegmentData
 	vec4 Pos;
 	vec4 Rotate;
 	vec4 Scale;
+	vec4 Color;
 	int  TrailIndex;
 	int  SegmentIndex;
 	int  Padding0;
@@ -69,7 +70,7 @@ void main(){
 	out_WorldVertexPos = pos;
 	out_WorldNormal=vec4(normalize(normal), 0.0);
 	out_gl_InstanceID = id;
-	out_Color = trailData.Color;
+	out_Color = rw_SegmentDataBuffer.segmentData[id].Color;
 }
 
 )"

@@ -33,6 +33,7 @@ struct SSegmentData
 	vec4 Pos;
 	vec4 Rotate;
 	vec4 Scale;
+	vec4 Color;
 	int  TrailIndex;
 	int  SegmentIndex;
 	int  Padding0;
@@ -57,6 +58,7 @@ void main()
 		Data.Pos = trailData.Pos;
 		Data.Rotate = trailData.Rotate;
 		Data.Scale = trailData.Scale;
+		Data.Color = trailData.Color;
 
 		rw_SegmentDataBuffer.segmentData[DID] = Data;
 	}
@@ -68,6 +70,7 @@ void main()
 		Data.Pos = PrevData.Pos;
 		Data.Rotate = PrevData.Rotate;
 		Data.Scale = PrevData.Scale;
+		Data.Color = PrevData.Color;
 
 		rw_SegmentDataBuffer.segmentData[DID] = Data;
 	}

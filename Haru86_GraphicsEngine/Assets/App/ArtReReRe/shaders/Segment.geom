@@ -22,6 +22,7 @@ struct SSegmentData
 	vec4 Pos;
 	vec4 Rotate;
 	vec4 Scale;
+	vec4 Color;
 	int  TrailIndex;
 	int  SegmentIndex;
 	int  Padding0;

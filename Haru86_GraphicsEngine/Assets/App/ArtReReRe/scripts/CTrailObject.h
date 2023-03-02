@@ -33,6 +33,7 @@ namespace app
 		float m_Pos[4];
 		float m_Rotate[4];
 		float m_Scale[4];
+		float m_Color[4];
 		int   m_TrailIndex;
 		int   m_SegmentIndex;
 		int   m_Padding0;
@@ -54,6 +55,12 @@ namespace app
 		float m_FlowGridX;
 		float m_FlowGridY;
 		float m_FlowCellSize;
+
+		float m_NoiseScale;
+		float m_NoiseOctaves;
+		float m_NoiseOffset;
+		float m_AngleScale;
+		glm::vec2 m_Seed;
 
 		// Trail Param
 		std::shared_ptr<MeshRendererComponent> m_TrailMesh;
