@@ -19,7 +19,7 @@ namespace app
 
 		m_ThreadNum(1024, 1, 1),
 		m_FlowThreads(8, 8, 8),
-		m_WallHalfSize(glm::vec4(100.0f, 50.0f, 25.0f, 1.0f)),
+		m_WallHalfSize(glm::vec4(100.0f, 100.0f, 100.0f, 1.0f)),
 
 		m_FlowGridX(64.0f),
 		m_FlowGridY(64.0f),
@@ -37,7 +37,7 @@ namespace app
 		m_StepLength(1.0f),
 		m_StepSpeed(1.0f),
 		m_CurveAlpha(1.0f),
-		m_CurveTickness(0.1f)
+		m_CurveTickness(0.25f)
 	{
 	}
 
@@ -264,9 +264,15 @@ namespace app
 
 	void CTrailObject::Update()
 	{
+		// シードを更新
+		float t = GraphicsMain::GetInstance()->m_SecondsTime;
+		m_Seed = glm::vec4(
+			glm::vec2(t * 0.1f, Noise(glm::vec2(glm::floor(t * 0.1f), 0.945f))), 
+			glm::vec2(Noise(glm::vec2(8.77f, glm::floor(t * 0.25f))), t * 0.25f));
+
 		// FlowFields
 		m_FlowFieldsGPGPU->SetActive();
-		m_FlowFieldsGPGPU->SetFloatUniform("_time", GraphicsMain::GetInstance()->m_SecondsTime);
+		m_FlowFieldsGPGPU->SetFloatUniform("_time", t);
 		m_FlowFieldsGPGPU->SetFloatUniform("_deltaTime", GraphicsMain::GetInstance()->m_DeltaTime);
 		m_FlowFieldsGPGPU->SetVec4Uniform("_WallHalfSize", m_WallHalfSize);
 		m_FlowFieldsGPGPU->SetIntUniform("_FlowGridX", static_cast<int>(m_FlowGridX));
@@ -282,7 +288,7 @@ namespace app
 
 		// Trail
 		m_TrailGPGPU->SetActive();
-		m_TrailGPGPU->SetFloatUniform("_time", GraphicsMain::GetInstance()->m_SecondsTime);
+		m_TrailGPGPU->SetFloatUniform("_time", t);
 		m_TrailGPGPU->SetFloatUniform("_deltaTime", GraphicsMain::GetInstance()->m_DeltaTime);
 		m_TrailGPGPU->SetVec4Uniform("_WallHalfSize", m_WallHalfSize);
 		m_TrailGPGPU->SetFloatUniform("_FlowGridX", m_FlowGridX);
@@ -294,7 +300,7 @@ namespace app
 		
 		// Segment
 		m_SegmentGPGPU->SetActive();
-		m_SegmentGPGPU->SetFloatUniform("_time", GraphicsMain::GetInstance()->m_SecondsTime);
+		m_SegmentGPGPU->SetFloatUniform("_time", t);
 		m_SegmentGPGPU->SetFloatUniform("_deltaTime", GraphicsMain::GetInstance()->m_DeltaTime);
 		m_SegmentGPGPU->SetIntUniform("_SegmentNum", m_TrailSegmentNum);
 		m_SegmentGPGPU->Dispatch(m_DomainCount * m_TrailNumPerDomain * m_TrailSegmentNum / m_ThreadNum.x, 1, 1);
