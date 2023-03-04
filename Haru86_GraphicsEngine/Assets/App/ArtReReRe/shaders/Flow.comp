@@ -67,7 +67,6 @@ float FBM(vec2 st, float Octaves)
 	}
 
 	float result = val / total;
-	//result = result * 2.0 - 1.0;
 
 	return result;
 }

@@ -49,7 +49,9 @@ namespace app
 		glm::vec4 m_WallHalfSize;
 
 		// FlowFields Param
+#ifdef _DEBUG
 		std::shared_ptr<MeshRendererComponent> m_FlowFieldsMesh;
+#endif // _DEBUG
 		std::shared_ptr<ComputeBuffer> m_FlowFieldsBuffer;
 		std::shared_ptr<Material> m_FlowFieldsGPGPU;
 
@@ -85,8 +87,6 @@ namespace app
 		float m_CurveTickness; // Curve Tickness
 	private:
 		static float Noise(glm::vec2 st);
-
-		static float PerlinNoise(glm::vec2 st);
 
 		void InitBuffer();
 		void LinkBuffer();

@@ -303,13 +303,13 @@ xcopy "$(ProjectDir)Assets\Shader" "$(OutDir)Assets\Shader" /i /s /y
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)GraphicsEngine\Library\GLFW\x64\include\GLFW;$(ProjectDir)GraphicsEngine\Library\GLEW\x64\include\GL;$(ProjectDir)GraphicsEngine\Library\FreeType\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)GraphicsEngine\Library\GLFW\x64\include\GLFW;$(ProjectDir)GraphicsEngine\Library\GLEW\x64\include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)GraphicsEngine\Library\GLFW\x64\lib;$(ProjectDir)GraphicsEngine\Library\GLEW\x64\lib;$(ProjectDir)GraphicsEngine\Library\FreeType\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glfw3dll.lib;glew32d.lib;WinMM.Lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)GraphicsEngine\Library\GLFW\x64\lib;$(ProjectDir)GraphicsEngine\Library\GLEW\x64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3dll.lib;glew32d.lib;WinMM.Lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
     </Link>
     <PostBuildEvent>
@@ -317,9 +317,7 @@ xcopy "$(ProjectDir)Assets\Shader" "$(OutDir)Assets\Shader" /i /s /y
 attrib +s +h $(OutDir)bin
 xcopy "$(ProjectDir)GraphicsEngine\Library\GLEW\x64\bin\glew32d.dll" "$(OutDir)bin" /i /s /y
 xcopy "$(ProjectDir)GraphicsEngine\Library\GLFW\x64\lib\glfw3.dll" "$(OutDir)bin" /i /s /y
-xcopy "$(ProjectDir)GraphicsEngine\Library\FreeType\lib\freetype.dll" "$(OutDir)bin" /i /s /y 
 xcopy "$(ProjectDir)Assets\Sound\edm_electronic_electronica_.mp3" "$(OutDir)bin" /i /s /y
-xcopy "$(ProjectDir)Assets\Font\georgiai.ttf" "$(OutDir)bin" /i /s /y
 del /Q $(OutDir)Haru86_GraphicsEngine.pdb</Command>
     </PostBuildEvent>
     <PreBuildEvent>
@@ -334,15 +332,15 @@ del /Q $(OutDir)Haru86_GraphicsEngine.pdb</Command>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)GraphicsEngine\Library\GLFW\x64\include\GLFW;$(ProjectDir)GraphicsEngine\Library\GLEW\x64\include\GL;$(ProjectDir)GraphicsEngine\Library\FreeType\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)GraphicsEngine\Library\GLFW\x64\include\GLFW;$(ProjectDir)GraphicsEngine\Library\GLEW\x64\include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)GraphicsEngine\Library\GLFW\x64\lib;$(ProjectDir)GraphicsEngine\Library\GLEW\x64\lib;$(ProjectDir)GraphicsEngine\Library\FreeType\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glfw3dll.lib;glew32d.lib;WinMM.Lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)GraphicsEngine\Library\GLFW\x64\lib;$(ProjectDir)GraphicsEngine\Library\GLEW\x64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3dll.lib;glew32d.lib;WinMM.Lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
     </Link>
     <PostBuildEvent>
@@ -350,9 +348,7 @@ del /Q $(OutDir)Haru86_GraphicsEngine.pdb</Command>
 attrib +s +h $(OutDir)bin
 xcopy "$(ProjectDir)GraphicsEngine\Library\GLEW\x64\bin\glew32d.dll" "$(OutDir)bin" /i /s /y
 xcopy "$(ProjectDir)GraphicsEngine\Library\GLFW\x64\lib\glfw3.dll" "$(OutDir)bin" /i /s /y
-xcopy "$(ProjectDir)GraphicsEngine\Library\FreeType\lib\freetype.dll" "$(OutDir)bin" /i /s /y 
 xcopy "$(ProjectDir)Assets\Sound\edm_electronic_electronica_.mp3" "$(OutDir)bin" /i /s /y
-xcopy "$(ProjectDir)Assets\Font\georgiai.ttf" "$(OutDir)bin" /i /s /y
 del /Q $(OutDir)Haru86_GraphicsEngine.pdb
 </Command>
     </PostBuildEvent>
@@ -368,15 +364,15 @@ del /Q $(OutDir)Haru86_GraphicsEngine.pdb
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)GraphicsEngine\Library\GLFW\x64\include\GLFW;$(ProjectDir)GraphicsEngine\Library\GLEW\x64\include\GL;$(ProjectDir)GraphicsEngine\Library\FreeType\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)GraphicsEngine\Library\GLFW\x64\include\GLFW;$(ProjectDir)GraphicsEngine\Library\GLEW\x64\include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)GraphicsEngine\Library\GLFW\x64\lib;$(ProjectDir)GraphicsEngine\Library\GLEW\x64\lib;$(ProjectDir)GraphicsEngine\Library\FreeType\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glfw3dll.lib;glew32d.lib;WinMM.Lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)GraphicsEngine\Library\GLFW\x64\lib;$(ProjectDir)GraphicsEngine\Library\GLEW\x64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3dll.lib;glew32d.lib;WinMM.Lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
@@ -385,9 +381,7 @@ del /Q $(OutDir)Haru86_GraphicsEngine.pdb
 attrib +s +h $(OutDir)bin
 xcopy "$(ProjectDir)GraphicsEngine\Library\GLEW\x64\bin\glew32d.dll" "$(OutDir)bin" /i /s /y
 xcopy "$(ProjectDir)GraphicsEngine\Library\GLFW\x64\lib\glfw3.dll" "$(OutDir)bin" /i /s /y
-xcopy "$(ProjectDir)GraphicsEngine\Library\FreeType\lib\freetype.dll" "$(OutDir)bin" /i /s /y 
 xcopy "$(ProjectDir)Assets\Sound\edm_electronic_electronica_.mp3" "$(OutDir)bin" /i /s /y
-xcopy "$(ProjectDir)Assets\Font\georgiai.ttf" "$(OutDir)bin" /i /s /y
 call squishy-x64 -i "$(OutDir)Haru86_GraphicsEngine.exe" -o "$(OutDir)Haru86_GraphicsEngine.exe"
 del /Q $(OutDir)Haru86_GraphicsEngine.pdb
 </Command>
@@ -404,15 +398,15 @@ del /Q $(OutDir)Haru86_GraphicsEngine.pdb
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)GraphicsEngine\Library\GLFW\x64\include\GLFW;$(ProjectDir)GraphicsEngine\Library\GLEW\x64\include\GL;$(ProjectDir)GraphicsEngine\Library\FreeType\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)GraphicsEngine\Library\GLFW\x64\include\GLFW;$(ProjectDir)GraphicsEngine\Library\GLEW\x64\include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)GraphicsEngine\Library\GLFW\x64\lib;$(ProjectDir)GraphicsEngine\Library\GLEW\x64\lib;$(ProjectDir)GraphicsEngine\Library\FreeType\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glfw3dll.lib;glew32d.lib;WinMM.Lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)GraphicsEngine\Library\GLFW\x64\lib;$(ProjectDir)GraphicsEngine\Library\GLEW\x64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3dll.lib;glew32d.lib;WinMM.Lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
       <AdditionalOptions>/CRINKLER %(AdditionalOptions)</AdditionalOptions>
       <OutputFile>Winmm.lib;$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
@@ -430,111 +424,8 @@ xcopy "$(ProjectDir)GraphicsEngine\Assets\Sound\stroke.wav" "$(OutDir)" /i /s /y
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Assets\App\ArtReReRe\ArtReReRe.h" />
-    <ClInclude Include="Assets\App\ArtReReRe\scripts\CWhiteWall.h" />
     <ClInclude Include="Assets\App\ArtReReRe\scripts\CTrailObject.h" />
     <ClInclude Include="GraphicsEngine\Graphics\ComputeBuffer.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\dlg\dlg.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\dlg\output.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\config\ftconfig.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\config\ftheader.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\config\ftmodule.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\config\ftoption.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\config\ftstdlib.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\config\integer-types.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\config\mac-support.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\config\public-macros.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\freetype.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftadvanc.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftbbox.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftbdf.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftbitmap.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftbzip2.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftcache.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftchapters.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftcid.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftcolor.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftdriver.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\fterrdef.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\fterrors.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftfntfmt.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftgasp.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftglyph.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftgxval.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftgzip.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftimage.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftincrem.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftlcdfil.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftlist.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftlogging.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftlzw.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftmac.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftmm.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftmodapi.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftmoderr.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftotval.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftoutln.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftparams.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftpfr.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftrender.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftsizes.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftsnames.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftstroke.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftsynth.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftsystem.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\fttrigon.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\fttypes.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ftwinfnt.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\autohint.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\cffotypes.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\cfftypes.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\compiler-macros.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\ftcalc.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\ftdebug.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\ftdrv.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\ftgloadr.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\fthash.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\ftmemory.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\ftobjs.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\ftpsprop.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\ftrfork.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\ftserv.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\ftstream.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\fttrace.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\ftvalid.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\psaux.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\pshints.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svbdf.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svcfftl.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svcid.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svfntfmt.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svgldict.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svgxval.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svkern.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svmetric.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svmm.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svotval.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svpfr.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svpostnm.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svprop.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svpscmap.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svpsinfo.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svsfnt.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svttcmap.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svtteng.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svttglyf.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\services\svwinfnt.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\sfnt.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\svginterface.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\t1types.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\tttypes.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\internal\wofftypes.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\otsvg.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\t1tables.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\ttnameid.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\tttables.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\freetype\tttags.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\ft2build.h" />
-    <ClInclude Include="GraphicsEngine\Library\FreeType\lib\ftoption.h" />
     <ClInclude Include="GraphicsEngine\Library\GLEW\x64\include\GL\glew.h" />
     <ClInclude Include="GraphicsEngine\Library\GLEW\x64\include\GL\glxew.h" />
     <ClInclude Include="GraphicsEngine\Library\GLEW\x64\include\GL\wglew.h" />
@@ -546,8 +437,6 @@ xcopy "$(ProjectDir)GraphicsEngine\Assets\Sound\stroke.wav" "$(OutDir)" /i /s /y
     <ClInclude Include="GraphicsEngine\Library\GLFW\x64\include\GLFW\glfw3native.h" />
     <ClInclude Include="GraphicsEngine\Library\GLFW\x86\include\GLFW\glfw3.h" />
     <ClInclude Include="GraphicsEngine\Library\GLFW\x86\include\GLFW\glfw3native.h" />
-    <ClInclude Include="GraphicsEngine\ShaderEditor\CShaderCode.h" />
-    <ClInclude Include="GraphicsEngine\ShaderEditor\CShaderEditor.h" />
     <ClInclude Include="GraphicsEngine\Graphics\EGraphicsParam.h" />
     <ClInclude Include="GraphicsEngine\Graphics\ShaderLib.h" />
     <ClInclude Include="GraphicsEngine\Message\Console.h" />
@@ -566,18 +455,11 @@ xcopy "$(ProjectDir)GraphicsEngine\Assets\Sound\stroke.wav" "$(OutDir)" /i /s /y
     <ClInclude Include="GraphicsEngine\Component\TransformComponent.h" />
     <ClInclude Include="GraphicsEngine\Graphics\Mesh.h" />
     <ClInclude Include="GraphicsEngine\Sound\SoundPlayer.h" />
-    <ClInclude Include="GraphicsEngine\Text\TextRenderer.h" />
-    <ClInclude Include="GraphicsEngine\Text\TextObject.h" />
-    <ClInclude Include="GraphicsEngine\Text\TTFFactory.h" />
-    <ClInclude Include="GraphicsEngine\Graphics\RenderBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Assets\App\ArtReReRe\ArtReReRe.cpp" />
-    <ClCompile Include="Assets\App\ArtReReRe\scripts\CWhiteWall.cpp" />
     <ClCompile Include="Assets\App\ArtReReRe\scripts\CTrailObject.cpp" />
     <ClCompile Include="GraphicsEngine\Graphics\ComputeBuffer.cpp" />
-    <ClCompile Include="GraphicsEngine\ShaderEditor\CShaderCode.cpp" />
-    <ClCompile Include="GraphicsEngine\ShaderEditor\CShaderEditor.cpp" />
     <ClCompile Include="GraphicsEngine\GraphicsMain\GraphicsMain.cpp" />
     <ClCompile Include="GraphicsEngine\Graphics\GraphicsRenderer.cpp" />
     <ClCompile Include="GraphicsEngine\GraphicsMain\Main.cpp" />
@@ -590,10 +472,6 @@ xcopy "$(ProjectDir)GraphicsEngine\Assets\Sound\stroke.wav" "$(OutDir)" /i /s /y
     <ClCompile Include="GraphicsEngine\Graphics\PolygonRaymarchingMixer.cpp" />
     <ClCompile Include="GraphicsEngine\Graphics\PostProcess.cpp" />
     <ClCompile Include="GraphicsEngine\Sound\SoundPlayer.cpp" />
-    <ClCompile Include="GraphicsEngine\Text\TextRenderer.cpp" />
-    <ClCompile Include="GraphicsEngine\Text\TextObject.cpp" />
-    <ClCompile Include="GraphicsEngine\Text\TTFFactory.cpp" />
-    <ClCompile Include="GraphicsEngine\Graphics\RenderBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\App\ArtReReRe\shaders\Flow.comp" />

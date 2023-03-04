@@ -1,7 +1,6 @@
 #include "ArtReReRe.h"
 #include "GraphicsEngine/GraphicsMain/GraphicsMain.h"
 #include "GraphicsEngine/Graphics/GraphicsRenderer.h"
-#include "scripts/CWhiteWall.h"
 #include "scripts/CTrailObject.h"
 
 namespace app
@@ -11,14 +10,12 @@ namespace app
         m_SceneStartTime(0.0f),
         m_SceneEndTime(0.0f),
         m_LocalTime(0.0f),
-        m_WhiteWall(std::make_shared<CWhiteWall>()),
         m_TrailObject(std::make_shared<CTrailObject>())
     {
     }
 
     void ArtReReRe::Start()
     {
-        m_WhiteWall->Init(m_TrailObject->GetWallHalfSize());
         m_TrailObject->Init();
     }
     void ArtReReRe::Update()
@@ -32,24 +29,18 @@ namespace app
         //GraphicsMain::GetInstance()->m_MainCamera->m_position = glm::vec3(100.0f * glm::cos(GraphicsMain::GetInstance()->m_SecondsTime), 0.0f, 100.0f * glm::sin(GraphicsMain::GetInstance()->m_SecondsTime));
 
         //
-        m_WhiteWall->Update();
         m_TrailObject->Update();
     }
 
     void ArtReReRe::Draw(bool IsRaymarching)
     {
-        if (IsRaymarching)
+        if (!IsRaymarching)
         {
-        }
-        else
-        {
-            //m_WhiteWall->Draw();
             m_TrailObject->Draw();
         }
     }
 
     void ArtReReRe::UpdateTimeline()
     {
-
     }
 }

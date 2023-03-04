@@ -5,7 +5,9 @@
 namespace app
 {
 	CTrailObject::CTrailObject() :
+#ifdef _DEBUG
 		m_FlowFieldsMesh(nullptr),
+#endif // _DEBUG
 		m_FlowFieldsBuffer(nullptr),
 		m_FlowFieldsGPGPU(nullptr),
 
@@ -50,41 +52,20 @@ namespace app
 		return glm::fract(glm::sin(glm::dot(st, glm::vec2(12.9898f, 78.233f))) * 43758.5453123f);
 	}
 
-	float CTrailObject::PerlinNoise(glm::vec2 st)
-	{
-		glm::vec2 i = glm::floor(st);
-		glm::vec2 f = glm::fract(st);
-
-		// Four corners in 2D of a tile
-		float a = Noise(i);
-		float b = Noise(i + glm::vec2(1.0f, 0.0f));
-		float c = Noise(i + glm::vec2(0.0f, 1.0f));
-		float d = Noise(i + glm::vec2(1.0f, 1.0f));
-
-		// Smooth Interpolation
-
-		// Cubic Hermine Curve.  Same as SmoothStep()
-		glm::vec2 u = f * f * (3.0f - 2.0f * f);
-		// u = smoothstep(0.,1.,f);
-
-		// Mix 4 coorners percentages
-		return glm::mix(a, b, u.x) +
-			(c - a) * u.y * (1.0f - u.x) +
-			(d - b) * u.x * u.y;
-	}
-
 	void CTrailObject::Init()
 	{
 		// FlowFields
+#ifdef _DEBUG
 		m_FlowFieldsMesh = std::make_shared<MeshRendererComponent>(
 			std::make_shared<TransformComponent>(),
 			PrimitiveType::ARROW,
 			RenderingSurfaceType::RASTERIZER,
 			std::string({
 				#include "../shaders/Flow.vert"	
-			}),
-			shaderlib::Standard_frag
-		);
+				}),
+				shaderlib::Standard_frag
+				);
+#endif // _DEBUG
 
 		m_FlowFieldsGPGPU = std::make_shared<Material>(
 			RenderingSurfaceType::RASTERIZER,
@@ -248,7 +229,9 @@ namespace app
 	void CTrailObject::LinkBuffer()
 	{
 		// FlowFields
+#ifdef _DEBUG
 		m_FlowFieldsMesh->m_material->SetBufferToMat(m_FlowFieldsBuffer, 2);
+#endif // _DEBUG
 		m_FlowFieldsGPGPU->SetBufferToCS(m_FlowFieldsBuffer, 2);
 
 		// Trail
