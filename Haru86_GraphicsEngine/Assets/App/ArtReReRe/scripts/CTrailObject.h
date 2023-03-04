@@ -11,7 +11,8 @@ namespace app
 {
 	struct SFlowData
 	{
-		float Data[4]; // pos.x, pos.y, pos.z, angle
+		float Pos[4]; // pos.x, pos.y, pos.z, 0.0
+		float Angle[4]; // x axis angle, 0.0, z axis angle, 0.0
 	};
 
 	struct STrailData
@@ -54,13 +55,14 @@ namespace app
 
 		float m_FlowGridX;
 		float m_FlowGridY;
+		float m_FlowGridZ;
 		float m_FlowCellSize;
 
-		float m_NoiseScale;
-		float m_NoiseOctaves;
-		float m_NoiseOffset;
-		float m_AngleScale;
-		glm::vec2 m_Seed;
+		glm::vec2 m_NoiseScale;
+		glm::vec2 m_NoiseOctaves;
+		glm::vec2 m_NoiseOffset;
+		glm::vec2 m_AngleScale;
+		glm::vec4 m_Seed;
 
 		// Trail Param
 		std::shared_ptr<MeshRendererComponent> m_TrailMesh;

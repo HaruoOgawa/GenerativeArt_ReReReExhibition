@@ -16,7 +16,8 @@ uniform float _FlowCellSize;
 
 struct SFlowData
 {
-	vec4 Data;
+	vec4 Pos;
+	vec4 Angle;
 };
 
 layout(std430, binding = 2) buffer FlowDataBuffer
@@ -44,8 +45,9 @@ void main(){
 	SFlowData flowData = rw_FlowDataBuffer.flowData[id];
 
 	pos.xyz *= _FlowCellSize;
-	pos.xy *= rot(flowData.Data.w); wn.xy *= rot(flowData.Data.w);
-	pos.xyz += flowData.Data.xyz;
+	pos.xy *= rot(flowData.Angle.z); wn.xy *= rot(flowData.Angle.z);
+	pos.yz *= rot(flowData.Angle.x); wn.yz *= rot(flowData.Angle.x);
+	pos.xyz += flowData.Pos.xyz;
 	
 	gl_Position = PMatrix * VMatrix * pos;
 	out_uv = texcoord;

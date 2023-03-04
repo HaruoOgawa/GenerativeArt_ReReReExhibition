@@ -27,7 +27,8 @@ namespace app
         GraphicsRenderer::GetInstance()->SetBackgroudColor(glm::vec4(glm::vec3(0.01f), 1.0f));
         //GraphicsMain::GetInstance()->m_MainCamera->m_position = glm::vec3(0.0f, 0.0f, -50.0f);
         //GraphicsMain::GetInstance()->m_MainCamera->m_position = glm::vec3(0.0f, 0.0f, -65.0f);
-        GraphicsMain::GetInstance()->m_MainCamera->m_position = glm::vec3(0.0f, 0.0f, 65.0f);
+        GraphicsMain::GetInstance()->m_MainCamera->m_position = glm::vec3(0.0f, 0.0f, 60.0f);
+        //GraphicsMain::GetInstance()->m_MainCamera->m_position = glm::vec3(100.0f * glm::cos(GraphicsMain::GetInstance()->m_SecondsTime), 0.0f, 100.0f * glm::sin(GraphicsMain::GetInstance()->m_SecondsTime));
         //GraphicsMain::GetInstance()->m_MainCamera->m_position = glm::vec3(0.0f, 0.0f, -10.0f);
 
         //

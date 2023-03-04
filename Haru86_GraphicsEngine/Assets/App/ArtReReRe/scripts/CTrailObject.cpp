@@ -18,17 +18,18 @@ namespace app
 		m_SegmentGPGPU(nullptr),
 
 		m_ThreadNum(1024, 1, 1),
-		m_FlowThreads(32, 32, 1),
+		m_FlowThreads(8, 8, 8),
 		m_WallHalfSize(glm::vec4(100.0f, 50.0f, 25.0f, 1.0f)),
 
 		m_FlowGridX(64.0f),
 		m_FlowGridY(64.0f),
+		m_FlowGridZ(64.0f),
 		m_FlowCellSize(1.0f),
-		m_NoiseScale(1.0f),
-		m_NoiseOctaves(2.0f),
-		m_NoiseOffset(0.0f),
-		m_AngleScale(4.0f),
-		m_Seed(glm::vec2(0.0f, 0.0f)),
+		m_NoiseScale(glm::vec2(1.0f, 1.0f)),
+		m_NoiseOctaves(glm::vec2(2.0f, 2.0f)),
+		m_NoiseOffset(glm::vec2(0.0f, 0.0f)),
+		m_AngleScale(glm::vec2(4.0f, 4.0f)),
+		m_Seed(glm::vec4(glm::vec2(0.0f, 0.0f), glm::vec2(0.0f, 0.0f))),
 		
 		m_DomainCount(1),
 		m_TrailNumPerDomain(1024),
@@ -139,7 +140,7 @@ namespace app
 		);
 
 		// Buffer
-		m_FlowFieldsBuffer = std::make_shared<ComputeBuffer>(m_FlowGridX * m_FlowGridY * sizeof(SFlowData));
+		m_FlowFieldsBuffer = std::make_shared<ComputeBuffer>(m_FlowGridX * m_FlowGridY * m_FlowGridZ * sizeof(SFlowData));
 		m_TrailBuffer = std::make_shared<ComputeBuffer>(m_DomainCount * m_TrailNumPerDomain * sizeof(STrailData));
 		m_SegmentBuffer = std::make_shared<ComputeBuffer>(m_DomainCount * m_TrailNumPerDomain * m_TrailSegmentNum * sizeof(SSegmentData));
 
@@ -151,22 +152,28 @@ namespace app
 	{
 		// Flow ///////////////////////////////////
 		std::vector<SFlowData> InitFlowData;
-		for (float y = 0.0f; y < m_FlowGridY; y++)
+		for (float z = 0.0f; z < m_FlowGridZ; z++)
 		{
-			for (float x = 0.0f; x < m_FlowGridX; x++)
+			for (float y = 0.0f; y < m_FlowGridY; y++)
 			{
-				glm::vec3 pos = glm::vec3(x / (m_FlowGridX - 1.0f), y / (m_FlowGridY - 1.0f), 0.0f);
-				pos = pos * 2.0f - 1.0f;
-				pos.x *= m_WallHalfSize.x;
-				pos.y *= m_WallHalfSize.y;
+				for (float x = 0.0f; x < m_FlowGridX; x++)
+				{
+					glm::vec3 pos = glm::vec3(x / (m_FlowGridX - 1.0f), y / (m_FlowGridY - 1.0f), z / (m_FlowGridZ - 1.0f));
+					pos = pos * 2.0f - 1.0f;
+					pos.x *= m_WallHalfSize.x;
+					pos.y *= m_WallHalfSize.y;
+					pos.z *= m_WallHalfSize.z;
 
-				SFlowData data = {
-					{pos.x, pos.y, pos.z, 0.0f/*3.1415f * 0.25f*/}
-				};
+					SFlowData data = {
+						{pos.x, pos.y, pos.z, 0.0f},
+						{0.0f, 0.0f, 0.0f, 0.0f}
+					};
 
-				InitFlowData.push_back(data);
+					InitFlowData.push_back(data);
+				}
 			}
 		}
+		
 
 		m_FlowCellSize = m_WallHalfSize.x / m_FlowGridX;
 		m_FlowFieldsBuffer->SetData<std::vector<SFlowData>>(InitFlowData);
@@ -264,13 +271,14 @@ namespace app
 		m_FlowFieldsGPGPU->SetVec4Uniform("_WallHalfSize", m_WallHalfSize);
 		m_FlowFieldsGPGPU->SetIntUniform("_FlowGridX", static_cast<int>(m_FlowGridX));
 		m_FlowFieldsGPGPU->SetIntUniform("_FlowGridY", static_cast<int>(m_FlowGridY));
+		m_FlowFieldsGPGPU->SetIntUniform("_FlowGridZ", static_cast<int>(m_FlowGridZ));
 
-		m_FlowFieldsGPGPU->SetFloatUniform("_NoiseScale", m_NoiseScale);
-		m_FlowFieldsGPGPU->SetFloatUniform("_NoiseOctaves", m_NoiseOctaves);
-		m_FlowFieldsGPGPU->SetFloatUniform("_NoiseOffset", m_NoiseOffset);
-		m_FlowFieldsGPGPU->SetFloatUniform("_AngleScale", m_AngleScale);
-		m_FlowFieldsGPGPU->SetVec2Uniform("_Seed", m_Seed);
-		m_FlowFieldsGPGPU->Dispatch(m_FlowGridX / m_FlowThreads.x, m_FlowGridY / m_FlowThreads.y, 1);
+		m_FlowFieldsGPGPU->SetVec2Uniform("_NoiseScale", m_NoiseScale);
+		m_FlowFieldsGPGPU->SetVec2Uniform("_NoiseOctaves", m_NoiseOctaves);
+		m_FlowFieldsGPGPU->SetVec2Uniform("_NoiseOffset", m_NoiseOffset);
+		m_FlowFieldsGPGPU->SetVec2Uniform("_AngleScale", m_AngleScale);
+		m_FlowFieldsGPGPU->SetVec4Uniform("_Seed", m_Seed);
+		m_FlowFieldsGPGPU->Dispatch(m_FlowGridX / m_FlowThreads.x, m_FlowGridY / m_FlowThreads.y, m_FlowGridZ / m_FlowThreads.z);
 
 		// Trail
 		m_TrailGPGPU->SetActive();
@@ -279,6 +287,7 @@ namespace app
 		m_TrailGPGPU->SetVec4Uniform("_WallHalfSize", m_WallHalfSize);
 		m_TrailGPGPU->SetFloatUniform("_FlowGridX", m_FlowGridX);
 		m_TrailGPGPU->SetFloatUniform("_FlowGridY", m_FlowGridY);
+		m_TrailGPGPU->SetFloatUniform("_FlowGridZ", m_FlowGridZ);
 		m_TrailGPGPU->SetFloatUniform("_StepLength", m_StepLength);
 		m_TrailGPGPU->SetFloatUniform("_StepSpeed", m_StepSpeed);
 		m_TrailGPGPU->Dispatch(m_DomainCount * m_TrailNumPerDomain / m_ThreadNum.x, 1, 1);
@@ -293,12 +302,12 @@ namespace app
 	void CTrailObject::Draw()
 	{
 		// Debug FlowFields
-//#ifdef _DEBUG
-		m_FlowFieldsMesh->Draw([&]() {
+#ifdef _DEBUG
+		/*m_FlowFieldsMesh->Draw([&]() {
 			m_FlowFieldsMesh->m_material->SetIntUniform("_Use2FColor", 1);
 			m_FlowFieldsMesh->m_material->SetFloatUniform("_FlowCellSize", m_FlowCellSize);
-		}, GL_TRIANGLES, true, static_cast<int>(m_FlowGridX * m_FlowGridY));
-//#endif // _DEBUG
+		}, GL_TRIANGLES, true, static_cast<int>(m_FlowGridX * m_FlowGridY * m_FlowGridZ));*/
+#endif // _DEBUG
 
 		// Trail
 		m_TrailMesh->Draw([&]() {

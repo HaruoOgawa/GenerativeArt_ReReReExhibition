@@ -10,13 +10,15 @@ uniform float _deltaTime;
 uniform vec4 _WallHalfSize;
 uniform float _FlowGridX;
 uniform float _FlowGridY;
+uniform float _FlowGridZ;
 uniform float _StepLength;
 uniform float _StepSpeed;
 
 //
 struct SFlowData
 {
-	vec4 Data;
+	vec4 Pos;
+	vec4 Angle;
 };
 
 layout(std430, binding = 2) buffer FlowDataBuffer
@@ -262,15 +264,16 @@ void main()
 	// çXêVÇ∑ÇÈ
 	if(length(trailData.TargetPos.xyz - pos.xyz) < 1e-3)
 	{
-		vec2 GridPos = pos.xy / _WallHalfSize.xy;
+		vec3 GridPos = pos.xyz / _WallHalfSize.xyz;
 		GridPos = GridPos * 0.5 + 0.5;
-		GridPos *= vec2(_FlowGridX - 1.0f, _FlowGridY - 1.0f);
-		int GridID = int(floor(GridPos.y) * _FlowGridX + floor(GridPos.x));
+		GridPos *= vec3(_FlowGridX - 1.0f, _FlowGridY - 1.0f, _FlowGridZ - 1.0f);
+		int GridID = int(floor(GridPos.z) * (_FlowGridX * _FlowGridY) + floor(GridPos.y) * _FlowGridX + floor(GridPos.x));
 
 		SFlowData flowData = rw_FlowDataBuffer.flowData[GridID];
 
 		addv = vec4(0.0, 1.0, 0.0, 0.0);
-		addv.xy *= rot(flowData.Data.w);
+		addv.xy *= rot(flowData.Angle.z);
+		addv.yz *= rot(flowData.Angle.x);
 
 		trailData.TargetPos = pos + addv * _StepLength;
 		
