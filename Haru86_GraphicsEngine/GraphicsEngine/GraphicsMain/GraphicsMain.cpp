@@ -7,7 +7,6 @@
 #include "GraphicsEngine/Component/TransformComponent.h"
 #include "GraphicsEngine/Sound/SoundPlayer.h"
 #include "GraphicsEngine/Component/MeshRendererComponent.h"
-#include "GraphicsEngine/Text/TTFFactory.h"
 #include <time.h>
 
 #ifdef _DEBUG
@@ -47,8 +46,6 @@ GraphicsMain::GraphicsMain()
 	m_MainCamera(nullptr),
 	m_UsingCamera(nullptr),
 	m_SoundPlayer(nullptr),
-	m_TTFFactory(nullptr),
-	m_ShaderEditor(nullptr),
 	m_LoadingWaitTime(0.0f),
 	m_GroabalLightPosition(nullptr),
 	m_DirectionalLightDir(glm::vec3(-1.0f, -1.0f, -1.0f))
@@ -77,14 +74,7 @@ bool GraphicsMain::Initialize() {
 
 void GraphicsMain::LoadData() {
 	//
-	m_ShaderEditor = std::make_shared<editor::CShaderEditor>();
-
-	//
 	m_SoundPlayer = std::make_shared<sound::SoundPlayer>();
-
-	//
-	m_TTFFactory = std::make_shared<text::TTFFactory>();
-	if (!m_TTFFactory->Load()) isRunning = false;
 
 	//
 	m_App->Start();
@@ -95,9 +85,6 @@ void GraphicsMain::LoadData() {
 
 	if (m_MainCamera == nullptr) m_MainCamera = std::make_shared<TransformComponent>(glm::vec3(0.0f, 0.0f, -3.0f), glm::vec3(0.0f), glm::vec3(1.0f));
 	if (!m_GroabalLightPosition) m_GroabalLightPosition = std::make_shared<TransformComponent>(glm::vec3(10.0f));
-
-	// 描画リソース全体のロード完了後にテキストラインテクスチャをプリレンダリングする
-	m_ShaderEditor->CreatePreCodeLineTexture();
 
 	// ロードにかかった時間を記録しておく(エディタ実装以前の待ち時間と辻褄を合わせる)
 	m_LoadingWaitTime = static_cast<float>(clock()) - AdjustAppLoadWatitTime;
@@ -183,7 +170,6 @@ void GraphicsMain::Update() {
 
 	previousTime = m_MilliSecondsTime;
 	if (m_App)m_App->Update();
-	m_ShaderEditor->Update();
 }
 
 // ここのDrawではカメラ位置を変える
@@ -193,9 +179,6 @@ void GraphicsMain::Draw() {
 
 	// 通常の描画(画面に表示される部分)
 	GraphicsRenderer::GetInstance()->Draw(m_MainCamera, true,0, []() {},GraphicsRenderer::GetInstance()->GetScreenSize().x, GraphicsRenderer::GetInstance()->GetScreenSize().y);
-
-	// 演出用ShaderEditorを上書きする
-	m_ShaderEditor->Draw();
 
 	//カラーバッファを入れ替える
 	glfwSwapBuffers(GraphicsRenderer::GetInstance()->GetWindow());

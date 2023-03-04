@@ -48,7 +48,8 @@ layout(location=4) out vec4 out_Color;
 
 bool IsOutterWall(vec4 p)
 {
-	float Shrink = 0.75;
+	//float Shrink = 0.75;
+	float Shrink = 0.95;
 
 	if(abs(p.x) > _WallHalfSize.x * Shrink){ return true; }
 	if(abs(p.y) > _WallHalfSize.y * Shrink){ return true; }
@@ -79,6 +80,7 @@ void main()
 
 	//
 	float Alpha = (IsOutterWall(data1.Pos))? 0.0 : 1.0;
+	Alpha *= float(data1.SegmentIndex) / float(_SegmentNum - 1);
 	vec4 Color = vec4(in_Color[0].rgb, Alpha);
 
 	//

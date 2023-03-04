@@ -11,7 +11,6 @@
 #include "GraphicsEngine/Graphics/PolygonRaymarchingMixer.h"
 #include "GraphicsEngine/Graphics/PostProcess.h"
 #include "Assets/App/ArtReReRe/ArtReReRe.h"
-#include "GraphicsEngine/Text/TextRenderer.h"
 
 GraphicsRenderer* GraphicsRenderer::renderer_instance = nullptr;
 
@@ -159,8 +158,7 @@ GraphicsRenderer::GraphicsRenderer(GraphicsMain* game)
 	p_r_BlendingBuffer(0),
 	p_r_DepthBlendingBuffer(0),
 	m_PolygonPostProcess_FrameBuffer(0),
-	m_LatePostProcess_FrameBuffer(0),
-	m_TextRenderer(nullptr)
+	m_LatePostProcess_FrameBuffer(0)
 {
 }
 
@@ -249,9 +247,6 @@ bool GraphicsRenderer::Initialize(float width,float height) {
 
 	//
 	m_Mixer = std::make_unique<PolygonRaymarchingMixer>();
-
-	//
-	m_TextRenderer = std::make_shared<text::TextRenderer>();
 
 	return true;
 }

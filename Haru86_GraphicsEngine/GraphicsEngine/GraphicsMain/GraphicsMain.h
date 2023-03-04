@@ -9,8 +9,6 @@
 #include <glew.h>
 #include <glfw3.h>
 
-#include "GraphicsEngine/ShaderEditor/CShaderEditor.h"
-
 enum class ERerderingTarget
 {
 	COLOR,
@@ -19,7 +17,6 @@ enum class ERerderingTarget
 
 namespace sound { class SoundPlayer;}
 namespace app { class ArtReReRe; }
-namespace text { class TTFFactory; }
 class TransformComponent;
 class MeshRendererComponent;
 
@@ -78,11 +75,6 @@ public:
 	// サウンド
 	std::shared_ptr<sound::SoundPlayer> m_SoundPlayer;
 
-	// テキスト
-	std::shared_ptr<text::TTFFactory>	m_TTFFactory;
-
-	// シェーダーエディター
-	std::shared_ptr<editor::CShaderEditor> m_ShaderEditor;
 private :
 	void UpdateTimeline();
 	void InputProcess();

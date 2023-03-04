@@ -2,7 +2,7 @@ R"(
 #version 430
 
 // thread
-layout(local_size_x = 32, local_size_y = 32, local_size_z = 1) in;
+layout(local_size_x = 8, local_size_y = 8, local_size_z = 8) in;
 
 // Uniform 
 uniform float _time;
@@ -10,16 +10,18 @@ uniform float _deltaTime;
 uniform vec4 _WallHalfSize;
 uniform int _FlowGridX;
 uniform int _FlowGridY;
+uniform int _FlowGridZ;
 
-uniform float _NoiseScale;
-uniform float _NoiseOctaves;
-uniform float _NoiseOffset;
-uniform float _AngleScale;
-uniform vec2 _Seed;
+uniform vec2 _NoiseScale;
+uniform vec2 _NoiseOctaves;
+uniform vec2 _NoiseOffset;
+uniform vec2 _AngleScale;
+uniform vec4 _Seed;
 
 struct SFlowData
 {
-	vec4 Data;
+	vec4 Pos;
+	vec4 Angle;
 };
 
 layout(std430, binding = 2) buffer FlowDataBuffer
@@ -52,11 +54,11 @@ float PerlinNoise(vec2 st)
 		(d - b) * u.x * u.y;
 }
 
-float FBM(vec2 st)
+float FBM(vec2 st, float Octaves)
 {
 	float total = 0.0, freq = 1.0, amp = 1.0, val = 0.0;
 
-	for(float i = 0.0; i < _NoiseOctaves; i++)
+	for(float i = 0.0; i < Octaves; i++)
 	{
 		val += PerlinNoise(st * freq) * amp;
 		total += amp;
@@ -65,21 +67,27 @@ float FBM(vec2 st)
 	}
 
 	float result = val / total;
-	//result = result * 2.0 - 1.0;
 
 	return result;
 }
 
 void main()
 {
-	uvec2 DID = gl_GlobalInvocationID.xy;
+	uvec3 DID = gl_GlobalInvocationID.xyz;
+
 	//float angle = pi * (float(DID.x) / float(_FlowGridX - 1));
-	float angle = pi * 0.7 * _AngleScale * (
-		FBM(_Seed + vec2(float(DID.x), float(DID.y)) / vec2(float(_FlowGridX), float(_FlowGridY)) * _NoiseScale) + _NoiseOffset
+
+	float angleZ = pi * 2.0 * _AngleScale.x * (
+		FBM(_Seed.xy + vec2(float(DID.x), float(DID.y)) / vec2(float(_FlowGridX), float(_FlowGridY)) * _NoiseScale.x, _NoiseOctaves.x) + _NoiseOffset.x
 	);
 	
-	uint ID = DID.y * _FlowGridX + DID.x;
-	rw_FlowDataBuffer.flowData[ID].Data.w = angle;
+	float angleX = pi * 2.0 * _AngleScale.y * (
+		FBM(_Seed.zw + vec2(float(DID.y), float(DID.z)) / vec2(float(_FlowGridY), float(_FlowGridZ)) * _NoiseScale.y, _NoiseOctaves.y) + _NoiseOffset.y
+	);
+
+	uint ID = DID.z * (_FlowGridX * _FlowGridY) + DID.y * _FlowGridX + DID.x;
+	rw_FlowDataBuffer.flowData[ID].Angle.z = angleZ;
+	rw_FlowDataBuffer.flowData[ID].Angle.x = angleX;
 }
 
 )"
