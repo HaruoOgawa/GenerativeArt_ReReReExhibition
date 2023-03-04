@@ -318,7 +318,8 @@ void main()
 	//vc.x *= 0.5;
 	//vec4 col = vec4(hsv2rgb2(vc, 2.2), 1.0);
 	//vec4 col = vec4(hsv2rgb2(vec3( (vc.x+vc.y+vc.z)*0.33333 , 1.0, 1.0), 2.2), 1.0);
-	vec4 col = vec4(vc, 1.0);
+	//vec4 col = vec4(vc, 1.0);
+	vec4 col = mix(vec4(vc, 1.0), vec4(hsv2rgb2(vec3( (vc.x+vc.y+vc.z)*0.33333 , 1.0, 1.0), 2.2), 1.0), Noise(vec2(float(DID), float(DID) * 10.0)) );
 
 	//
 	trailData.Pos =  pos;
