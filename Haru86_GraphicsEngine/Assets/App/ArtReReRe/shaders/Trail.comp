@@ -265,12 +265,12 @@ void main()
 		vec2 GridPos = pos.xy / _WallHalfSize.xy;
 		GridPos = GridPos * 0.5 + 0.5;
 		GridPos *= vec2(_FlowGridX - 1.0f, _FlowGridY - 1.0f);
-		int GridID = int(floor(GridPos.x) * _FlowGridY + floor(GridPos.y));
+		int GridID = int(floor(GridPos.y) * _FlowGridX + floor(GridPos.x));
 
 		SFlowData flowData = rw_FlowDataBuffer.flowData[GridID];
 
 		addv = vec4(0.0, 1.0, 0.0, 0.0);
-		addv.xy *= rot(flowData.Data.w + pi);
+		addv.xy *= rot(flowData.Data.w);
 
 		trailData.TargetPos = pos + addv * _StepLength;
 		
