@@ -33,7 +33,7 @@ namespace app
 		m_AngleScale(glm::vec2(2.0f, 2.0f)),
 		m_Seed(glm::vec4(glm::vec2(0.0f, 0.0f), glm::vec2(0.0f, 0.0f))),
 		
-		m_DomainCount(2),
+		m_DomainCount(8),
 		m_TrailNumPerDomain(1024),
 		m_TrailSegmentNum(64),
 		m_StepLength(1.0f),
