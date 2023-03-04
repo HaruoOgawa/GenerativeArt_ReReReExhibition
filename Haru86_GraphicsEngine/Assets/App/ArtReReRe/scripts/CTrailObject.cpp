@@ -19,7 +19,7 @@ namespace app
 
 		m_ThreadNum(1024, 1, 1),
 		m_FlowThreads(8, 8, 8),
-		m_WallHalfSize(glm::vec4(100.0f, 100.0f, 100.0f, 1.0f)),
+		m_WallHalfSize(glm::vec4(200.0f, 100.0f, 25.0f, 1.0f)),
 
 		m_FlowGridX(64.0f),
 		m_FlowGridY(64.0f),
@@ -28,12 +28,12 @@ namespace app
 		m_NoiseScale(glm::vec2(1.0f, 1.0f)),
 		m_NoiseOctaves(glm::vec2(2.0f, 2.0f)),
 		m_NoiseOffset(glm::vec2(0.0f, 0.0f)),
-		m_AngleScale(glm::vec2(4.0f, 4.0f)),
+		m_AngleScale(glm::vec2(2.0f, 2.0f)),
 		m_Seed(glm::vec4(glm::vec2(0.0f, 0.0f), glm::vec2(0.0f, 0.0f))),
 		
-		m_DomainCount(1),
+		m_DomainCount(2),
 		m_TrailNumPerDomain(1024),
-		m_TrailSegmentNum(256),
+		m_TrailSegmentNum(64),
 		m_StepLength(1.0f),
 		m_StepSpeed(1.0f),
 		m_CurveAlpha(1.0f),

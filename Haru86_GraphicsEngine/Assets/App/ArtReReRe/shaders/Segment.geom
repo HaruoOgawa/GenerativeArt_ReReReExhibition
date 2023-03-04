@@ -79,6 +79,7 @@ void main()
 
 	//
 	float Alpha = (IsOutterWall(data1.Pos))? 0.0 : 1.0;
+	Alpha *= float(data1.SegmentIndex) / float(_SegmentNum - 1);
 	vec4 Color = vec4(in_Color[0].rgb, Alpha);
 
 	//
