@@ -41,6 +41,8 @@ layout(std430, binding = 0) buffer TrailDataBuffer
 } rw_TrailDataBuffer;
 
 //
+#define pi 3.14159265
+
 float Noise(vec2 st)
 {
 	return fract(sin(dot(st, vec2(12.9898, 78.233))) * 43758.5453123);
@@ -67,9 +69,12 @@ float PerlinNoise(vec2 st)
 
 vec4 RefWall(vec4 v, vec4 p, inout bool IsWall)
 {
-	if(abs(p.x) > _WallHalfSize.x){ v.x = abs(v.x) * (-1.0) * sign(p.x); IsWall = true; }
-	if(abs(p.y) > _WallHalfSize.y){ v.y = abs(v.y) * (-1.0) * sign(p.y); IsWall = true; }
-	if(abs(p.z) > _WallHalfSize.z){ v.z = abs(v.z) * (-1.0) * sign(p.z); IsWall = true; }
+	//float Shrink = 0.75;
+	float Shrink = 1.0;
+
+	if(abs(p.x) > _WallHalfSize.x * Shrink){ v.x = abs(v.x) * (-1.0) * sign(p.x); IsWall = true; }
+	if(abs(p.y) > _WallHalfSize.y * Shrink){ v.y = abs(v.y) * (-1.0) * sign(p.y); IsWall = true; }
+	if(abs(p.z) > _WallHalfSize.z * Shrink){ v.z = abs(v.z) * (-1.0) * sign(p.z); IsWall = true; }
 
 	return v;
 }
@@ -257,18 +262,15 @@ void main()
 	// 更新する
 	if(length(trailData.TargetPos.xyz - pos.xyz) < 1e-3)
 	{
-		vec2 DebugPos = pos.xy;
-
 		vec2 GridPos = pos.xy / _WallHalfSize.xy;
 		GridPos = GridPos * 0.5 + 0.5;
-		//GridPos *= vec2(_FlowGridX, _FlowGridY);
-
-		int GridID = int(GridPos.x * _FlowGridY + GridPos.y);
+		GridPos *= vec2(_FlowGridX - 1.0f, _FlowGridY - 1.0f);
+		int GridID = int(floor(GridPos.x) * _FlowGridY + floor(GridPos.y));
 
 		SFlowData flowData = rw_FlowDataBuffer.flowData[GridID];
 
 		addv = vec4(0.0, 1.0, 0.0, 0.0);
-		addv.xy *= rot(flowData.Data.w);
+		addv.xy *= rot(flowData.Data.w + pi);
 
 		trailData.TargetPos = pos + addv * _StepLength;
 		
@@ -288,10 +290,13 @@ void main()
 	// 壁に当たっているのなら範囲内のランダムな位置に再配置する
 	if(IsWall)
 	{
+		//float Shrink = 0.75;
+		float Shrink = 1.0;
+
 		pos = vec4(
-			_WallHalfSize.x * (Noise(vec2(DID, 0.741 + _time)) * 2.0 - 1.0),
-			_WallHalfSize.y * (Noise(vec2(DID, 942.0 + _time)) * 2.0 - 1.0),
-			_WallHalfSize.z * (Noise(vec2(DID, 77.7 + _time)) * 2.0 - 1.0),
+			Shrink * _WallHalfSize.x * (Noise(vec2(DID, 0.741 + _time)) * 2.0 - 1.0),
+			Shrink * _WallHalfSize.y * (Noise(vec2(DID, 942.0 + _time)) * 2.0 - 1.0),
+			Shrink * _WallHalfSize.z * (Noise(vec2(DID, 77.7 + _time)) * 2.0 - 1.0),
 			1.0f
 		);
 
@@ -301,9 +306,9 @@ void main()
 	}
 
 	// 速度ベクトルの向きから回転を取得
-	vec3 rot = vec3(0.0), nv = normalize(v.xyz), zdir = vec3(0.0, 0.0, 1.0);
-	rot.z = acos(dot(nv.xy, zdir.xy));
-	rot.x = acos(dot(nv.yz, zdir.yz));
+	vec3 rotate = vec3(0.0), nv = normalize(v.xyz), zdir = vec3(0.0, 0.0, 1.0);
+	rotate.z = acos(dot(nv.xy, zdir.xy));
+	rotate.x = acos(dot(nv.yz, zdir.yz));
 
 	//
 	vec3 vc = normalize(v.xyz) * 0.5 + 0.5;
@@ -316,7 +321,7 @@ void main()
 	trailData.Pos =  pos;
 	trailData.Velocity = v;
 	trailData.Color = col;
-	trailData.Rotate = vec4(rot, 1.0);
+	trailData.Rotate = vec4(rotate, 1.0);
 	trailData.Data = Data;
 
 	rw_TrailDataBuffer.trailData[DID] = trailData;
