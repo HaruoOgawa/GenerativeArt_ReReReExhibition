@@ -71,8 +71,8 @@ float PerlinNoise(vec2 st)
 
 vec4 RefWall(vec4 v, vec4 p, inout bool IsWall)
 {
-	float Shrink = 0.75;
-	//float Shrink = 1.0;
+	//float Shrink = 0.75;
+	float Shrink = 1.0;
 
 	if(abs(p.x) > _WallHalfSize.x * Shrink){ v.x = abs(v.x) * (-1.0) * sign(p.x); IsWall = true; }
 	if(abs(p.y) > _WallHalfSize.y * Shrink){ v.y = abs(v.y) * (-1.0) * sign(p.y); IsWall = true; }
@@ -293,8 +293,8 @@ void main()
 	// 壁に当たっているのなら範囲内のランダムな位置に再配置する
 	if(IsWall)
 	{
-		float Shrink = 0.75;
-		//float Shrink = 1.0;
+		//float Shrink = 0.75;
+		float Shrink = 1.0;
 
 		pos = vec4(
 			Shrink * _WallHalfSize.x * (Noise(vec2(DID, 0.741 + _time)) * 2.0 - 1.0),

@@ -48,7 +48,8 @@ layout(location=4) out vec4 out_Color;
 
 bool IsOutterWall(vec4 p)
 {
-	float Shrink = 0.75;
+	//float Shrink = 0.75;
+	float Shrink = 0.95;
 
 	if(abs(p.x) > _WallHalfSize.x * Shrink){ return true; }
 	if(abs(p.y) > _WallHalfSize.y * Shrink){ return true; }
