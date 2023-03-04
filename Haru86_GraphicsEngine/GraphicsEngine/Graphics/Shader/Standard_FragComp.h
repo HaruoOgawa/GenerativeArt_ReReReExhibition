@@ -84,6 +84,8 @@
        "else"
          " i=_RimColor*r;"
      "}"
+   "if(i.w==0.)"
+     "discard;"
    "out_Color=i;"
  "}",
 

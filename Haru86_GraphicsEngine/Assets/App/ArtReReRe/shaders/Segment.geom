@@ -12,7 +12,9 @@ uniform float _deltaTime;
 uniform int _SegmentNum;
 uniform mat4 VMatrix;
 uniform mat4 PMatrix;
-uniform float _Radius;
+uniform float _Tickness;
+
+uniform vec4 _WallHalfSize;
 
 // 
 struct SSegmentData 
@@ -20,6 +22,7 @@ struct SSegmentData
 	vec4 Pos;
 	vec4 Rotate;
 	vec4 Scale;
+	vec4 Color;
 	int  TrailIndex;
 	int  SegmentIndex;
 	int  Padding0;
@@ -43,6 +46,17 @@ layout(location=2) out vec4 out_WorldNormal;
 layout(location=3) flat out int out_gl_InstanceID;
 layout(location=4) out vec4 out_Color;
 
+bool IsOutterWall(vec4 p)
+{
+	float Shrink = 0.75;
+
+	if(abs(p.x) > _WallHalfSize.x * Shrink){ return true; }
+	if(abs(p.y) > _WallHalfSize.y * Shrink){ return true; }
+	if(abs(p.z) > _WallHalfSize.z * Shrink){ return true; }
+
+	return false;
+}
+
 void main()
 {
 	//
@@ -58,10 +72,14 @@ void main()
 	vec3 mDir = normalize(cross(n.xyz, dir));
 
 	//
-	vec4 pos0 = data1.Pos + vec4(mDir * _Radius, 0.0);
-	vec4 pos1 = data1.Pos - vec4(mDir * _Radius, 0.0);
-	vec4 pos2 = data0.Pos + vec4(mDir * _Radius, 0.0);
-	vec4 pos3 = data0.Pos - vec4(mDir * _Radius, 0.0);
+	vec4 pos0 = data1.Pos + vec4(mDir * _Tickness, 0.0);
+	vec4 pos1 = data1.Pos - vec4(mDir * _Tickness, 0.0);
+	vec4 pos2 = data0.Pos + vec4(mDir * _Tickness, 0.0);
+	vec4 pos3 = data0.Pos - vec4(mDir * _Tickness, 0.0);
+
+	//
+	float Alpha = (IsOutterWall(data1.Pos))? 0.0 : 1.0;
+	vec4 Color = vec4(in_Color[0].rgb, Alpha);
 
 	//
 	gl_Position = PMatrix * VMatrix * pos2;
@@ -69,7 +87,7 @@ void main()
 	out_WorldVertexPos = pos2;
 	out_WorldNormal = n;
 	out_gl_InstanceID = in_gl_InstanceID[0];
-	out_Color = in_Color[0];
+	out_Color = Color;
 	EmitVertex();
 
 	gl_Position = PMatrix * VMatrix * pos1;
@@ -77,7 +95,7 @@ void main()
 	out_WorldVertexPos = pos1;
 	out_WorldNormal = n;
 	out_gl_InstanceID = in_gl_InstanceID[0];
-	out_Color = in_Color[0];
+	out_Color = Color;
 	EmitVertex();
 
 	gl_Position = PMatrix * VMatrix * pos3;
@@ -85,7 +103,7 @@ void main()
 	out_WorldVertexPos = pos3;
 	out_WorldNormal = n;
 	out_gl_InstanceID = in_gl_InstanceID[0];
-	out_Color = in_Color[0];
+	out_Color = Color;
 	EmitVertex();
 
 	EndPrimitive();
@@ -96,7 +114,7 @@ void main()
 	out_WorldVertexPos = pos0;
 	out_WorldNormal = n;
 	out_gl_InstanceID = in_gl_InstanceID[0];
-	out_Color = in_Color[0];
+	out_Color = Color;
 	EmitVertex();
 	
 	gl_Position = PMatrix * VMatrix * pos1;
@@ -104,7 +122,7 @@ void main()
 	out_WorldVertexPos = pos1;
 	out_WorldNormal = n;
 	out_gl_InstanceID = in_gl_InstanceID[0];
-	out_Color = in_Color[0];
+	out_Color = Color;
 	EmitVertex();
 
 	gl_Position = PMatrix * VMatrix * pos2;
@@ -112,7 +130,7 @@ void main()
 	out_WorldVertexPos = pos2;
 	out_WorldNormal = n;
 	out_gl_InstanceID = in_gl_InstanceID[0];
-	out_Color = in_Color[0];
+	out_Color = Color;
 	EmitVertex();
 
 	EndPrimitive();

@@ -5,11 +5,13 @@ namespace app
 {
 	CWhiteWall::CWhiteWall()
 	{
-		Start();
 	}
 
-	void CWhiteWall::Start()
+	void CWhiteWall::Init(const glm::vec4& WallHalfSize)
 	{
+		float Shrink = 0.75f;
+		glm::vec4 Size = WallHalfSize * Shrink;
+
 		for (int i = 0; i < 4; i++)
 		{
 			std::shared_ptr<MeshRendererComponent> Wall = std::make_shared<MeshRendererComponent>(
@@ -20,18 +22,19 @@ namespace app
 				shaderlib::Standard_frag
 			);
 
-			float val = static_cast<float>(i), sign = (i % 2 == 0) ? 1.0f : -1.0f, size = 50.0f, smin = 0.1f;
-			
+			float val = static_cast<float>(i), sign = (i % 2 == 0) ? 1.0f : -1.0f;
+			const float WallDepth = 1.25f, WallTickness = 1.0f;
+
 			Wall->m_transform->m_position = glm::vec3(
-				0.5f * size * ((i >= 0 && i < 2) ? sign : 0.0f),
-				0.5f * size * ((i >= 2 && i < 4) ? sign : 0.0f),
-				0.5f * size * ((i >= 4 && i < 6) ? sign : 0.0f)
+				Size.x * ((i >= 0 && i < 2) ? sign : 0.0f),
+				Size.y * ((i >= 2 && i < 4) ? sign : 0.0f),
+				Size.z * ((i >= 4 && i < 6) ? sign : 0.0f)
 			);
 
 			Wall->m_transform->m_scale = glm::vec3(
-				!(i >= 0 && i < 2) ? size : smin,
-				!(i >= 2 && i < 4) ? size : smin,
-				!(i >= 4 && i < 6) ? size : smin
+				!(i >= 0 && i < 2) ? Size.x * 2.0f : WallTickness,
+				!(i >= 2 && i < 4) ? Size.y * 2.0f : WallTickness,
+				!(i >= 4 && i < 6) ? Size.z * 2.0f * WallDepth : WallTickness
 			);
 			
 			m_WallList.push_back(Wall);

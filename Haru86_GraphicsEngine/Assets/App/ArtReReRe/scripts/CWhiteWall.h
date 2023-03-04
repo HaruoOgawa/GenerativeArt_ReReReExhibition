@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 #include <vector>
+#include <glm/glm.hpp>
 
 class MeshRendererComponent;
 
@@ -13,7 +14,7 @@ namespace app
 		CWhiteWall();
 		virtual ~CWhiteWall() = default;
 
-		void Start();
+		void Init(const glm::vec4& WallHalfSize);
 		void Update();
 		void Draw();
 	};

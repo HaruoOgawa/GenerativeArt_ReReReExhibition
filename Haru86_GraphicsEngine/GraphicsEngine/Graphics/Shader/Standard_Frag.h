@@ -128,6 +128,8 @@ void main(){
 
 	//col.rgb = in_WorldNormal.xyz*0.5+0.5;
 
+	if(col.a == 0.0) { discard; }
+
 	//gl_FragColor=col;
 	out_Color=col;
 }

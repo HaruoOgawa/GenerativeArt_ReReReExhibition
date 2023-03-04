@@ -22,9 +22,7 @@ namespace app
 		float m_Color[4];
 		float m_Velocity[4];
 		float m_TargetPos[4];
-		float m_DebugData[4];
-		float m_DebugData2[4];
-		float m_DebugData3[4];
+		float m_Data[4]; // IsRelocation, none, none, none
 	};
 
 	// 今回はセグメントの順番は固定で単純にひとつ前のセグメントの位置を参照する形にしてみる
@@ -35,6 +33,7 @@ namespace app
 		float m_Pos[4];
 		float m_Rotate[4];
 		float m_Scale[4];
+		float m_Color[4];
 		int   m_TrailIndex;
 		int   m_SegmentIndex;
 		int   m_Padding0;
@@ -43,36 +42,45 @@ namespace app
 
 	class CTrailObject
 	{
-		// FlowFields
+		// GPGPU Param
+		glm::ivec3 m_ThreadNum;
+		glm::ivec3	m_FlowThreads;
+		glm::vec4 m_WallHalfSize;
+
+		// FlowFields Param
 		std::shared_ptr<MeshRendererComponent> m_FlowFieldsMesh;
 		std::shared_ptr<ComputeBuffer> m_FlowFieldsBuffer;
 		std::shared_ptr<Material> m_FlowFieldsGPGPU;
 
-		const float m_FlowGridX = 64;
-		const float m_FlowGridY = 64;
-		float		m_FlowCellSize;
-		const glm::ivec3	m_FlowThreads = glm::ivec3(32, 32, 1);
+		float m_FlowGridX;
+		float m_FlowGridY;
+		float m_FlowCellSize;
 
-		// Trail
+		float m_NoiseScale;
+		float m_NoiseOctaves;
+		float m_NoiseOffset;
+		float m_AngleScale;
+		glm::vec2 m_Seed;
+
+		// Trail Param
 		std::shared_ptr<MeshRendererComponent> m_TrailMesh;
 		std::shared_ptr<ComputeBuffer> m_TrailBuffer;
 		std::shared_ptr<Material> m_TrailGPGPU;
 
-		// Segment
+		// Segment Param
 		std::shared_ptr<MeshRendererComponent> m_SegmentMesh;
 		std::shared_ptr<ComputeBuffer> m_SegmentBuffer;
 		std::shared_ptr<Material> m_SegmentGPGPU;
 
-		//
-
-		//
-		glm::vec4 m_WallHalfSize;
-		glm::ivec3 m_ThreadNum;
-		unsigned int m_DomainCount; // これをドローコール数としてもいいのかも？
-		unsigned int m_TrailNumPerDomain;
+		// Art Param
+		unsigned int m_DomainCount;
+		unsigned int m_TrailNumPerDomain; // Curve Count
 		unsigned int m_TrailSegmentNum;
 
-		float m_Radius;
+		float m_StepLength; // Curve Length
+		float m_StepSpeed;
+		float m_CurveAlpha; // Curve Alpha
+		float m_CurveTickness; // Curve Tickness
 	private:
 		static float Noise(glm::vec2 st);
 
@@ -87,5 +95,7 @@ namespace app
 		void Init();
 		void Update();
 		void Draw();
+
+		const glm::vec4& GetWallHalfSize() const { return m_WallHalfSize; }
 	};
 }

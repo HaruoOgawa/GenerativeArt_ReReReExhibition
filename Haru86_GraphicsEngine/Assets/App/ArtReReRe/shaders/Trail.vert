@@ -21,9 +21,7 @@ struct STrailData
 	vec4 Color;
 	vec4 Velocity;
 	vec4 TargetPos;
-	vec4 DebugData;
-	vec4 DebugData2;
-	vec4 DebugData3;
+	vec4 Data;
 };
 
 layout(std430, binding = 0) buffer TrailDataBuffer
@@ -48,18 +46,20 @@ void main(){
 	vec4 wn = vec4(normal, 0.0);
 	int id = gl_InstanceID;
 
-	pos.xyz *= rw_TrailDataBuffer.trailData[id].Scale.xyz;
-	vec4 TR = rw_TrailDataBuffer.trailData[id].Rotate;
+	STrailData trailData = rw_TrailDataBuffer.trailData[id];
+
+	/*pos.xyz *= trailData.Scale.xyz;
+	vec4 TR = trailData.Rotate;
 	pos.xy *= rot(TR.z); pos.yz *= rot(TR.x); pos.xz *= rot(TR.y);
-	wn.xy *= rot(TR.z); wn.yz *= rot(TR.x); wn.xz *= rot(TR.y);
-	pos.xyz += rw_TrailDataBuffer.trailData[id].Pos.xyz;
+	wn.xy *= rot(TR.z); wn.yz *= rot(TR.x); wn.xz *= rot(TR.y);*/
+	pos.xyz += trailData.Pos.xyz;
 	
 	gl_Position = PMatrix * VMatrix * pos;
 	out_uv = texcoord;
 	out_WorldVertexPos = pos;
 	out_WorldNormal = wn;
 	out_gl_InstanceID = id;
-	out_Color = rw_TrailDataBuffer.trailData[id].Color;
+	out_Color = trailData.Color;
 }
 
 )"
