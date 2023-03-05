@@ -5,6 +5,7 @@
 #pragma comment(lib, "Winmm.lib")
 #ifdef _DEBUG
 #include <sstream>
+#include "GraphicsEngine/Message/Console.h"
 #endif // _DEBUG
 
 namespace sound 
@@ -24,8 +25,8 @@ namespace sound
 		GetModuleFileName(NULL, ExePath, 256);
 		std::string ExeDir = GetExeDir(ExePath);
 
-		std::string AudioPath ="\"" + ExeDir + "\\" + "bin\\electronica_electronic_edm_.mp3" + "\"";
-		std::string cmd = "open " + AudioPath + " type mpegvideo alias mp3";
+		std::string AudioPath = "\"" + ExeDir + "\\" + "silentspace_nullptr_monet_keyboard.wav" + "\"";
+		std::string cmd = "open " + AudioPath + " alias wav";
 		
 		std::array<char, MAXERRORLENGTH> errorString;
 		mciGetErrorStringA(
@@ -36,7 +37,9 @@ namespace sound
 				nullptr),
 			errorString.data(),
 			MAXERRORLENGTH);
-		//std::printf("%s\n", errorString.data());
+#ifdef _DEBUG
+		Console::Log(">>>>>>>>>>>>>>>>>>[Audio Error Log] %s / AudioPath: %s\n", errorString.data(), AudioPath.c_str());
+#endif
 
 		return true;
 	}
@@ -47,16 +50,17 @@ namespace sound
 
 		std::array<char, MAXERRORLENGTH> errorString;
 		mciGetErrorStringA(
-			mciSendStringA("play mp3", nullptr, 0, nullptr),
+			mciSendStringA("play wav", nullptr, 0, nullptr),
 			errorString.data(),
 			MAXERRORLENGTH);
-		//std::printf("%s\n", errorString.data());
-
+#ifdef _DEBUG
+		Console::Log(">>>>>>>>>>>>>>>>>>[Audio Error Log] %s\n", errorString.data());
+#endif
 		return true;
 	}
 
 	bool SoundPlayer::Pause() {
-		mciSendStringA("pause mp3", NULL, 0, NULL);
+		mciSendStringA("pause wav", NULL, 0, NULL);
 
 		return true;
 	}
@@ -69,7 +73,7 @@ namespace sound
 		std::ostringstream ss;
 		ss << Offset;
 		std::string SkipOffset_str(ss.str());
-		std::string cmd = "seek mp3 to " + SkipOffset_str;
+		std::string cmd = "seek wav to " + SkipOffset_str;
 
 		std::array<char, MAXERRORLENGTH> errorString;
 		mciGetErrorStringA(
@@ -89,7 +93,7 @@ namespace sound
 	}
 
 	void SoundPlayer::Release() {
-		mciSendStringA("close mp3", NULL, 0, NULL);
+		mciSendStringA("close wav", NULL, 0, NULL);
 	}
 
 	std::string SoundPlayer::GetExeDir(char path[]) {
