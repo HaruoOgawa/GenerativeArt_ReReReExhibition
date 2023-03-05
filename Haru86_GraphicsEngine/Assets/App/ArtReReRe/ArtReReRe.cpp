@@ -2,6 +2,12 @@
 #include "GraphicsEngine/GraphicsMain/GraphicsMain.h"
 #include "GraphicsEngine/Graphics/GraphicsRenderer.h"
 #include "scripts/CTrailObject.h"
+#include "GraphicsEngine/Sound/SoundPlayer.h"
+
+#ifdef _DEBUG
+#include "GraphicsEngine/Message/Console.h"
+#endif // _DEBUG
+
 
 namespace app
 {
@@ -10,6 +16,7 @@ namespace app
         m_SceneStartTime(0.0f),
         m_SceneEndTime(0.0f),
         m_LocalTime(0.0f),
+        m_LoopedNum(1.0f),
         m_TrailObject(std::make_shared<CTrailObject>())
     {
     }
@@ -30,6 +37,25 @@ namespace app
 
         //
         m_TrailObject->Update();
+
+        //
+        if (t >= m_LoopedNum * (4.0f * 60.0f))
+        {
+            if (m_LoopedNum >= 2.0f)
+            {
+                GraphicsMain::GetInstance()->isRunning = false;
+                return;
+            }
+
+            GraphicsMain::GetInstance()->m_SoundPlayer->Skip(0.0f);
+
+            m_LoopedNum++;
+
+#ifdef _DEBUG
+            Console::Log("[AppLog] m_LoopedNum: %f\n", m_LoopedNum);
+#endif // _DEBUG
+
+        }
     }
 
     void ArtReReRe::Draw(bool IsRaymarching)

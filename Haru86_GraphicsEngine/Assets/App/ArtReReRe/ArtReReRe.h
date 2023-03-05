@@ -11,6 +11,7 @@ namespace app
         float        m_SceneStartTime;
         float        m_SceneEndTime;
         float        m_LocalTime;
+        float        m_LoopedNum;
 
         std::shared_ptr<CTrailObject> m_TrailObject;
     public:
