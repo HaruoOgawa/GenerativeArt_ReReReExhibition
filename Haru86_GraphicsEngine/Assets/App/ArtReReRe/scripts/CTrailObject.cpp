@@ -21,7 +21,7 @@ namespace app
 
 		m_ThreadNum(1024, 1, 1),
 		m_FlowThreads(8, 8, 8),
-		m_WallHalfSize(glm::vec4(200.0f, 100.0f, 25.0f, 1.0f)),
+		m_WallHalfSize(glm::vec4(200.0f, 100.0f, 50.0f, 1.0f)),
 
 		m_FlowGridX(128.0f),
 		m_FlowGridY(128.0f),
