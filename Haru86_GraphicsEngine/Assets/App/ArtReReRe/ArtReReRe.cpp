@@ -41,15 +41,15 @@ namespace app
         //
         if (t >= m_LoopedNum * (4.0f * 60.0f))
         {
-            if (m_LoopedNum >= 2.0f)
+            GraphicsMain::GetInstance()->m_SoundPlayer->Skip(0.0f);
+
+            m_LoopedNum++;
+
+            if (m_LoopedNum > 15.0f)
             {
                 GraphicsMain::GetInstance()->isRunning = false;
                 return;
             }
-
-            GraphicsMain::GetInstance()->m_SoundPlayer->Skip(0.0f);
-
-            m_LoopedNum++;
 
 #ifdef _DEBUG
             Console::Log("[AppLog] m_LoopedNum: %f\n", m_LoopedNum);
