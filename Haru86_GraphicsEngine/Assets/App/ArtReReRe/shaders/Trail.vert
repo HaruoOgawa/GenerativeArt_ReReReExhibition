@@ -47,6 +47,10 @@ void main(){
 	int id = gl_InstanceID;
 
 	STrailData trailData = rw_TrailDataBuffer.trailData[id];
+	pos.xyz *= trailData.Scale.xyz;
+	vec4 TR = trailData.Rotate;
+	pos.xy *= rot(TR.z); pos.yz *= rot(TR.x); pos.xz *= rot(TR.y);
+	wn.xy *= rot(TR.z); wn.yz *= rot(TR.x); wn.xz *= rot(TR.y);
 	pos.xyz += trailData.Pos.xyz;
 	
 	gl_Position = PMatrix * VMatrix * pos;

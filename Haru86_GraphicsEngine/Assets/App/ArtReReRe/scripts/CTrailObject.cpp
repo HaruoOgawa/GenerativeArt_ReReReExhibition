@@ -173,7 +173,7 @@ namespace app
 					m_WallHalfSize.z * (Noise(glm::vec2(id, 77.7f)) * 2.0f - 1.0f),
 					1.0f
 				);
-				glm::vec4 scl = glm::vec4(0.25f);
+				glm::vec4 scl = glm::vec4(0.5f);
 				glm::vec4 col = glm::vec4(Noise(glm::vec2(id, id + 11.1f)), Noise(glm::vec2(id + 95.0f, id)), Noise(glm::vec2(id, 66.6)), 0.5f);
 				//glm::vec4 vel = glm::vec4(Noise(glm::vec2(id + 2.622f)) * 2.0f - 1.0f, Noise(glm::vec2(id + 55.12f, id  + id)) * 2.0f - 1.0f, Noise(glm::vec2(id + 66.6)) * 2.0f - 1.0f, 1.0f);
 				glm::vec4 vel = glm::vec4(0.0f);
