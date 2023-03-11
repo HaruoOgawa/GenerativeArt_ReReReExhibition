@@ -3,10 +3,8 @@
 #include <mmsystem.h>
 #include <array>
 #pragma comment(lib, "Winmm.lib")
-#ifdef _DEBUG
 #include <sstream>
 #include "GraphicsEngine/Message/Console.h"
-#endif // _DEBUG
 
 namespace sound 
 {
@@ -37,9 +35,7 @@ namespace sound
 				nullptr),
 			errorString.data(),
 			MAXERRORLENGTH);
-#ifdef _DEBUG
-		Console::Log(">>>>>>>>>>>>>>>>>>[Audio Error Log] %s / AudioPath: %s\n", errorString.data(), AudioPath.c_str());
-#endif
+		//Console::Log(">>>>>>>>>>>>>>>>>>[Audio Error Log] %s / AudioPath: %s\n", errorString.data(), AudioPath.c_str());
 
 		return true;
 	}
@@ -53,9 +49,7 @@ namespace sound
 			mciSendStringA("play wav", nullptr, 0, nullptr),
 			errorString.data(),
 			MAXERRORLENGTH);
-#ifdef _DEBUG
-		Console::Log(">>>>>>>>>>>>>>>>>>[Audio Error Log] %s\n", errorString.data());
-#endif
+		//Console::Log(">>>>>>>>>>>>>>>>>>[Audio Error Log] %s\n", errorString.data());
 		return true;
 	}
 
@@ -67,7 +61,6 @@ namespace sound
 
 	void SoundPlayer::Skip(float SkipOffset)
 	{
-#ifdef _DEBUG
 		float Offset = (SkipOffset * 1000.0f); // ミリ秒に直す
 
 		std::ostringstream ss;
@@ -83,8 +76,6 @@ namespace sound
 
 		// スキップした後は、もう一度Playしないと音が鳴らない
 		Play();
-#endif // _DEBUG
-
 	}
 
 	void SoundPlayer::Mute(bool IsMute)
